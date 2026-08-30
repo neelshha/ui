@@ -158,15 +158,15 @@ export default function ThemingPage() {
       <div className="docBlock">
         <h2>Where chrome lives</h2>
         <p>
-          The page is paper. Cards, default badges, and the navbar rail are
-          hairlines on <code>--bg</code>. Solid keys use the sky candy face
-          and <code>--float</code>. Outline keys use the silver face. Alerts
-          are paper; tone is ink and the hairline. Dialogs use{" "}
-          <code>--float</code>. Fields use <code>--well</code>. Progress fill
-          is <code>--key</code>. Inline <code>code</code> is a wash; a{" "}
-          <code>pre</code> block is a hairline plate. Press uses the press face
-          and <code>--float-press</code>, then travels 2px. Ghost hover is a
-          wash, not a plate.
+          The page is paper. Solid keys use the sky candy face and{" "}
+          <code>--float</code>. Outline keys — buttons, accordion, card,
+          alert, dialog, menu, popover, toast, tooltip, badge, avatar — use
+          the silver face, <code>--face-line</code>, and <code>--float</code>.
+          Fields use <code>--well</code>. Progress fill is <code>--key</code>.
+          Inline <code>code</code> is a wash; a <code>pre</code> block is a
+          hairline plate. Press uses the press face and{" "}
+          <code>--float-press</code>, then travels 2px. Ghost hover is a wash,
+          not a plate.
         </p>
       </div>
 

@@ -8,7 +8,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Alert",
-  description: "A paper plate. Tone is ink and the hairline.",
+  description: "A silver key. Tone is the title ink.",
 };
 
 const rows = [
@@ -16,7 +16,7 @@ const rows = [
     name: "tone",
     type: '"default" | "success" | "warning" | "danger" | "info"',
     def: '"default"',
-    notes: "Colors the hairline and the title. The plate stays paper.",
+    notes: "Colors the title. The key stays silver.",
   },
   {
     name: "role",
@@ -42,8 +42,9 @@ export default function AlertPage() {
       <header className="docLead">
         <h1>Alert</h1>
         <p>
-          A paper plate. Tone is ink and the hairline. Body stays readable.
-          Compose a title and description when there is more than one line.
+          A silver key, same chrome as an outline button. Tone is the title
+          ink. Body stays readable. Compose a title and description when there
+          is more than one line.
         </p>
       </header>
 

@@ -15,7 +15,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Table",
-  description: "A semantic table. Type on paper. Hairline rows.",
+  description: "A semantic table on a silver key. Hairline rows.",
 };
 
 const rows = [
@@ -42,8 +42,8 @@ export default function TablePage() {
       <header className="docLead">
         <h1>Table</h1>
         <p>
-          A native <code>table</code>. Type on paper. Hairlines between rows.
-          Not a data grid. Compact density tightens the cells.
+          A native <code>table</code> on a silver key. Hairlines between
+          rows. Not a data grid. Compact density tightens the cells.
         </p>
       </header>
 

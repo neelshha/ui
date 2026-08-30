@@ -6,7 +6,7 @@ import { ToastDemo } from "@/components/ToastDemo";
 
 export const metadata: Metadata = {
   title: "Toast",
-  description: "A live region. Not a modal.",
+  description: "A silver key. A live region, not a modal.",
 };
 
 const rows = [
@@ -33,8 +33,8 @@ export default function ToastPage() {
       <header className="docLead">
         <h1>Toast</h1>
         <p>
-          A named notifications region. Hairline plate. Not a modal, not a
-          raise. Each toast can be dismissed. Hover or focus holds the timer.
+          A named notifications region. A silver key. Not a modal. Each toast
+          can be dismissed. Hover or focus holds the timer.
           This file is a client component. Wrap the place that toasts — not
           the layout.
         </p>

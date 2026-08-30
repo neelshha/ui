@@ -52,8 +52,8 @@ export default function SelectPage() {
         <h1>Select</h1>
         <p>
           A native <code>select</code> in the Field well. Options are
-          children. The open list is a hairline plate of wash rows, as
-          wide as the field. Safari still uses the platform picker.
+          children. The open list is a silver key of ghost rows, as wide as
+          the field. Safari still uses the platform picker.
         </p>
       </header>
 

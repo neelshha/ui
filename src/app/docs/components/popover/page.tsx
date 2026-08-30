@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Popover",
-  description: "A native popover. Top layer, light dismiss.",
+  description: "A silver key. Top layer, light dismiss.",
 };
 
 const rows = [
@@ -34,8 +34,8 @@ export default function PopoverPage() {
       <header className="docLead">
         <h1>Popover</h1>
         <p>
-          A native <code>popover=&quot;auto&quot;</code> panel, anchored to
-          the trigger. Top layer. Light dismiss. No portal. Trigger is an
+          A native <code>popover=&quot;auto&quot;</code> silver key, anchored
+          to the trigger. Top layer. Light dismiss. No portal. Trigger is an
           outline key.
         </p>
       </header>

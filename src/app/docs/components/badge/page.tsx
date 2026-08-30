@@ -15,7 +15,7 @@ const rows = [
     type: '"default" | "accent" | "success" | "warning" | "danger"',
     def: '"default"',
     notes:
-      "Default is a hairline. Accent is the sky key. Intent tones color the border and copy. No role unless you pass one.",
+      "Default is a silver key. Accent is the sky key. Intent tones color the copy. No role unless you pass one.",
   },
 ] as const;
 
@@ -24,7 +24,7 @@ export default function BadgePage() {
     <article className="doc">
       <header className="docLead">
         <h1>Badge</h1>
-        <p>A flat mark for status. Accent is the sky key.</p>
+        <p>A tiny silver key. Accent is the sky key.</p>
       </header>
 
       <Example>

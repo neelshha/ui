@@ -8,7 +8,7 @@
     },
     {
       "path": "popover.css",
-      "content": "@layer components {\n  .ns-popover {\n    box-sizing: border-box;\n    min-width: 10rem;\n    width: max-content;\n    inset: unset;\n    margin: 0;\n    margin-block-start: var(--space-3, 0.39rem);\n    padding: var(--inset-list, var(--space-2, 0.31rem));\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n    border-radius: var(--radius-list, calc(var(--radius, 0.4rem) + var(--space-2, 0.31rem)));\n    background: var(--bg-overlay, var(--bg, #fff));\n    color: var(--text-body, #444);\n    box-shadow: none;\n  }\n\n  @supports (top: anchor(bottom)) {\n    .ns-popover {\n      top: anchor(bottom);\n      inset-inline-start: anchor(start);\n    }\n  }\n\n  .ns-popover:popover-open {\n    z-index: var(--z-overlay, 20);\n  }\n}\n"
+      "content": "@layer components {\n  .ns-popover {\n    box-sizing: border-box;\n    min-width: 10rem;\n    width: max-content;\n    inset: unset;\n    margin: 0;\n    margin-block-start: var(--space-3, 0.39rem);\n    padding: var(--inset-list, var(--space-2, 0.31rem));\n    border: 1px solid var(--face-line, #626262);\n    border-radius: var(\n      --radius-list,\n      calc(var(--radius, 0.4rem) + var(--space-2, 0.31rem))\n    );\n    background: var(--face);\n    background-clip: padding-box;\n    color: var(--text-body, #444);\n    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));\n  }\n\n  @supports (top: anchor(bottom)) {\n    .ns-popover {\n      top: anchor(bottom);\n      inset-inline-start: anchor(start);\n    }\n  }\n\n  .ns-popover:popover-open {\n    z-index: var(--z-overlay, 20);\n  }\n}\n"
     },
     {
       "path": "anchor.ts",

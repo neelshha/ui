@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Card",
-  description: "A hairline group. Children go in.",
+  description: "A silver key. Children go in.",
 };
 
 const rows = [
@@ -23,8 +23,8 @@ export default function CardPage() {
       <header className="docLead">
         <h1>Card</h1>
         <p>
-          A hairline group on paper. No raise. Use it to hold a cluster, not
-          every block on the page.
+          A silver key. Same face, line, and float as an outline button. Use it
+          to hold a cluster, not every block on the page.
         </p>
       </header>
 

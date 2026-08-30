@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Menu",
-  description: "A hairline plate of wash rows. Arrows move.",
+  description: "A silver key of ghost rows. Arrows move.",
 };
 
 const rows = [
@@ -39,9 +39,9 @@ export default function MenuPage() {
       <header className="docLead">
         <h1>Menu</h1>
         <p>
-          A hairline plate of wash rows, same type as the trigger.
-          Opening washes the first item. Arrow keys move. Tab or a click
-          hides it. This file is a client component.
+          A silver key of ghost rows, same type as the trigger. Opening
+          washes the first item. Arrow keys move. Tab or a click hides it.
+          This file is a client component.
         </p>
       </header>
 

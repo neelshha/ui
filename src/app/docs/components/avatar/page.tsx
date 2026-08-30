@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Avatar",
-  description: "A face. Initials if the image fails.",
+  description: "A silver face. Initials if the image fails.",
 };
 
 const rows = [
@@ -29,8 +29,8 @@ export default function AvatarPage() {
       <header className="docLead">
         <h1>Avatar</h1>
         <p>
-          A face. Put an image in. If it fails, initials stay. This file is a
-          client component because of <code>onError</code>.
+          A silver face. Put an image in. If it fails, initials stay. This
+          file is a client component because of <code>onError</code>.
         </p>
       </header>
 

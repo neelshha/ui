@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Tooltip",
-  description: "A hint on hover or focus.",
+  description: "A silver key on hover or focus.",
 };
 
 const rows = [
@@ -23,8 +23,9 @@ export default function TooltipPage() {
       <header className="docLead">
         <h1>Tooltip</h1>
         <p>
-          A hint on hover or focus. No portal. Delay is 400ms so it does not
-          flash on a pass. Escape hides it until the next hover or focus.
+          A silver key on hover or focus. No portal. Delay is 400ms so it
+          does not flash on a pass. Escape hides it until the next hover or
+          focus.
         </p>
       </header>
 

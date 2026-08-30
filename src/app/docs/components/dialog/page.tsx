@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Dialog",
-  description: "A native modal. showModal, not a portal.",
+  description: "A silver key modal. showModal, not a portal.",
 };
 
 const rows = [

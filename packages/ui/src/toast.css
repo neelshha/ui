@@ -17,12 +17,12 @@
     justify-content: space-between;
     gap: var(--space-4, 0.49rem);
     padding: var(--space-4, 0.49rem) var(--space-5, 0.61rem);
-    border: 1px solid
-      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border: 1px solid var(--face-line, #626262);
     border-radius: var(--radius, 0.4rem);
-    background: var(--bg-overlay, var(--bg, #fff));
+    background: var(--face);
+    background-clip: padding-box;
     color: var(--text-body, #444);
-    box-shadow: none;
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     pointer-events: auto;
   }
 

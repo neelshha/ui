@@ -2,6 +2,11 @@
   .ns-table-wrap {
     width: 100%;
     overflow-x: auto;
+    border: 1px solid var(--face-line, #626262);
+    border-radius: var(--radius, 0.4rem);
+    background: var(--face);
+    background-clip: padding-box;
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
   }
 
   .ns-table {
@@ -9,7 +14,7 @@
     border-collapse: collapse;
     font: inherit;
     color: var(--text-body, #444);
-    background: var(--bg, #fff);
+    background: transparent;
   }
 
   .ns-table__caption {
