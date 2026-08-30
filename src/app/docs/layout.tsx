@@ -7,11 +7,14 @@ export default function DocsLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <div className="shell frame">
+      <a href="#content" className="skip">
+        Skip to content
+      </a>
       <DocsNav />
-      <div className="main">
+      <main id="content" className="main">
         {children}
         <DocsPager />
-      </div>
+      </main>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogActions,
   DialogClose,
+  DialogDescription,
   DialogTitle,
 } from "@neelshha/ui";
 
@@ -19,7 +20,7 @@ export function DialogDemo() {
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTitle>Delete this project?</DialogTitle>
-        <p>This cannot be undone.</p>
+        <DialogDescription>This cannot be undone.</DialogDescription>
         <DialogActions>
           <DialogClose>Cancel</DialogClose>
           <DialogClose variant="danger">Delete</DialogClose>

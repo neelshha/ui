@@ -18,7 +18,12 @@ const rows = [
   {
     name: "toast(message, options)",
     type: "fn",
-    notes: "tone is default | success | warning | danger | info. timeout defaults to 4000.",
+    notes: "Returns an id. tone is default | success | warning | danger | info. timeout defaults to 4000. Hover or focus pauses the timer.",
+  },
+  {
+    name: "dismiss(id)",
+    type: "fn",
+    notes: "Removes a toast. Each toast also has a Dismiss control.",
   },
 ] as const;
 
@@ -28,8 +33,10 @@ export default function ToastPage() {
       <header className="docLead">
         <h1>Toast</h1>
         <p>
-          A live region. Hairline plate. Not a modal, not a raise. This file
-          is a client component. Wrap the place that toasts — not the layout.
+          A named notifications region. Hairline plate. Not a modal, not a
+          raise. Each toast can be dismissed. Hover or focus holds the timer.
+          This file is a client component. Wrap the place that toasts — not
+          the layout.
         </p>
       </header>
 

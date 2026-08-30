@@ -16,6 +16,12 @@ const rows = [
     def: '"horizontal"',
     notes: "Horizontal is an hr. Vertical is a div with role=separator.",
   },
+  {
+    name: "decorative",
+    type: "boolean",
+    def: "false",
+    notes: "Hides the line from the accessibility tree.",
+  },
 ] as const;
 
 export default function SeparatorPage() {

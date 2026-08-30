@@ -7,7 +7,7 @@
   .ns-tooltip__tip {
     position: absolute;
     inset-block-start: calc(100% + var(--space-2, 0.31rem));
-    inset-inline-start: 50%;
+    left: 50%;
     z-index: var(--z-overlay, 20);
     width: max-content;
     max-width: 14rem;
@@ -21,7 +21,7 @@
     line-height: var(--leading-tight, 1.25);
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%);
+    translate: -50% 0;
     transition: opacity var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1))
       0.4s;
   }
@@ -29,5 +29,10 @@
   .ns-tooltip:hover .ns-tooltip__tip,
   .ns-tooltip:focus-within .ns-tooltip__tip {
     opacity: 1;
+  }
+
+  .ns-tooltip[data-dismissed] .ns-tooltip__tip {
+    opacity: 0;
+    transition-delay: 0s;
   }
 }

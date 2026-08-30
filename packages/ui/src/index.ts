@@ -47,10 +47,13 @@ export {
   Dialog,
   DialogActions,
   DialogClose,
+  DialogDescription,
   DialogTitle,
 } from "./dialog";
 export type {
+  DialogActionsProps,
   DialogCloseProps,
+  DialogDescriptionProps,
   DialogProps,
   DialogTitleProps,
 } from "./dialog";

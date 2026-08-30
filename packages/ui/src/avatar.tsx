@@ -2,8 +2,23 @@
 
 import "./avatar.css";
 
-import { useState, type ComponentProps } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type ComponentProps,
+} from "react";
 import { cx } from "./cx";
+
+type AvatarContextValue = {
+  loaded: boolean;
+  setLoaded: (loaded: boolean) => void;
+};
+
+const AvatarContext = createContext<AvatarContextValue>({
+  loaded: false,
+  setLoaded: () => {},
+});
 
 export type AvatarProps = ComponentProps<"span"> & {
   size?: "sm" | "md" | undefined;
@@ -14,23 +29,40 @@ export type AvatarImageProps = ComponentProps<"img">;
 export type AvatarFallbackProps = ComponentProps<"span">;
 
 export function Avatar({ size = "md", className, ...rest }: AvatarProps) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <span
-      className={cx("ns-avatar", className)}
-      data-size={size === "md" ? undefined : size}
-      {...rest}
-    />
+    <AvatarContext.Provider value={{ loaded, setLoaded }}>
+      <span
+        className={cx("ns-avatar", className)}
+        data-size={size === "md" ? undefined : size}
+        {...rest}
+      />
+    </AvatarContext.Provider>
   );
 }
 
-export function AvatarImage({ className, onError, ...rest }: AvatarImageProps) {
+export function AvatarImage({
+  className,
+  alt = "",
+  onError,
+  onLoad,
+  ...rest
+}: AvatarImageProps) {
+  const { setLoaded } = useContext(AvatarContext);
   const [failed, setFailed] = useState(false);
   if (failed) return null;
   return (
     <img
       className={cx("ns-avatar__image", className)}
+      alt={alt}
+      onLoad={(event) => {
+        setLoaded(true);
+        onLoad?.(event);
+      }}
       onError={(event) => {
         setFailed(true);
+        setLoaded(false);
         onError?.(event);
       }}
       {...rest}
@@ -39,5 +71,7 @@ export function AvatarImage({ className, onError, ...rest }: AvatarImageProps) {
 }
 
 export function AvatarFallback({ className, ...rest }: AvatarFallbackProps) {
+  const { loaded } = useContext(AvatarContext);
+  if (loaded) return null;
   return <span className={cx("ns-avatar__fallback", className)} {...rest} />;
 }

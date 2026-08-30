@@ -37,6 +37,7 @@
     );
     border: 1px solid color-mix(in srgb, var(--ns-key) 28%, transparent);
     border-radius: var(--radius, 0.4rem);
+    background-clip: padding-box;
     font: inherit;
     line-height: var(--leading-tight, 1.25);
     letter-spacing: inherit;

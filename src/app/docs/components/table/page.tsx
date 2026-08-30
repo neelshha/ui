@@ -32,7 +32,7 @@ const rows = [
   {
     name: "TableHead / TableCell",
     type: "th / td",
-    notes: "Hairline under the row. No sort. No virtualization.",
+    notes: "Hairline under the row. TableHead defaults to scope=col. No sort. No virtualization.",
   },
 ] as const;
 

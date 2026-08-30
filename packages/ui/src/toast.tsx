@@ -19,13 +19,20 @@ type ToastItem = {
   id: string;
   message: ReactNode;
   tone: ToastTone;
+  timeout: number;
+};
+
+type Timer = {
+  handle: number;
+  remaining: number;
+  started: number;
 };
 
 type ToastContextValue = {
   toast: (
     message: ReactNode,
     options?: { tone?: ToastTone; timeout?: number } | undefined,
-  ) => void;
+  ) => string;
   dismiss: (id: string) => void;
 };
 
@@ -43,14 +50,43 @@ export type ToastProviderProps = {
 
 export function ToastProvider({ children }: ToastProviderProps) {
   const [items, setItems] = useState<ToastItem[]>([]);
-  const timers = useRef(new Map<string, number>());
+  const timers = useRef(new Map<string, Timer>());
 
   const dismiss = useCallback((id: string) => {
     const timer = timers.current.get(id);
-    if (timer) window.clearTimeout(timer);
+    if (timer) window.clearTimeout(timer.handle);
     timers.current.delete(id);
     setItems((current) => current.filter((item) => item.id !== id));
   }, []);
+
+  const arm = useCallback(
+    (id: string, remaining: number) => {
+      if (remaining <= 0) return;
+      timers.current.set(id, {
+        handle: window.setTimeout(() => dismiss(id), remaining),
+        remaining,
+        started: Date.now(),
+      });
+    },
+    [dismiss],
+  );
+
+  const pause = useCallback((id: string) => {
+    const timer = timers.current.get(id);
+    if (!timer) return;
+    window.clearTimeout(timer.handle);
+    timer.remaining = Math.max(0, timer.remaining - (Date.now() - timer.started));
+    timer.handle = 0;
+  }, []);
+
+  const resume = useCallback(
+    (id: string) => {
+      const timer = timers.current.get(id);
+      if (!timer || timer.handle) return;
+      arm(id, timer.remaining);
+    },
+    [arm],
+  );
 
   const toast = useCallback(
     (
@@ -60,28 +96,28 @@ export function ToastProvider({ children }: ToastProviderProps) {
       const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       const tone = options?.tone ?? "default";
       const timeout = options?.timeout ?? 4000;
-      setItems((current) => [...current, { id, message, tone }]);
-      if (timeout > 0) {
-        timers.current.set(
-          id,
-          window.setTimeout(() => dismiss(id), timeout),
-        );
-      }
+      setItems((current) => [...current, { id, message, tone, timeout }]);
+      if (timeout > 0) arm(id, timeout);
+      return id;
     },
-    [dismiss],
+    [arm],
   );
 
   useEffect(() => {
     const active = timers.current;
     return () => {
-      for (const timer of active.values()) window.clearTimeout(timer);
+      for (const timer of active.values()) window.clearTimeout(timer.handle);
     };
   }, []);
 
   return (
     <ToastContext.Provider value={{ toast, dismiss }}>
       {children}
-      <div className="ns-toast-region" aria-live="polite" aria-relevant="additions">
+      <div
+        className="ns-toast-region"
+        role="region"
+        aria-label="Notifications"
+      >
         {items.map((item) => (
           <div
             key={item.id}
@@ -89,8 +125,20 @@ export function ToastProvider({ children }: ToastProviderProps) {
             data-tone={item.tone}
             role={item.tone === "danger" ? "alert" : "status"}
             aria-atomic="true"
+            onMouseEnter={() => pause(item.id)}
+            onMouseLeave={() => resume(item.id)}
+            onFocus={() => pause(item.id)}
+            onBlur={() => resume(item.id)}
           >
-            {item.message}
+            <div className="ns-toast__message">{item.message}</div>
+            <button
+              type="button"
+              className="ns-toast__dismiss"
+              aria-label="Dismiss"
+              onClick={() => dismiss(item.id)}
+            >
+              ×
+            </button>
           </div>
         ))}
       </div>

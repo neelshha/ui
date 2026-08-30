@@ -105,6 +105,7 @@ export function RadioGroup({
           return cloneElement(child, {
             name,
             disabled: child.props.disabled ?? disabled,
+            required: child.props.required ?? (required && !optional) ?? undefined,
           });
         })}
       </div>

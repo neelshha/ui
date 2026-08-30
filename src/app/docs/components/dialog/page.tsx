@@ -23,7 +23,12 @@ const rows = [
   {
     name: "DialogTitle",
     type: "h2",
-    notes: "The heading. Wire aria-labelledby yourself if you need it.",
+    notes: "The heading. Dialog sets aria-labelledby to it.",
+  },
+  {
+    name: "DialogDescription",
+    type: "p",
+    notes: "Supporting copy. Dialog sets aria-describedby to it.",
   },
   {
     name: "DialogActions",
@@ -67,6 +72,7 @@ import {
   Dialog,
   DialogActions,
   DialogClose,
+  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
 
@@ -75,7 +81,7 @@ const [open, setOpen] = useState(false);
 <Button onClick={() => setOpen(true)}>Delete</Button>
 <Dialog open={open} onOpenChange={setOpen}>
   <DialogTitle>Delete this project?</DialogTitle>
-  <p>This cannot be undone.</p>
+  <DialogDescription>This cannot be undone.</DialogDescription>
   <DialogActions>
     <DialogClose>Cancel</DialogClose>
     <DialogClose variant="danger">Delete</DialogClose>

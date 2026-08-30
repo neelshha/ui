@@ -13,7 +13,7 @@ const rows = [
   {
     name: "href",
     type: "string",
-    notes: "A native a. Color is --link, not ink.",
+    notes: "A native a. Color is --link, not ink. target=_blank adds rel=noopener noreferrer unless you pass rel.",
   },
 ] as const;
 

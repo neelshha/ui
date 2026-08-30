@@ -82,8 +82,8 @@
     --tool:
       inset 0 1px 0 0 var(--highlight),
       inset 0 -1px 0 0 var(--shade),
-      inset 1px 0 0 0 color-mix(in srgb, var(--highlight) 50%, transparent),
-      inset -1px 0 0 0 color-mix(in srgb, var(--shade) 70%, transparent);
+      inset 0 0 0 0 transparent,
+      inset 0 0 0 0 transparent;
     --lift:
       0 1px 0 color-mix(in srgb, var(--shade) 90%, transparent),
       0 2px 0 color-mix(in srgb, var(--shade) 50%, transparent);
@@ -101,10 +101,10 @@
       inset 0 4px 6px color-mix(in srgb, var(--shade) 80%, transparent),
       inset 0 -1px 0 var(--highlight);
     --press:
-      inset 0 1px 0 0 var(--shade),
-      inset 0 -1px 0 0 var(--highlight),
-      inset 1px 0 0 0 color-mix(in srgb, var(--shade) 70%, transparent),
-      inset -1px 0 0 0 color-mix(in srgb, var(--highlight) 50%, transparent),
+      inset 0 2px 3px color-mix(in srgb, var(--shade) 55%, transparent),
+      inset 0 0 0 0 transparent,
+      inset 0 0 0 0 transparent,
+      inset 0 0 0 0 transparent,
       0 0 0 transparent,
       0 0 0 transparent;
     --face: linear-gradient(

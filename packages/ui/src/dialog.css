@@ -8,6 +8,7 @@
       var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));
     border-radius: var(--radius, 0.4rem);
     background: var(--bg-overlay, var(--bg, #fff));
+    background-clip: padding-box;
     color: var(--text-body, #444);
     box-shadow: var(--raise);
   }
@@ -22,6 +23,11 @@
     font-size: var(--type-lg, 1.25rem);
     font-weight: var(--weight-medium, 500);
     line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-dialog__description {
+    margin: 0;
+    color: var(--text-body, #444);
   }
 
   .ns-dialog__actions {

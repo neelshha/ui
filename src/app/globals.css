@@ -182,6 +182,21 @@ pre code {
   --ns-sidebar-top: var(--header-height);
 }
 
+.skip {
+  position: absolute;
+  inset-inline-start: var(--space-4);
+  inset-block-start: var(--space-4);
+  z-index: calc(var(--z-toast, 30) + 1);
+  padding: var(--space-3) var(--space-5);
+  background: var(--bg);
+  color: var(--text-heading);
+  transform: translateY(-200%);
+}
+
+.skip:focus {
+  transform: none;
+}
+
 .main {
   min-width: 0;
   width: min(100%, var(--content));
@@ -371,6 +386,7 @@ pre code {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--bg-well);
+  background-clip: padding-box;
   box-shadow: var(--well);
   padding: var(--space-11) var(--space-9);
   display: flex;
@@ -396,6 +412,7 @@ pre code {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--bg);
+  background-clip: padding-box;
   color: var(--text-heading);
   font: inherit;
   box-shadow: var(--well);

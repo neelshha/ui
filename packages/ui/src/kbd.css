@@ -9,6 +9,7 @@
       var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
     border-radius: var(--radius, 0.4rem);
     background: var(--bg, #fff);
+    background-clip: padding-box;
     box-shadow: var(--raise);
     color: var(--text-heading, #111);
     font: inherit;

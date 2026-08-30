@@ -19,7 +19,7 @@ const rows = [
   {
     name: "AvatarImage",
     type: "img",
-    notes: "Hides itself on error so the fallback shows. Client, for onError.",
+    notes: "Hides itself on error so the fallback shows. alt defaults to empty. Fallback leaves the tree once the image loads.",
   },
 ] as const;
 

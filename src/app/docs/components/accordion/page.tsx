@@ -28,7 +28,7 @@ const rows = [
   {
     name: "AccordionTrigger",
     type: "summary",
-    notes: "The clickable row. Marker is hidden.",
+    notes: "The clickable row. Native marker is hidden. A chevron turns when open.",
   },
   {
     name: "AccordionPanel",

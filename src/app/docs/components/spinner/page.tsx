@@ -13,7 +13,7 @@ const rows = [
   {
     name: "Spinner",
     type: "span",
-    notes: "aria-hidden. Button pending renders this. Standalone when you need the glyph without a key.",
+    notes: "aria-hidden by default. Pass label to expose it as a status. Button pending renders this.",
   },
 ] as const;
 
@@ -30,6 +30,14 @@ export default function SpinnerPage() {
 
       <Example code={`<Spinner />`}>
         <Spinner />
+      </Example>
+
+      <Example
+        title="Named"
+        description="Pass a label when the spinner is the only status on the page."
+        code={`<Spinner label="Loading" />`}
+      >
+        <Spinner label="Loading" />
       </Example>
 
       <div className="docBlock">

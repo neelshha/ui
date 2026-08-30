@@ -13,7 +13,7 @@ const rows = [
   {
     name: "content",
     type: "ReactNode",
-    notes: "The hint. role=tooltip. Shows on hover and focus-within after a short delay.",
+    notes: "The hint. role=tooltip. Shows on hover and focus-within after a short delay. Escape hides it.",
   },
 ] as const;
 
@@ -23,8 +23,8 @@ export default function TooltipPage() {
       <header className="docLead">
         <h1>Tooltip</h1>
         <p>
-          A hint on hover or focus. CSS only. No portal. Delay is 400ms so it
-          does not flash on a pass.
+          A hint on hover or focus. No portal. Delay is 400ms so it does not
+          flash on a pass. Escape hides it until the next hover or focus.
         </p>
       </header>
 

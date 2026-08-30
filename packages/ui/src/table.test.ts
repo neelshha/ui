@@ -35,6 +35,7 @@ describe("Table", () => {
     expect(markup).toContain("<caption");
     expect(markup).toContain("Projects");
     expect(markup).toContain("<th");
+    expect(markup).toContain('scope="col"');
     expect(markup).toContain("<td");
     expect(markup).toContain("Atlas");
   });
@@ -58,5 +59,21 @@ describe("Tabs", () => {
     expect(markup).toContain("Profile copy");
     expect(markup).not.toContain("Billing copy");
     expect(markup).toContain("hidden");
+  });
+
+  it("selects the first tab when no value is passed", () => {
+    const markup = renderToStaticMarkup(
+      h(Tabs, {}, [
+        h(TabList, { key: "list" }, [
+          h(Tab, { key: "one", value: "one" }, "Profile"),
+          h(Tab, { key: "two", value: "two" }, "Billing"),
+        ]),
+        h(TabPanel, { key: "p1", value: "one" }, "Profile copy"),
+        h(TabPanel, { key: "p2", value: "two" }, "Billing copy"),
+      ]),
+    );
+    expect(markup).toContain('aria-selected="true"');
+    expect(markup).toContain("Profile copy");
+    expect(markup).not.toContain("Billing copy");
   });
 });

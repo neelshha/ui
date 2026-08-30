@@ -24,12 +24,12 @@ const rows = [
   {
     name: "BreadcrumbList",
     type: "ol",
-    notes: "The trail. Separators are CSS.",
+    notes: "The trail. Separators are aria-hidden slashes.",
   },
   {
     name: "BreadcrumbLink href",
     type: "string",
-    notes: "A previous crumb. Omit href and pass a child to keep your own router.",
+    notes: "A previous crumb. A native a. Pass href yourself.",
   },
   {
     name: "BreadcrumbPage",

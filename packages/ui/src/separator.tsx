@@ -7,20 +7,25 @@ type SeparatorOrientation = "horizontal" | "vertical";
 
 export type SeparatorProps = {
   orientation?: SeparatorOrientation;
+  decorative?: boolean;
   className?: string;
 } & Omit<ComponentProps<"hr">, "className">;
 
 export function Separator({
   orientation = "horizontal",
+  decorative,
   className,
   ...rest
 }: SeparatorProps) {
+  const hidden = decorative ? ({ "aria-hidden": true } as const) : {};
+
   if (orientation === "vertical") {
     return (
       <div
         {...rest}
-        role="separator"
-        aria-orientation="vertical"
+        {...hidden}
+        role={decorative ? undefined : "separator"}
+        aria-orientation={decorative ? undefined : "vertical"}
         className={cx("ns-separator", className)}
         data-orientation="vertical"
       />
@@ -32,6 +37,7 @@ export function Separator({
       className={cx("ns-separator", className)}
       data-orientation="horizontal"
       {...rest}
+      {...hidden}
     />
   );
 }

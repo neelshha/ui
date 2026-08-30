@@ -37,6 +37,7 @@
     border: 1px solid var(--ns-field-line);
     border-radius: var(--ns-field-radius);
     background: var(--ns-field-fill);
+    background-clip: padding-box;
     box-shadow: var(--well);
     transition: box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   }
@@ -181,6 +182,7 @@
     border: 1px solid var(--ns-field-line);
     border-radius: calc(var(--ns-field-radius) * 0.7);
     background: var(--ns-field-fill);
+    background-clip: padding-box;
     box-shadow: var(--well);
     color: var(--ns-on-key, var(--on-ink, #fff));
     cursor: pointer;
@@ -347,9 +349,24 @@
 
   @media (prefers-reduced-motion: reduce) {
     .ns-field__control,
-    .ns-field__label {
+    .ns-field__label,
+    .ns-choice[data-kind="switch"]::after {
       transition: none;
     }
+  }
+
+  [dir="rtl"] select.ns-field__input {
+    background-position:
+      0.7em calc(50% - 0.12em),
+      0.95em calc(50% - 0.12em);
+  }
+
+  [dir="rtl"] .ns-choice[data-kind="switch"]::after {
+    transform: translateX(0.36em);
+  }
+
+  [dir="rtl"] .ns-choice[data-kind="switch"]:checked::after {
+    transform: translateX(-0.36em);
   }
 }
 

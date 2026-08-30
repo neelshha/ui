@@ -18,7 +18,7 @@ const rows = [
   {
     name: "PopoverTrigger popoverTarget",
     type: "string",
-    notes: "Native invoker. Light dismiss and Escape are the browser's.",
+    notes: "Native invoker. Light dismiss and Escape are the browser's. aria-expanded tracks the popover.",
   },
   {
     name: "PopoverTrigger variant",

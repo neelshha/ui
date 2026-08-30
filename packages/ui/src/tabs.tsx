@@ -3,7 +3,9 @@
 import "./tabs.css";
 
 import {
+  Children,
   createContext,
+  isValidElement,
   useContext,
   useId,
   useRef,
@@ -27,6 +29,25 @@ function useTabs() {
   const ctx = useContext(TabsContext);
   if (!ctx) throw new Error("Tab components must be used inside Tabs.");
   return ctx;
+}
+
+function token(value: string) {
+  return value.replace(/[^A-Za-z0-9_-]/g, "-");
+}
+
+function firstTabValue(children: ReactNode): string | undefined {
+  let found: string | undefined;
+  Children.forEach(children, (child) => {
+    if (found || !isValidElement(child)) return;
+    if (child.type === Tab) {
+      const props = child.props as TabProps;
+      if (!props.disabled) found = props.value;
+      return;
+    }
+    const nested = (child.props as { children?: ReactNode }).children;
+    if (nested != null) found = firstTabValue(nested);
+  });
+  return found;
 }
 
 export type TabsProps = ComponentProps<"div"> & {
@@ -57,7 +78,9 @@ export function Tabs({
   ...rest
 }: TabsProps) {
   const uid = useId();
-  const [uncontrolled, setUncontrolled] = useState(defaultValue ?? "");
+  const [uncontrolled, setUncontrolled] = useState(
+    defaultValue ?? firstTabValue(children) ?? "",
+  );
   const value = controlled ?? uncontrolled;
 
   function setValue(next: string) {
@@ -150,8 +173,8 @@ export function Tab({ value, disabled, className, children }: TabProps) {
     <Button
       variant="ghost"
       role="tab"
-      id={`${uid}-tab-${value}`}
-      aria-controls={`${uid}-panel-${value}`}
+      id={`${uid}-tab-${token(value)}`}
+      aria-controls={`${uid}-panel-${token(value)}`}
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
       {...(disabled ? { disabled: true } : {})}
@@ -176,9 +199,9 @@ export function TabPanel({
   return (
     <div
       {...rest}
-      id={`${uid}-panel-${value}`}
+      id={`${uid}-panel-${token(value)}`}
       role="tabpanel"
-      aria-labelledby={`${uid}-tab-${value}`}
+      aria-labelledby={`${uid}-tab-${token(value)}`}
       hidden={!selected}
       className={cx("ns-tabs__panel", className)}
     >

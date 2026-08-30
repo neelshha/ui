@@ -42,6 +42,10 @@
       "types": "./src/button.tsx",
       "default": "./src/button.tsx"
     },
+    "./button-group": {
+      "types": "./src/button-group.tsx",
+      "default": "./src/button-group.tsx"
+    },
     "./card": {
       "types": "./src/card.tsx",
       "default": "./src/card.tsx"

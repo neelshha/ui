@@ -23,8 +23,19 @@ export function BreadcrumbList({ className, ...rest }: BreadcrumbListProps) {
   return <ol className={cx("ns-breadcrumb__list", className)} {...rest} />;
 }
 
-export function BreadcrumbItem({ className, ...rest }: BreadcrumbItemProps) {
-  return <li className={cx("ns-breadcrumb__item", className)} {...rest} />;
+export function BreadcrumbItem({
+  className,
+  children,
+  ...rest
+}: BreadcrumbItemProps) {
+  return (
+    <li className={cx("ns-breadcrumb__item", className)} {...rest}>
+      {children}
+      <span className="ns-breadcrumb__sep" aria-hidden="true">
+        /
+      </span>
+    </li>
+  );
 }
 
 export function BreadcrumbLink({ className, ...rest }: BreadcrumbLinkProps) {

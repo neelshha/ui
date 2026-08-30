@@ -43,6 +43,12 @@ const rows = [
     def: "false",
     notes: "Native disabled.",
   },
+  {
+    name: "indeterminate",
+    type: "boolean",
+    def: "false",
+    notes: "Sets the DOM indeterminate property. Mixed, not a third value.",
+  },
 ] as const;
 
 export default function CheckboxPage() {
@@ -110,6 +116,14 @@ export default function CheckboxPage() {
         code={`<Checkbox label="Remember me" name="remember" disabled defaultChecked />`}
       >
         <Checkbox label="Remember me" name="remember" disabled defaultChecked />
+      </Example>
+
+      <Example
+        title="Indeterminate"
+        description="The DOM mixed state. Not a third value."
+        code={`<Checkbox label="Select all" name="all" indeterminate />`}
+      >
+        <Checkbox label="Select all" name="all" indeterminate />
       </Example>
 
       <div className="docBlock">

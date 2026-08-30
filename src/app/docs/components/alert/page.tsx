@@ -19,8 +19,8 @@ const rows = [
   {
     name: "role",
     type: "string",
-    def: '"status"',
-    notes: 'Use role="alert" when the message must interrupt.',
+    def: 'tone === "danger" ? "alert" : "status"',
+    notes: "Danger interrupts. Other tones are polite status. Pass role to override.",
   },
 ] as const;
 

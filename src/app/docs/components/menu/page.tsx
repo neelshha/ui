@@ -18,12 +18,12 @@ const rows = [
   {
     name: "MenuTrigger menu",
     type: "string",
-    notes: "Sets popoverTarget. Outline key by default.",
+    notes: "Sets popoverTarget. Outline key by default. aria-expanded tracks the popover.",
   },
   {
     name: "MenuItem",
     type: "button",
-    notes: "Ghost key. role=menuitem. Click hides the popover.",
+    notes: "Ghost key. role=menuitem. tabIndex=-1. Arrows move. Click hides the popover.",
   },
   {
     name: "MenuItem disabled",
@@ -39,8 +39,9 @@ export default function MenuPage() {
       <header className="docLead">
         <h1>Menu</h1>
         <p>
-          A native popover of ghost keys. Arrow keys move. Clicking an item
-          hides it. This file is a client component.
+          A native popover of ghost keys. Opening moves focus to the first
+          item. Arrow keys move. Tab or a click hides it. This file is a
+          client component.
         </p>
       </header>
 

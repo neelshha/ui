@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { Alert } from "./alert";
 import { Checkbox } from "./checkbox";
-import { Dialog, DialogTitle } from "./dialog";
+import { Dialog, DialogDescription, DialogTitle } from "./dialog";
 import { Radio, RadioGroup } from "./radio";
 import { Select } from "./select";
 import { Switch } from "./switch";
@@ -128,6 +128,18 @@ describe("Radio", () => {
     expect(markup.split('name="notify"').length - 1).toBe(2);
     expect(markup).toContain('type="radio"');
   });
+
+  it("marks radios required when the group is required", () => {
+    const markup = renderToStaticMarkup(
+      h(RadioGroup, {
+        label: "Notify",
+        name: "notify-req",
+        required: true,
+        children: [h(Radio, { key: "mail", label: "Mail" })],
+      }),
+    );
+    expect(markup).toMatch(/<input[^>]*required/);
+  });
 });
 
 describe("Select", () => {
@@ -180,6 +192,18 @@ describe("Dialog", () => {
     expect(markup).toContain("ns-dialog");
     expect(markup).toContain("<h2");
     expect(markup).toContain("Delete?");
+    expect(markup).toContain("aria-labelledby");
     expect(markup).not.toContain("open");
+  });
+
+  it("wires DialogDescription into aria-describedby", () => {
+    const markup = renderToStaticMarkup(
+      h(Dialog, {}, [
+        h(DialogTitle, { key: "t" }, "Delete?"),
+        h(DialogDescription, { key: "d" }, "This cannot be undone."),
+      ]),
+    );
+    expect(markup).toContain("aria-describedby");
+    expect(markup).toContain("This cannot be undone.");
   });
 });

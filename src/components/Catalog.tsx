@@ -2,6 +2,7 @@ import NextLink from "next/link";
 import {
   Accordion,
   AccordionItem,
+  AccordionPanel,
   AccordionTrigger,
   Alert,
   Avatar,
@@ -17,10 +18,15 @@ import {
   Kbd,
   Label,
   Link,
+  Menu,
+  MenuItem,
+  MenuTrigger,
   Navbar,
   NavbarBrand,
   NavbarItem,
   NavbarList,
+  Popover,
+  PopoverTrigger,
   Progress,
   Radio,
   Select,
@@ -35,6 +41,7 @@ import {
   Spinner,
   Switch,
   Tab,
+  TabPanel,
   Table,
   TableBody,
   TableCell,
@@ -54,6 +61,7 @@ const thumbs = {
     <Accordion>
       <AccordionItem>
         <AccordionTrigger>Shipping</AccordionTrigger>
+        <AccordionPanel>Two days.</AccordionPanel>
       </AccordionItem>
     </Accordion>
   ),
@@ -89,16 +97,23 @@ const thumbs = {
   ),
   checkbox: <Checkbox label="Remember me" defaultChecked />,
   dialog: (
-    <div className="catalogDialog">
-      <strong>Delete?</strong>
-      <span>This cannot be undone.</span>
+    <div className="ns-dialog catalogDialog">
+      <strong className="ns-dialog__title">Delete?</strong>
+      <span className="ns-dialog__description">This cannot be undone.</span>
     </div>
   ),
   field: <TextField label="Name" name="catalog-name" />,
   kbd: <Kbd>⌘K</Kbd>,
   label: <Label>Email</Label>,
   link: <Link href="/docs">Docs</Link>,
-  menu: <Button variant="outline">Actions</Button>,
+  menu: (
+    <>
+      <MenuTrigger menu="catalog-actions">Actions</MenuTrigger>
+      <Menu id="catalog-actions">
+        <MenuItem>Archive</MenuItem>
+      </Menu>
+    </>
+  ),
   navbar: (
     <Navbar>
       <NavbarBrand>Acme</NavbarBrand>
@@ -108,7 +123,14 @@ const thumbs = {
       </NavbarList>
     </Navbar>
   ),
-  popover: <span className="catalogDialog">Notes</span>,
+  popover: (
+    <>
+      <PopoverTrigger popoverTarget="catalog-notes">Notes</PopoverTrigger>
+      <Popover id="catalog-notes">
+        <Text>A short note.</Text>
+      </Popover>
+    </>
+  ),
   progress: <Progress value={64} max={100} />,
   radio: <Radio label="Mail" name="catalog-radio" defaultChecked />,
   select: (
@@ -161,6 +183,7 @@ const thumbs = {
         <Tab value="profile">Profile</Tab>
         <Tab value="billing">Billing</Tab>
       </TabList>
+      <TabPanel value="profile">Name and email.</TabPanel>
     </Tabs>
   ),
   text: (
@@ -172,7 +195,11 @@ const thumbs = {
       <Text tone="sub">Sub</Text>
     </div>
   ),
-  toast: <Alert tone="success">Saved.</Alert>,
+  toast: (
+    <div className="ns-toast" data-tone="success">
+      Saved.
+    </div>
+  ),
   tooltip: <Tooltip content="Saved.">Hover</Tooltip>,
 } as const;
 

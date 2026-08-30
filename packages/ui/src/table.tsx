@@ -35,8 +35,8 @@ export function TableRow({ className, ...rest }: TableRowProps) {
   return <tr className={cx("ns-table__row", className)} {...rest} />;
 }
 
-export function TableHead({ className, ...rest }: TableHeadProps) {
-  return <th className={cx("ns-table__head", className)} {...rest} />;
+export function TableHead({ className, scope = "col", ...rest }: TableHeadProps) {
+  return <th className={cx("ns-table__head", className)} scope={scope} {...rest} />;
 }
 
 export function TableCell({ className, ...rest }: TableCellProps) {

@@ -49,6 +49,17 @@ const rows = [
     def: '"button"',
     notes: "Defaults to button so it does not submit a form by accident.",
   },
+  {
+    name: "disabled",
+    type: "boolean",
+    def: "false",
+    notes: "Native disabled on a button. A link keeps href, leaves the tab order, and sets aria-disabled.",
+  },
+  {
+    name: "ButtonGroup",
+    type: "div",
+    notes: 'Joins keys. role="group". Pass aria-label when the group has no visible name.',
+  },
 ] as const;
 
 function Icon({ children }: { children: ReactNode }) {

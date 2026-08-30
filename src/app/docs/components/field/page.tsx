@@ -20,7 +20,7 @@ const rows = [
     type: '"stack" | "float" | "placeholder"',
     def: '"stack"',
     notes:
-      "TextField and TextArea. Stack and float keep the label above the well. Placeholder drops the visible label when you type.",
+      "TextField and TextArea. Stack and float both keep the label above the well — they look the same. Placeholder drops the visible label when you type.",
   },
   {
     name: "optionalLabel / requiredLabel",
