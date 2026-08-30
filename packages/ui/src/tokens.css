@@ -249,24 +249,25 @@
           );
       --key-face: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--key) 18%, var(--chrome-mix)) 0%,
-        color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 18%,
-        color-mix(in srgb, var(--key) 58%, var(--chrome-mix)) 50%,
-        color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 80%,
-        color-mix(in srgb, var(--key) 55%, var(--chrome-mix)) 100%
+        #4d6795 0%,
+        #42598c 18%,
+        #36507f 50%,
+        #324c78 80%,
+        #3a5686 100%
       );
       --key-face-hover: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--key) 12%, var(--chrome-mix)) 0%,
-        color-mix(in srgb, var(--key) 30%, var(--chrome-mix)) 18%,
-        color-mix(in srgb, var(--key) 50%, var(--chrome-mix)) 50%,
-        color-mix(in srgb, var(--key) 54%, var(--chrome-mix)) 100%
+        #58739f 0%,
+        #4d64a0 18%,
+        #415b8f 50%,
+        #3e588b 80%,
+        #456194 100%
       );
       --key-face-press: linear-gradient(
         180deg,
-        color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 0%,
-        color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 50%,
-        color-mix(in srgb, var(--key) 72%, var(--chrome-mix)) 100%
+        #42598c 0%,
+        #324c78 45%,
+        #273e63 100%
       );
     }
   }
@@ -325,24 +326,25 @@
     );
     --key-face: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--key) 18%, var(--chrome-mix)) 0%,
-      color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 18%,
-      color-mix(in srgb, var(--key) 58%, var(--chrome-mix)) 50%,
-      color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 80%,
-      color-mix(in srgb, var(--key) 55%, var(--chrome-mix)) 100%
+      #4d6795 0%,
+      #42598c 18%,
+      #36507f 50%,
+      #324c78 80%,
+      #3a5686 100%
     );
     --key-face-hover: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--key) 12%, var(--chrome-mix)) 0%,
-      color-mix(in srgb, var(--key) 30%, var(--chrome-mix)) 18%,
-      color-mix(in srgb, var(--key) 50%, var(--chrome-mix)) 50%,
-      color-mix(in srgb, var(--key) 54%, var(--chrome-mix)) 100%
+      #58739f 0%,
+      #4d64a0 18%,
+      #415b8f 50%,
+      #3e588b 80%,
+      #456194 100%
     );
     --key-face-press: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 0%,
-      color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 50%,
-      color-mix(in srgb, var(--key) 72%, var(--chrome-mix)) 100%
+      #42598c 0%,
+      #324c78 45%,
+      #273e63 100%
     );
   }
 
