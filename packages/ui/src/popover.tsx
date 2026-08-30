@@ -30,7 +30,13 @@ export function PopoverTrigger({
   variant = "outline",
 }: PopoverTriggerProps) {
   return (
-    <Button variant={variant} className={className} popoverTarget={popoverTarget}>
+    <Button
+      variant={variant}
+      className={className}
+      popoverTarget={popoverTarget}
+      aria-haspopup="dialog"
+      aria-controls={popoverTarget}
+    >
       {children}
     </Button>
   );

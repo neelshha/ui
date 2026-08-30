@@ -1,21 +1,23 @@
 import { TextArea, TextField } from "@neelshha/ui";
 
 type FieldDemoProps = {
-  chrome?: "float" | "placeholder";
+  chrome?: "stack" | "float" | "placeholder";
   error?: string;
   optional?: boolean;
   required?: boolean;
   multiline?: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
 };
 
 export function FieldDemo({
-  chrome = "float",
+  chrome = "stack",
   error,
   optional,
   required,
   multiline,
   disabled,
+  readOnly,
 }: FieldDemoProps) {
   if (multiline) {
     return (
@@ -25,6 +27,8 @@ export function FieldDemo({
         optional={optional}
         required={required}
         disabled={disabled}
+        readOnly={readOnly}
+        defaultValue={readOnly ? "Ships in two days." : undefined}
         {...(error ? { error } : {})}
       />
     );
@@ -39,6 +43,8 @@ export function FieldDemo({
       optional={optional}
       required={required}
       disabled={disabled}
+      readOnly={readOnly}
+      defaultValue={readOnly ? "Ada Lovelace" : undefined}
       {...(error ? { error } : {})}
     />
   );

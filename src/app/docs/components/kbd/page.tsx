@@ -35,6 +35,18 @@ export default function KbdPage() {
         </Text>
       </Example>
 
+      <Example
+        title="Chord"
+        description="One key per glyph. Space is type."
+        code={`<Text>
+  <Kbd>⌘</Kbd> <Kbd>⇧</Kbd> <Kbd>P</Kbd>
+</Text>`}
+      >
+        <Text>
+          <Kbd>⌘</Kbd> <Kbd>⇧</Kbd> <Kbd>P</Kbd>
+        </Text>
+      </Example>
+
       <div className="docBlock">
         <h2>Installation</h2>
         <Install name="kbd" />

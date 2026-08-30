@@ -25,6 +25,10 @@
       "title": "Navbar"
     },
     {
+      "name": "sidebar",
+      "title": "Sidebar"
+    },
+    {
       "name": "card",
       "title": "Card"
     },

@@ -32,13 +32,18 @@ const rows = [
   {
     name: "NavbarItem href",
     type: "string",
-    notes: "A ghost Button. href makes an a. No underline.",
+    notes: "A ghost Button. href makes an a. Omit href and pass a child to keep your own router.",
   },
   {
     name: "NavbarItem current",
     type: "boolean",
     def: "false",
     notes: "Sets aria-current=page and seats the key.",
+  },
+  {
+    name: "NavbarSpacer",
+    type: "div",
+    notes: "Pushes trailing actions to the end of the rail.",
   },
 ] as const;
 

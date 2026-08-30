@@ -4,12 +4,14 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@neelshha/ui"],
   async redirects() {
     return [
+      { source: "/docs/components", destination: "/components", permanent: true },
       { source: "/field", destination: "/docs/components/field", permanent: true },
       { source: "/button", destination: "/docs/components/button", permanent: true },
       { source: "/label", destination: "/docs/components/label", permanent: true },
       { source: "/card", destination: "/docs/components/card", permanent: true },
       { source: "/badge", destination: "/docs/components/badge", permanent: true },
       { source: "/separator", destination: "/docs/components/separator", permanent: true },
+      { source: "/sidebar", destination: "/docs/components/sidebar", permanent: true },
       { source: "/text", destination: "/docs/components/text", permanent: true },
       { source: "/alert", destination: "/docs/components/alert", permanent: true },
       { source: "/checkbox", destination: "/docs/components/checkbox", permanent: true },

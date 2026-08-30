@@ -1,19 +1,15 @@
 export const SITE = "https://ui.neelshha.com";
 
+export const headerNav = [
+  { href: "/docs", label: "Docs" },
+  { href: "/components", label: "Components" },
+] as const;
+
 export const startNav = [
-  { href: "/", label: "Home" },
   { href: "/docs", label: "Introduction" },
   { href: "/docs/installation", label: "Installation" },
   { href: "/docs/theming", label: "Theming" },
   { href: "/docs/cli", label: "CLI" },
-] as const;
-
-export const headerNav = [
-  { href: "/docs", label: "Docs" },
-  { href: "/docs/installation", label: "Installation" },
-  { href: "/docs/theming", label: "Theming" },
-  { href: "/docs/cli", label: "CLI" },
-  { href: "/docs/components", label: "Components" },
 ] as const;
 
 export const components = [
@@ -37,6 +33,7 @@ export const components = [
   { slug: "radio", title: "Radio", description: "A native radio. Group sets the name." },
   { slug: "select", title: "Select", description: "A native select in the Field well." },
   { slug: "separator", title: "Separator", description: "A line between things." },
+  { slug: "sidebar", title: "Sidebar", description: "A paper rail. The current item is seated." },
   { slug: "skeleton", title: "Skeleton", description: "A pulsing well. Holds still if you reduce motion." },
   { slug: "spinner", title: "Spinner", description: "The pending glyph, extracted." },
   { slug: "switch", title: "Switch", description: "A checkbox that reads as a switch." },
@@ -58,6 +55,6 @@ export const componentNav = components.map((item) => ({
 
 export const pagerNav = [
   ...startNav,
-  { href: "/docs/components", label: "Components" },
+  { href: "/components", label: "Components" },
   ...componentNav,
 ];

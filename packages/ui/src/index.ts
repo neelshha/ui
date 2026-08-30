@@ -54,7 +54,7 @@ export type {
   DialogProps,
   DialogTitleProps,
 } from "./dialog";
-export { Field, TEXT_FIELD_TYPES, TextArea, TextField } from "./field";
+export { Field, FieldMark, TEXT_FIELD_TYPES, TextArea, TextField } from "./field";
 export type {
   FieldChrome,
   FieldKind,
@@ -97,6 +97,22 @@ export { Select } from "./select";
 export type { SelectProps } from "./select";
 export { Separator } from "./separator";
 export type { SeparatorProps } from "./separator";
+export {
+  Sidebar,
+  SidebarGroup,
+  SidebarItem,
+  SidebarLabel,
+  SidebarList,
+  SidebarNav,
+} from "./sidebar";
+export type {
+  SidebarGroupProps,
+  SidebarItemProps,
+  SidebarLabelProps,
+  SidebarListProps,
+  SidebarNavProps,
+  SidebarProps,
+} from "./sidebar";
 export { Skeleton } from "./skeleton";
 export type { SkeletonProps } from "./skeleton";
 export { Spinner } from "./spinner";

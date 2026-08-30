@@ -22,6 +22,16 @@ const rows = [
     notes: 'aria-label is "Breadcrumb" unless you pass your own.',
   },
   {
+    name: "BreadcrumbList",
+    type: "ol",
+    notes: "The trail. Separators are CSS.",
+  },
+  {
+    name: "BreadcrumbLink href",
+    type: "string",
+    notes: "A previous crumb. Omit href and pass a child to keep your own router.",
+  },
+  {
     name: "BreadcrumbPage",
     type: "span",
     notes: "The current crumb. aria-current=page.",
@@ -46,6 +56,9 @@ export default function BreadcrumbPageDoc() {
       <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>
+      <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
       <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
@@ -55,6 +68,9 @@ export default function BreadcrumbPageDoc() {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
               <BreadcrumbPage>Breadcrumb</BreadcrumbPage>

@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "alert.tsx",
-      "content": "import \"./alert.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type AlertTone = \"default\" | \"success\" | \"warning\" | \"danger\" | \"info\";\n\nexport type AlertProps = ComponentProps<\"div\"> & {\n  tone?: AlertTone;\n};\n\nexport function Alert({\n  tone = \"default\",\n  className,\n  role = \"status\",\n  ...rest\n}: AlertProps) {\n  return (\n    <div\n      className={cx(\"ns-alert\", className)}\n      data-tone={tone}\n      role={role}\n      {...rest}\n    />\n  );\n}\n"
+      "content": "import \"./alert.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type AlertTone = \"default\" | \"success\" | \"warning\" | \"danger\" | \"info\";\n\nexport type AlertProps = ComponentProps<\"div\"> & {\n  tone?: AlertTone;\n};\n\nexport function Alert({\n  tone = \"default\",\n  className,\n  role,\n  ...rest\n}: AlertProps) {\n  return (\n    <div\n      className={cx(\"ns-alert\", className)}\n      data-tone={tone}\n      role={role ?? (tone === \"danger\" ? \"alert\" : \"status\")}\n      {...rest}\n    />\n  );\n}\n"
     },
     {
       "path": "alert.css",

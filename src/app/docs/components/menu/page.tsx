@@ -25,6 +25,12 @@ const rows = [
     type: "button",
     notes: "Ghost key. role=menuitem. Click hides the popover.",
   },
+  {
+    name: "MenuItem disabled",
+    type: "boolean",
+    def: "false",
+    notes: "Native disabled. Arrows skip it.",
+  },
 ] as const;
 
 export default function MenuPage() {
@@ -43,12 +49,14 @@ export default function MenuPage() {
 <Menu id="actions">
   <MenuItem>Archive</MenuItem>
   <MenuItem>Duplicate</MenuItem>
+  <MenuItem disabled>Delete</MenuItem>
 </Menu>`}
       >
         <MenuTrigger menu="actions">Actions</MenuTrigger>
         <Menu id="actions">
           <MenuItem>Archive</MenuItem>
           <MenuItem>Duplicate</MenuItem>
+          <MenuItem disabled>Delete</MenuItem>
         </Menu>
       </Example>
 

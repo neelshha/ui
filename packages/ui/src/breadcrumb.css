@@ -37,3 +37,17 @@
     color: var(--text-heading, #111);
   }
 }
+
+.ns-breadcrumb a {
+  text-decoration: none;
+}
+
+a.ns-breadcrumb__link {
+  color: var(--text-sub, #767676);
+}
+
+@media (hover: hover) {
+  a.ns-breadcrumb__link:hover {
+    color: var(--text-heading, #111);
+  }
+}

@@ -20,6 +20,17 @@ const rows = [
     type: "string",
     notes: "Required. Matches a TabPanel. Arrow keys move and select.",
   },
+  {
+    name: "Tab disabled",
+    type: "boolean",
+    def: "false",
+    notes: "Skipped by click and arrows.",
+  },
+  {
+    name: "TabPanel value",
+    type: "string",
+    notes: "Shown when it matches the selected tab.",
+  },
 ] as const;
 
 export default function TabsPage() {
@@ -49,6 +60,28 @@ export default function TabsPage() {
           <TabPanel value="members">
             People with access. Invite is a solid key.
           </TabPanel>
+        </Tabs>
+      </Example>
+
+      <Example
+        title="Disabled"
+        description="A disabled tab is skipped. Arrows jump over it."
+        code={`<Tabs defaultValue="profile">
+  <TabList>
+    <Tab value="profile">Profile</Tab>
+    <Tab value="billing" disabled>Billing</Tab>
+    <Tab value="members">Members</Tab>
+  </TabList>
+</Tabs>`}
+      >
+        <Tabs defaultValue="profile">
+          <TabList>
+            <Tab value="profile">Profile</Tab>
+            <Tab value="billing" disabled>
+              Billing
+            </Tab>
+            <Tab value="members">Members</Tab>
+          </TabList>
         </Tabs>
       </Example>
 

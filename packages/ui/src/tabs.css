@@ -22,10 +22,7 @@
   .ns-button.ns-tabs__tab[aria-selected="true"] {
     color: var(--text-heading, #111);
     border-color: var(--shade, oklch(0 0 0 / 28%));
-    background: var(
-      --face-press,
-      linear-gradient(180deg, #e8e6e4 0%, #fff 100%)
-    );
+    background: var(--bg-hover, #f3f2f1);
     box-shadow: var(--press);
   }
 
@@ -35,10 +32,7 @@
       ) {
       color: var(--text-heading, #111);
       border-color: var(--shade, oklch(0 0 0 / 28%));
-      background: var(
-        --face-press,
-        linear-gradient(180deg, #e8e6e4 0%, #fff 100%)
-      );
+      background: var(--bg-hover, #f3f2f1);
       box-shadow: var(--press);
     }
   }

@@ -28,8 +28,8 @@ export default function ProgressPage() {
       <header className="docLead">
         <h1>Progress</h1>
         <p>
-          Native <code>progress</code> and <code>meter</code>. A well, not a
-          raised bar. Omit <code>value</code> for indeterminate.
+          Native <code>progress</code> and <code>meter</code>. A hairline
+          track, not a raised bar. Omit <code>value</code> for indeterminate.
         </p>
       </header>
 
@@ -41,6 +41,14 @@ export default function ProgressPage() {
           <Progress value={64} max={100} />
           <Meter value={0.4} min={0} max={1} />
         </div>
+      </Example>
+
+      <Example
+        title="Indeterminate"
+        description="Omit value. The browser draws the pending state."
+        code={`<Progress />`}
+      >
+        <Progress />
       </Example>
 
       <div className="docBlock">

@@ -87,7 +87,8 @@ export function ToastProvider({ children }: ToastProviderProps) {
             key={item.id}
             className={cx("ns-toast")}
             data-tone={item.tone}
-            role="status"
+            role={item.tone === "danger" ? "alert" : "status"}
+            aria-atomic="true"
           >
             {item.message}
           </div>

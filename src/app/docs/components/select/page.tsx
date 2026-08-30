@@ -13,7 +13,7 @@ const rows = [
   {
     name: "label",
     type: "ReactNode",
-    notes: "Required. Always sits on the border.",
+    notes: "Required. Sits above the well.",
   },
   {
     name: "optional",
@@ -51,8 +51,8 @@ export default function SelectPage() {
       <header className="docLead">
         <h1>Select</h1>
         <p>
-          A native <code>select</code> in the Field well. The label stays
-          raised. Options are children. No listbox, no combobox.
+          A native <code>select</code> in the Field well. The label sits
+          above it. Options are children. No listbox, no combobox.
         </p>
       </header>
 
@@ -78,6 +78,20 @@ export default function SelectPage() {
   <option value="admin">Admin</option>
 </Select>`}</Code>
       </div>
+
+      <Example
+        title="Required"
+        description="A Required mark. The select is required."
+        code={`<Select label="Role" name="role" required>
+  <option value="">Choose</option>
+  <option value="editor">Editor</option>
+</Select>`}
+      >
+        <Select label="Role" name="role-req" required defaultValue="">
+          <option value="">Choose</option>
+          <option value="editor">Editor</option>
+        </Select>
+      </Example>
 
       <Example
         title="Error"

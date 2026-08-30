@@ -73,6 +73,20 @@ export default function RadioPage() {
       </div>
 
       <Example
+        title="Disabled"
+        description="The fieldset disables every radio."
+        code={`<RadioGroup label="Notify" name="notify-off" disabled>
+  <Radio label="Mail" value="mail" defaultChecked />
+  <Radio label="None" value="none" />
+</RadioGroup>`}
+      >
+        <RadioGroup label="Notify" name="notify-off" disabled>
+          <Radio label="Mail" value="mail" defaultChecked />
+          <Radio label="None" value="none" />
+        </RadioGroup>
+      </Example>
+
+      <Example
         title="Error"
         description="The group can carry the sentence. Each radio stays a native input."
         code={`<RadioGroup label="Plan" name="plan" error="Pick a plan.">

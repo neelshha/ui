@@ -30,6 +30,11 @@ const rows = [
     type: "summary",
     notes: "The clickable row. Marker is hidden.",
   },
+  {
+    name: "AccordionPanel",
+    type: "div",
+    notes: "The open body. Type, not chrome.",
+  },
 ] as const;
 
 export default function AccordionPage() {
@@ -57,6 +62,32 @@ export default function AccordionPage() {
       >
         <Accordion name="faq">
           <AccordionItem>
+            <AccordionTrigger>Shipping</AccordionTrigger>
+            <AccordionPanel>Leaves in two days.</AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionTrigger>Returns</AccordionTrigger>
+            <AccordionPanel>Thirty days. Keep the box.</AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </Example>
+
+      <Example
+        title="Independent"
+        description="Omit name and each details opens on its own."
+        code={`<Accordion>
+  <AccordionItem open>
+    <AccordionTrigger>Shipping</AccordionTrigger>
+    <AccordionPanel>Leaves in two days.</AccordionPanel>
+  </AccordionItem>
+  <AccordionItem>
+    <AccordionTrigger>Returns</AccordionTrigger>
+    <AccordionPanel>Thirty days. Keep the box.</AccordionPanel>
+  </AccordionItem>
+</Accordion>`}
+      >
+        <Accordion>
+          <AccordionItem open>
             <AccordionTrigger>Shipping</AccordionTrigger>
             <AccordionPanel>Leaves in two days.</AccordionPanel>
           </AccordionItem>

@@ -8,7 +8,7 @@
     },
     {
       "path": "link.css",
-      "content": "@layer components {\n  .ns-link {\n    color: var(--link, var(--text-heading, #111));\n    text-decoration-line: underline;\n    text-decoration-style: dotted;\n    text-underline-offset: 0.3em;\n    text-decoration-thickness: 1px;\n    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);\n  }\n\n  @media (hover: hover) {\n    .ns-link:hover {\n      text-decoration-color: currentColor;\n    }\n  }\n}\n"
+      "content": "@layer components {\n  .ns-link {\n    color: var(--link, var(--text-heading, #111));\n    text-decoration-line: underline;\n    text-decoration-style: dotted;\n    text-underline-offset: 0.3em;\n    text-decoration-thickness: 1px;\n    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);\n  }\n\n  @media (hover: hover) {\n    .ns-link:hover {\n      text-decoration-color: currentColor;\n    }\n  }\n}\n\na.ns-link {\n  color: var(--link, var(--text-heading, #111));\n  text-decoration-line: underline;\n  text-decoration-style: dotted;\n  text-underline-offset: 0.3em;\n  text-decoration-thickness: 1px;\n  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);\n}\n\n@media (hover: hover) {\n  a.ns-link:hover {\n    text-decoration-color: currentColor;\n  }\n}\n"
     }
   ],
   "dependencies": {

@@ -20,6 +20,12 @@
     line-height: var(--leading-tight, 1.25);
   }
 
+  .ns-accordion__trigger:focus-visible {
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: 0;
+  }
+
   .ns-accordion__trigger::-webkit-details-marker,
   .ns-accordion__trigger::marker {
     display: none;

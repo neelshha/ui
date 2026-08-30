@@ -1,7 +1,13 @@
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { Navbar, NavbarBrand, NavbarItem, NavbarList } from "./navbar";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarItem,
+  NavbarList,
+  NavbarMenu,
+} from "./navbar";
 
 describe("Navbar", () => {
   it("renders a native nav", () => {
@@ -17,6 +23,36 @@ describe("Navbar", () => {
     expect(markup).toContain("<a");
     expect(markup).toContain('href="/"');
     expect(markup).not.toContain("<span");
+  });
+
+  it("puts the disclosure label on a summary", () => {
+    const markup = renderToStaticMarkup(
+      h(NavbarMenu, {}, h(NavbarList, {}, "Docs")),
+    );
+    expect(markup).toContain("<details");
+    expect(markup).toContain("<summary");
+    expect(markup).toContain("ns-navbar__toggle");
+    expect(markup).toContain("Menu");
+  });
+
+  it("clones an element child when href is omitted", () => {
+    const markup = renderToStaticMarkup(
+      h(
+        NavbarList,
+        {},
+        h(
+          NavbarItem,
+          { current: true },
+          h("a", { href: "/docs" }, "Docs"),
+        ),
+      ),
+    );
+    expect(markup).toContain("<a");
+    expect(markup).toContain('href="/docs"');
+    expect(markup).toContain("ns-navbar__item");
+    expect(markup).toContain("ns-button");
+    expect(markup).toContain('aria-current="page"');
+    expect(markup).not.toContain("<button");
   });
 
   it("marks the current item", () => {

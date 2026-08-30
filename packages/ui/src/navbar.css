@@ -2,7 +2,7 @@
   .ns-navbar {
     display: flex;
     align-items: center;
-    gap: var(--space-3, 0.39rem);
+    gap: var(--space-8, 1.19rem);
     box-sizing: border-box;
     width: 100%;
     min-height: var(
@@ -44,7 +44,7 @@
     content-visibility: visible;
   }
 
-  .ns-navbar__toggle {
+  .ns-button.ns-navbar__toggle {
     display: none;
     list-style: none;
   }
@@ -64,17 +64,22 @@
     list-style: none;
   }
 
+  .ns-button.ns-navbar__item,
   .ns-navbar__item {
+    min-height: calc(
+      var(--type-sm, 0.8rem) * var(--leading-tight, 1.25) + var(--space-2, 0.31rem) *
+        2
+    );
+    padding-block: var(--space-1, 0.25rem);
+    padding-inline: var(--space-4, 0.49rem);
+    font-size: var(--type-sm, 0.8rem);
     color: var(--text-sub, #767676);
   }
 
   .ns-button.ns-navbar__item[aria-current="page"] {
     color: var(--text-heading, #111);
     border-color: var(--shade, oklch(0 0 0 / 28%));
-    background: var(
-      --face-press,
-      linear-gradient(180deg, #e8e6e4 0%, #fff 100%)
-    );
+    background: var(--bg-hover, #f3f2f1);
     box-shadow: var(--press);
   }
 
@@ -93,10 +98,7 @@
       ) {
       color: var(--text-heading, #111);
       border-color: var(--shade, oklch(0 0 0 / 28%));
-      background: var(
-        --face-press,
-        linear-gradient(180deg, #e8e6e4 0%, #fff 100%)
-      );
+      background: var(--bg-hover, #f3f2f1);
       box-shadow: var(--press);
     }
   }
@@ -115,7 +117,7 @@
       content-visibility: visible;
     }
 
-    .ns-navbar__toggle {
+    .ns-button.ns-navbar__toggle {
       display: inline-flex;
     }
 
@@ -149,4 +151,26 @@
 
 .ns-navbar a {
   text-decoration: none;
+}
+
+.ns-navbar a.ns-navbar__item {
+  color: var(--text-sub, #767676);
+}
+
+.ns-navbar a.ns-navbar__brand {
+  color: var(--text-heading, #111);
+}
+
+.ns-navbar a.ns-navbar__item[aria-current="page"] {
+  color: var(--text-heading, #111);
+}
+
+@media (hover: hover) {
+  .ns-navbar a.ns-navbar__item:hover {
+    color: var(--text-heading, #111);
+  }
+
+  .ns-navbar a.ns-navbar__item[aria-current="page"]:hover {
+    color: var(--text-heading, #111);
+  }
 }

@@ -7,7 +7,12 @@ import {
   type ReactNode,
 } from "react";
 import { cx } from "./cx";
-import { describedBy, Field, type FieldChrome } from "./field";
+import {
+  describedBy,
+  Field,
+  FieldMark,
+  type FieldChrome,
+} from "./field";
 
 export type RadioProps = Omit<
   ComponentProps<"input">,
@@ -25,52 +30,30 @@ export function Radio({
   label,
   optional,
   required,
+  optionalLabel,
+  requiredLabel,
   description,
   error,
   className,
   id,
   disabled,
-  "aria-describedby": ariaDescribedBy,
-  "aria-invalid": ariaInvalid,
   ...rest
 }: RadioProps) {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
-  const descriptionId = `${inputId}-desc`;
-  const errorId = `${inputId}-error`;
-  const invalid = error != null || ariaInvalid === true || ariaInvalid === "true";
-
   return (
     <Field
+      id={id}
       label={label}
       optional={optional}
       required={required}
+      optionalLabel={optionalLabel}
+      requiredLabel={requiredLabel}
       description={description}
       error={error}
       className={className}
       disabled={disabled}
       kind="choice"
-      inputId={inputId}
-      descriptionId={descriptionId}
-      errorId={errorId}
-      invalid={invalid}
     >
-      <input
-        {...rest}
-        id={inputId}
-        className="ns-choice"
-        type="radio"
-        disabled={disabled}
-        required={required}
-        aria-required={required || undefined}
-        aria-invalid={invalid || undefined}
-        aria-errormessage={error != null ? errorId : undefined}
-        aria-describedby={describedBy(
-          description != null && descriptionId,
-          error != null && errorId,
-          ariaDescribedBy,
-        )}
-      />
+      <input {...rest} className="ns-choice" type="radio" />
     </Field>
   );
 }
@@ -79,6 +62,8 @@ export function RadioGroup({
   label,
   optional,
   required,
+  optionalLabel,
+  requiredLabel,
   description,
   error,
   className,
@@ -98,7 +83,7 @@ export function RadioGroup({
       data-invalid={invalid ? "true" : undefined}
       data-disabled={disabled ? "true" : undefined}
       disabled={disabled}
-      aria-required={required || undefined}
+      aria-required={required && !optional ? true : undefined}
       aria-invalid={invalid || undefined}
       aria-describedby={describedBy(
         description != null && descriptionId,
@@ -107,11 +92,12 @@ export function RadioGroup({
     >
       <legend className="ns-field__legend">
         {label}
-        {optional ? (
-          <span className="ns-field__optional"> Optional</span>
-        ) : required ? (
-          <span className="ns-field__required"> Required</span>
-        ) : null}
+        <FieldMark
+          optional={optional}
+          required={required}
+          optionalLabel={optionalLabel}
+          requiredLabel={requiredLabel}
+        />
       </legend>
       <div className="ns-field__options">
         {Children.map(children, (child) => {
@@ -130,7 +116,7 @@ export function RadioGroup({
             </div>
           ) : null}
           {error != null ? (
-            <div className="ns-field__error" id={errorId} role="alert">
+            <div className="ns-field__error" id={errorId}>
               {error}
             </div>
           ) : null}

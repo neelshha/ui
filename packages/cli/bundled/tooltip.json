@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "tooltip.tsx",
-      "content": "import \"./tooltip.css\";\n\nimport type { ComponentProps, ReactNode } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type TooltipProps = Omit<ComponentProps<\"span\">, \"content\"> & {\n  content: ReactNode;\n};\n\nexport function Tooltip({ content, className, children, ...rest }: TooltipProps) {\n  return (\n    <span className={cx(\"ns-tooltip\", className)} {...rest}>\n      {children}\n      <span className=\"ns-tooltip__tip\" role=\"tooltip\">\n        {content}\n      </span>\n    </span>\n  );\n}\n"
+      "content": "import \"./tooltip.css\";\n\nimport {\n  cloneElement,\n  isValidElement,\n  useId,\n  type ComponentProps,\n  type ReactElement,\n  type ReactNode,\n} from \"react\";\nimport { cx } from \"./cx\";\n\nexport type TooltipProps = Omit<ComponentProps<\"span\">, \"content\"> & {\n  content: ReactNode;\n};\n\nexport function Tooltip({ content, className, children, ...rest }: TooltipProps) {\n  const tipId = useId();\n  const trigger = isValidElement(children)\n    ? cloneElement(\n        children as ReactElement<{ \"aria-describedby\"?: string }>,\n        { \"aria-describedby\": tipId },\n      )\n    : (\n        <span tabIndex={0} aria-describedby={tipId}>\n          {children}\n        </span>\n      );\n\n  return (\n    <span className={cx(\"ns-tooltip\", className)} {...rest}>\n      {trigger}\n      <span className=\"ns-tooltip__tip\" id={tipId} role=\"tooltip\">\n        {content}\n      </span>\n    </span>\n  );\n}\n"
     },
     {
       "path": "tooltip.css",

@@ -102,6 +102,10 @@
       "types": "./src/separator.tsx",
       "default": "./src/separator.tsx"
     },
+    "./sidebar": {
+      "types": "./src/sidebar.tsx",
+      "default": "./src/sidebar.tsx"
+    },
     "./skeleton": {
       "types": "./src/skeleton.tsx",
       "default": "./src/skeleton.tsx"
@@ -161,6 +165,7 @@
     "./popover.css": "./src/popover.css",
     "./progress.css": "./src/progress.css",
     "./separator.css": "./src/separator.css",
+    "./sidebar.css": "./src/sidebar.css",
     "./skeleton.css": "./src/skeleton.css",
     "./spinner.css": "./src/spinner.css",
     "./table.css": "./src/table.css",

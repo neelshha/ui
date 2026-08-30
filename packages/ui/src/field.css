@@ -21,14 +21,12 @@
     flex-direction: column;
     gap: var(--space-2, 0.31rem);
     min-width: 0;
-    padding-top: var(--space-3, 0.39rem);
     color: var(--ns-field-body);
   }
 
   [data-density="compact"] .ns-field {
     --ns-field-inset-y: var(--space-3, 0.39rem);
     --ns-field-inset-x: var(--space-4, 0.49rem);
-    padding-top: var(--space-2, 0.31rem);
   }
 
   .ns-field__control {
@@ -40,15 +38,7 @@
     border-radius: var(--ns-field-radius);
     background: var(--ns-field-fill);
     box-shadow: var(--well);
-    transition:
-      border-color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
-      box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
-  }
-
-  .ns-field__control:focus-within {
-    border-color: var(--ns-field-line-strong);
-    outline: 2px solid var(--ns-field-line-strong);
-    outline-offset: 2px;
+    transition: box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   }
 
   .ns-field[data-invalid="true"] .ns-field__control {
@@ -99,14 +89,6 @@
     cursor: pointer;
     padding: 0;
     background: none;
-  }
-
-  .ns-field[data-kind="select"] .ns-field__label {
-    transform: translateY(-50%) scale(calc(1 / var(--ratio, 1.25)));
-    color: var(--ns-field-fg);
-    background: var(--ns-field-fill);
-    padding: 0 var(--space-2, 0.31rem);
-    max-width: calc(100% - var(--space-8, 1.19rem));
   }
 
   .ns-field[data-kind="group"] {
@@ -162,11 +144,6 @@
     font: inherit;
     line-height: inherit;
     letter-spacing: inherit;
-  }
-
-  .ns-field__input:focus,
-  .ns-field__input:focus-visible {
-    outline: none;
   }
 
   .ns-field__input:disabled {
@@ -292,8 +269,9 @@
   }
 
   .ns-choice:focus-visible {
-    outline: 2px solid var(--ns-field-line-strong);
-    outline-offset: 2px;
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: 0;
   }
 
   .ns-field[data-invalid="true"] .ns-choice {
@@ -335,43 +313,14 @@
   }
 
   .ns-field__label {
-    position: absolute;
-    z-index: 1;
-    inset-inline-start: var(--ns-field-inset-x);
-    top: 0;
-    transform: translateY(
-      calc(0.5em * var(--leading, 1.5625) + var(--ns-field-inset-y) - 50%)
-    );
-    max-width: calc(100% - var(--ns-field-inset-x) * 2);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: var(--ns-field-muted);
-    cursor: text;
-    transform-origin: inline-start center;
-    transition:
-      transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
-      color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
-  }
-
-  .ns-field[data-multiline="true"] .ns-field__label {
-    transform: translateY(var(--ns-field-inset-y));
-  }
-
-  .ns-field__input:focus + .ns-field__label,
-  .ns-field__input:not(:placeholder-shown) + .ns-field__label,
-  .ns-field__input:-webkit-autofill + .ns-field__label {
-    transform: translateY(-50%) scale(calc(1 / var(--ratio, 1.25)));
     color: var(--ns-field-fg);
-    background: var(--ns-field-fill);
-    padding: 0 var(--space-2, 0.31rem);
-    max-width: calc(100% - var(--space-8, 1.19rem));
+    cursor: default;
   }
 
-  .ns-field[data-invalid="true"] .ns-field__input:focus + .ns-field__label,
-  .ns-field[data-invalid="true"] .ns-field__input:not(:placeholder-shown) + .ns-field__label,
-  .ns-field[data-invalid="true"] .ns-field__input:-webkit-autofill + .ns-field__label {
-    color: var(--ns-field-error);
+  .ns-field[data-label="stack"] .ns-field__label,
+  .ns-field[data-label="float"] .ns-field__label {
+    position: static;
+    max-width: none;
   }
 
   .ns-field__optional,
@@ -380,8 +329,6 @@
   }
 
   .ns-field__meta {
-    min-height: 1.6em;
-    min-height: 1lh;
     line-height: var(--leading, 1.5625);
   }
 
@@ -404,4 +351,11 @@
       transition: none;
     }
   }
+}
+
+.ns-field__input:focus,
+.ns-field__input:focus-visible {
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: 0;
 }

@@ -2,6 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  Sidebar,
+  SidebarGroup,
+  SidebarItem,
+  SidebarLabel,
+  SidebarList,
+  SidebarNav,
+} from "@neelshha/ui";
 import { componentNav, startNav } from "@/lib/docs";
 
 function current(pathname: string, href: string) {
@@ -12,48 +20,35 @@ export function DocsNav() {
   const pathname = usePathname();
 
   return (
-    <aside className="side">
-      <nav aria-label="Site">
-        <div className="sideGroup">
-          <p className="sideLabel">Get started</p>
-          <ul>
+    <Sidebar>
+      <SidebarNav aria-label="Docs">
+        <SidebarGroup>
+          <SidebarLabel>Get started</SidebarLabel>
+          <SidebarList>
             {startNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  data-current={current(pathname, item.href) ? "true" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
+              <SidebarItem
+                key={item.href}
+                current={current(pathname, item.href)}
+              >
+                <Link href={item.href}>{item.label}</Link>
+              </SidebarItem>
             ))}
-          </ul>
-        </div>
-        <div className="sideGroup">
-          <p className="sideLabel">
-            <Link
-              href="/docs/components"
-              data-current={
-                pathname === "/docs/components" ? "true" : undefined
-              }
-            >
-              Components
-            </Link>
-          </p>
-          <ul>
+          </SidebarList>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarLabel>Components</SidebarLabel>
+          <SidebarList>
             {componentNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  data-current={current(pathname, item.href) ? "true" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
+              <SidebarItem
+                key={item.href}
+                current={current(pathname, item.href)}
+              >
+                <Link href={item.href}>{item.label}</Link>
+              </SidebarItem>
             ))}
-          </ul>
-        </div>
-      </nav>
-    </aside>
+          </SidebarList>
+        </SidebarGroup>
+      </SidebarNav>
+    </Sidebar>
   );
 }

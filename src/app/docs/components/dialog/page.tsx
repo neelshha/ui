@@ -20,6 +20,21 @@ const rows = [
     type: "(open: boolean) => void",
     notes: "Fires false when the dialog closes, including Escape.",
   },
+  {
+    name: "DialogTitle",
+    type: "h2",
+    notes: "The heading. Wire aria-labelledby yourself if you need it.",
+  },
+  {
+    name: "DialogActions",
+    type: "div",
+    notes: "A trailing row for keys.",
+  },
+  {
+    name: "DialogClose",
+    type: "button",
+    notes: "A form with method=dialog. variant matches Button.",
+  },
 ] as const;
 
 export default function DialogPage() {

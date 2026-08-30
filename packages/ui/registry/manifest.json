@@ -55,6 +55,15 @@
       }
     },
     {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "files": ["src/sidebar.tsx", "src/sidebar.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
       "name": "card",
       "title": "Card",
       "files": ["src/card.tsx", "src/card.css"],

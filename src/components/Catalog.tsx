@@ -11,14 +11,26 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
+  Button,
   Card,
   Checkbox,
   Kbd,
   Label,
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarItem,
+  NavbarList,
   Progress,
   Radio,
   Select,
   Separator,
+  Sidebar,
+  SidebarGroup,
+  SidebarItem,
+  SidebarLabel,
+  SidebarList,
+  SidebarNav,
   Skeleton,
   Spinner,
   Switch,
@@ -32,6 +44,7 @@ import {
   TabList,
   Tabs,
   Text,
+  TextField,
   Tooltip,
 } from "@neelshha/ui";
 import { componentHref, components } from "@/lib/docs";
@@ -65,7 +78,7 @@ const thumbs = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  button: <span className="catalogButton">Save</span>,
+  button: <Button>Save</Button>,
   card: (
     <Card>
       <Text as="strong" tone="heading">
@@ -81,17 +94,19 @@ const thumbs = {
       <span>This cannot be undone.</span>
     </div>
   ),
-  field: <div className="catalogField">Name</div>,
+  field: <TextField label="Name" name="catalog-name" />,
   kbd: <Kbd>⌘K</Kbd>,
   label: <Label>Email</Label>,
-  link: <span className="ns-link">Docs</span>,
-  menu: <span className="catalogButton">Actions</span>,
+  link: <Link href="/docs">Docs</Link>,
+  menu: <Button variant="outline">Actions</Button>,
   navbar: (
-    <div className="catalogNavbar">
-      <strong>Acme</strong>
-      <span>Docs</span>
-      <span>Pricing</span>
-    </div>
+    <Navbar>
+      <NavbarBrand>Acme</NavbarBrand>
+      <NavbarList>
+        <NavbarItem current>Docs</NavbarItem>
+        <NavbarItem>Pricing</NavbarItem>
+      </NavbarList>
+    </Navbar>
   ),
   popover: <span className="catalogDialog">Notes</span>,
   progress: <Progress value={64} max={100} />,
@@ -107,6 +122,19 @@ const thumbs = {
       <Separator />
       <Text tone="sub">Below</Text>
     </div>
+  ),
+  sidebar: (
+    <Sidebar>
+      <SidebarNav>
+        <SidebarGroup>
+          <SidebarLabel>Docs</SidebarLabel>
+          <SidebarList>
+            <SidebarItem current>Intro</SidebarItem>
+            <SidebarItem>Field</SidebarItem>
+          </SidebarList>
+        </SidebarGroup>
+      </SidebarNav>
+    </Sidebar>
   ),
   skeleton: <Skeleton style={{ width: "8rem", height: "0.7rem" }} />,
   spinner: <Spinner />,
@@ -153,15 +181,16 @@ export function Catalog() {
     <ul className="catalog">
       {components.map((item) => (
         <li key={item.slug}>
-          <NextLink href={componentHref(item.slug)}>
-            <div className="demo catalogPreview" aria-hidden="true">
-              <div className="demoInner">{thumbs[item.slug]}</div>
-            </div>
-            <div className="catalogMeta">
-              <strong>{item.title}</strong>
-              <span>{item.description}</span>
-            </div>
+          <NextLink href={componentHref(item.slug)} className="catalogHit">
+            {item.title}
           </NextLink>
+          <div className="demo catalogPreview" aria-hidden="true">
+            <div className="demoInner">{thumbs[item.slug]}</div>
+          </div>
+          <div className="catalogMeta">
+            <strong>{item.title}</strong>
+            <span>{item.description}</span>
+          </div>
         </li>
       ))}
     </ul>

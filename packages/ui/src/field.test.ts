@@ -22,6 +22,8 @@ describe("Field", () => {
     expect(markup).toContain("Your full name.");
     expect(markup).toContain("Enter a name.");
     expect(markup).toContain("aria-describedby");
+    expect(markup).not.toContain("aria-errormessage");
+    expect(markup).not.toContain('role="alert"');
   });
 
   it("marks required on the label and the input", () => {
@@ -39,6 +41,40 @@ describe("Field", () => {
     );
     expect(markup).toContain(" Optional");
     expect(markup).not.toContain(" Required");
+  });
+
+  it("uses a custom optional label", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Name", optional: true, optionalLabel: "Facultatif" }),
+    );
+    expect(markup).toContain("Facultatif");
+    expect(markup).not.toContain(" Optional");
+  });
+
+  it("keeps a float label above the well", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Name", chrome: "float" }),
+    );
+    expect(markup).toContain('data-label="float"');
+    expect(markup).toContain("<label");
+    expect(markup).not.toContain('placeholder=" "');
+  });
+
+  it("omits meta when there is no help or error", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Name" }),
+    );
+    expect(markup).not.toContain("ns-field__meta");
+    expect(markup).toContain('data-label="stack"');
+  });
+
+  it("wires a composed control without ids from the caller", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Name", name: "name" }),
+    );
+    expect(markup).toContain("<label");
+    expect(markup).toContain("for=");
+    expect(markup).toContain('id="');
   });
 
   it("falls back from unsupported input types", () => {
@@ -124,6 +160,14 @@ describe("Alert", () => {
     expect(markup).toContain('role="status"');
     expect(markup).toContain('data-tone="success"');
     expect(markup).toContain("Saved.");
+  });
+
+  it("uses alert for danger", () => {
+    const markup = renderToStaticMarkup(
+      h(Alert, { tone: "danger" }, "Failed."),
+    );
+    expect(markup).toContain('role="alert"');
+    expect(markup).toContain('data-tone="danger"');
   });
 });
 

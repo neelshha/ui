@@ -149,9 +149,9 @@
   }
 
   .ns-button:focus-visible {
-    outline: 2px solid
-      var(--focus, color-mix(in srgb, var(--text-heading, #111) 70%, transparent));
-    outline-offset: 2px;
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: 0;
   }
 
   .ns-button:active:not(:disabled):not([aria-disabled="true"]):not(
@@ -221,10 +221,7 @@
   .ns-button[data-variant="ghost"]:active:not(:disabled):not(
       [aria-disabled="true"]
     ) {
-    background: var(
-      --face-press,
-      linear-gradient(180deg, #e8e6e4 0%, #fff 100%)
-    );
+    background: var(--bg-hover, #f3f2f1);
   }
 
   .ns-button[data-variant="link"]:active:not(:disabled):not(
@@ -281,4 +278,11 @@
 
 a.ns-button {
   text-decoration: none;
+  color: var(--ns-on-key, var(--on-ink, #fff));
+}
+
+a.ns-button[data-variant="outline"],
+a.ns-button[data-variant="ghost"],
+a.ns-button[data-variant="link"] {
+  color: var(--text-heading, #111);
 }

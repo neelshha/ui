@@ -3,8 +3,6 @@ import type { ReactNode } from "react";
 import Script from "next/script";
 import { ThemeProvider } from "@neelshha/ui";
 import { THEME_SCRIPT } from "@neelshha/ui/theme";
-import { DocsNav } from "@/components/DocsNav";
-import { DocsPager } from "@/components/DocsPager";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SITE } from "@/lib/docs";
@@ -33,13 +31,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="site">
             <SiteHeader />
-            <div className="shell frame">
-              <DocsNav />
-              <div className="main">
-                {children}
-                <DocsPager />
-              </div>
-            </div>
+            {children}
             <SiteFooter />
           </div>
         </ThemeProvider>

@@ -1,8 +1,12 @@
 import "./field.css";
 
 import {
+  Children,
+  cloneElement,
+  isValidElement,
   useId,
   type ComponentProps,
+  type ReactElement,
   type ReactNode,
 } from "react";
 import { cx } from "./cx";
@@ -30,38 +34,45 @@ export type FieldChrome = {
   label: ReactNode;
   optional?: boolean | undefined;
   required?: boolean | undefined;
+  optionalLabel?: ReactNode | undefined;
+  requiredLabel?: ReactNode | undefined;
   description?: ReactNode | undefined;
   error?: ReactNode | undefined;
   className?: string | undefined;
-  chrome?: "float" | "placeholder" | undefined;
+  chrome?: "stack" | "float" | "placeholder" | undefined;
 };
 
 export type FieldKind = "well" | "choice" | "select";
 
+type ControlProps = {
+  id?: string | undefined;
+  disabled?: boolean | undefined;
+  readOnly?: boolean | undefined;
+  required?: boolean | undefined;
+  "aria-invalid"?: boolean | "true" | "false" | undefined;
+  "aria-describedby"?: string | undefined;
+  "aria-required"?: boolean | undefined;
+};
+
 export type FieldProps = FieldChrome & {
+  id?: string | undefined;
   disabled?: boolean | undefined;
   readOnly?: boolean | undefined;
   multiline?: boolean | undefined;
   kind?: FieldKind | undefined;
-  inputId: string;
-  descriptionId: string;
-  errorId: string;
-  invalid: boolean;
-  children: ReactNode;
+  invalid?: boolean | undefined;
+  children: ReactElement<ControlProps>;
 };
 
 export type TextFieldProps = Omit<
   ComponentProps<"input">,
-  "size" | "className" | "placeholder" | "type"
+  "size" | "className" | "type"
 > &
   FieldChrome & {
     type?: TextFieldType | undefined;
   };
 
-export type TextAreaProps = Omit<
-  ComponentProps<"textarea">,
-  "className" | "placeholder"
-> &
+export type TextAreaProps = Omit<ComponentProps<"textarea">, "className"> &
   FieldChrome;
 
 type TypeDefaults = Pick<
@@ -84,18 +95,22 @@ function resolveType(type: string | undefined): TextFieldType {
   return "text";
 }
 
-function LabelMark({
+export function FieldMark({
   optional,
   required,
+  optionalLabel = "Optional",
+  requiredLabel = "Required",
 }: {
   optional?: boolean | undefined;
   required?: boolean | undefined;
+  optionalLabel?: ReactNode | undefined;
+  requiredLabel?: ReactNode | undefined;
 }) {
   if (optional) {
-    return <span className="ns-field__optional"> Optional</span>;
+    return <span className="ns-field__optional"> {optionalLabel}</span>;
   }
   if (required) {
-    return <span className="ns-field__required"> Required</span>;
+    return <span className="ns-field__required"> {requiredLabel}</span>;
   }
   return null;
 }
@@ -129,26 +144,80 @@ function defaultsForType(type: string | undefined): TypeDefaults {
   }
 }
 
+function textPlaceholder(
+  chrome: FieldChrome["chrome"],
+  label: ReactNode,
+  placeholder: string | undefined,
+) {
+  if (chrome === "placeholder" && typeof label === "string") return label;
+  return placeholder;
+}
+
 export function Field({
   label,
   optional,
   required,
+  optionalLabel,
+  requiredLabel,
   description,
   error,
   className,
-  chrome = "float",
+  chrome = "stack",
+  id,
   disabled,
   readOnly,
   multiline,
   kind = "well",
-  inputId,
-  descriptionId,
-  errorId,
-  invalid,
+  invalid: invalidProp,
   children,
 }: FieldProps) {
+  const generatedId = useId();
+  const child = Children.only(children);
+  const childProps = isValidElement<ControlProps>(child) ? child.props : {};
+  const inputId = id ?? childProps.id ?? generatedId;
+  const descriptionId = `${inputId}-desc`;
+  const errorId = `${inputId}-error`;
+  const invalid =
+    invalidProp === true ||
+    error != null ||
+    childProps["aria-invalid"] === true ||
+    childProps["aria-invalid"] === "true";
+  const requireControl = Boolean(required) && !optional;
   const placeholder = kind === "well" && chrome === "placeholder";
-  const mark = <LabelMark optional={optional} required={required} />;
+  const float = kind !== "choice" && chrome === "float";
+  const stack = kind !== "choice" && chrome === "stack";
+  const labelMode = kind === "choice" ? undefined : chrome;
+  const mark = (
+    <FieldMark
+      optional={optional}
+      required={required}
+      optionalLabel={optionalLabel}
+      requiredLabel={requiredLabel}
+    />
+  );
+
+  const control = isValidElement<ControlProps>(child)
+    ? cloneElement(child, {
+        id: inputId,
+        disabled: disabled ?? childProps.disabled,
+        ...(readOnly != null ? { readOnly } : {}),
+        required: requireControl || childProps.required,
+        "aria-required": requireControl || childProps.required || undefined,
+        "aria-invalid": invalid || undefined,
+        "aria-describedby": describedBy(
+          description != null && descriptionId,
+          error != null && errorId,
+          childProps["aria-describedby"],
+        ),
+      })
+    : child;
+
+  const visibleLabel = (
+    <label className="ns-field__label" htmlFor={inputId}>
+      {label}
+      {mark}
+    </label>
+  );
 
   return (
     <div
@@ -158,7 +227,7 @@ export function Field({
       data-readonly={readOnly ? "true" : undefined}
       data-multiline={multiline ? "true" : undefined}
       data-kind={kind === "well" ? undefined : kind}
-      data-label={placeholder ? "placeholder" : undefined}
+      data-label={labelMode}
     >
       {placeholder ? (
         <label className="ns-sr ns-field__sr" htmlFor={inputId}>
@@ -166,16 +235,12 @@ export function Field({
           {mark}
         </label>
       ) : null}
+      {stack || float ? visibleLabel : null}
       <div className="ns-field__control">
-        {children}
-        {placeholder ? null : (
-          <label className="ns-field__label" htmlFor={inputId}>
-            {label}
-            {mark}
-          </label>
-        )}
+        {control}
+        {kind === "choice" ? visibleLabel : null}
       </div>
-      {kind === "well" || description != null || error != null ? (
+      {description != null || error != null ? (
         <div className="ns-field__meta">
           {description != null ? (
             <div className="ns-field__description" id={descriptionId}>
@@ -183,7 +248,7 @@ export function Field({
             </div>
           ) : null}
           {error != null ? (
-            <div className="ns-field__error" id={errorId} role="alert">
+            <div className="ns-field__error" id={errorId}>
               {error}
             </div>
           ) : null}
@@ -197,6 +262,8 @@ export function TextField({
   label,
   optional,
   required,
+  optionalLabel,
+  requiredLabel,
   description,
   error,
   className,
@@ -205,53 +272,32 @@ export function TextField({
   type = "text",
   disabled,
   readOnly,
-  "aria-describedby": ariaDescribedBy,
-  "aria-invalid": ariaInvalid,
+  placeholder,
   ...rest
 }: TextFieldProps) {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
-  const descriptionId = `${inputId}-desc`;
-  const errorId = `${inputId}-error`;
   const resolvedType = resolveType(type);
-  const invalid = error != null || ariaInvalid === true || ariaInvalid === "true";
-  const placeholder =
-    chrome === "placeholder" && typeof label === "string" ? label : " ";
 
   return (
     <Field
+      id={id}
       label={label}
       optional={optional}
       required={required}
+      optionalLabel={optionalLabel}
+      requiredLabel={requiredLabel}
       description={description}
       error={error}
       className={className}
       chrome={chrome}
       disabled={disabled}
       readOnly={readOnly}
-      inputId={inputId}
-      descriptionId={descriptionId}
-      errorId={errorId}
-      invalid={invalid}
     >
       <input
         {...defaultsForType(resolvedType)}
         {...rest}
-        id={inputId}
         className="ns-field__input"
         type={resolvedType}
-        placeholder={placeholder}
-        disabled={disabled}
-        readOnly={readOnly}
-        required={required}
-        aria-required={required || undefined}
-        aria-invalid={invalid || undefined}
-        aria-errormessage={error != null ? errorId : undefined}
-        aria-describedby={describedBy(
-          description != null && descriptionId,
-          error != null && errorId,
-          ariaDescribedBy,
-        )}
+        placeholder={textPlaceholder(chrome, label, placeholder)}
       />
     </Field>
   );
@@ -261,6 +307,8 @@ export function TextArea({
   label,
   optional,
   required,
+  optionalLabel,
+  requiredLabel,
   description,
   error,
   className,
@@ -269,23 +317,17 @@ export function TextArea({
   disabled,
   readOnly,
   rows = 4,
-  "aria-describedby": ariaDescribedBy,
-  "aria-invalid": ariaInvalid,
+  placeholder,
   ...rest
 }: TextAreaProps) {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
-  const descriptionId = `${inputId}-desc`;
-  const errorId = `${inputId}-error`;
-  const invalid = error != null || ariaInvalid === true || ariaInvalid === "true";
-  const placeholder =
-    chrome === "placeholder" && typeof label === "string" ? label : " ";
-
   return (
     <Field
+      id={id}
       label={label}
       optional={optional}
       required={required}
+      optionalLabel={optionalLabel}
+      requiredLabel={requiredLabel}
       description={description}
       error={error}
       className={className}
@@ -293,28 +335,12 @@ export function TextArea({
       disabled={disabled}
       readOnly={readOnly}
       multiline
-      inputId={inputId}
-      descriptionId={descriptionId}
-      errorId={errorId}
-      invalid={invalid}
     >
       <textarea
         {...rest}
-        id={inputId}
         className="ns-field__input"
-        placeholder={placeholder}
-        disabled={disabled}
-        readOnly={readOnly}
         rows={rows}
-        required={required}
-        aria-required={required || undefined}
-        aria-invalid={invalid || undefined}
-        aria-errormessage={error != null ? errorId : undefined}
-        aria-describedby={describedBy(
-          description != null && descriptionId,
-          error != null && errorId,
-          ariaDescribedBy,
-        )}
+        placeholder={textPlaceholder(chrome, label, placeholder)}
       />
     </Field>
   );

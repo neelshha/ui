@@ -73,6 +73,14 @@ export default function CheckboxPage() {
       </div>
 
       <Example
+        title="Required"
+        description="A Required mark. The input is required."
+        code={`<Checkbox label="Terms" name="terms" required />`}
+      >
+        <Checkbox label="Terms" name="terms-req" required />
+      </Example>
+
+      <Example
         title="Description"
         description="Help stays under the row."
         code={`<Checkbox

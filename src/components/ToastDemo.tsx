@@ -6,12 +6,35 @@ function Inner() {
   const { toast } = useToast();
   return (
     <div className="demoRow">
-      <Button onClick={() => toast("Saved.", { tone: "success" })}>Save</Button>
+      <Button
+        variant="outline"
+        onClick={() => toast("Copied.", { tone: "default" })}
+      >
+        Default
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() => toast("Saved.", { tone: "success" })}
+      >
+        Success
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() => toast("Quota is low.", { tone: "warning" })}
+      >
+        Warning
+      </Button>
       <Button
         variant="danger"
         onClick={() => toast("Payment failed.", { tone: "danger" })}
       >
-        Fail
+        Danger
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() => toast("A new version is out.", { tone: "info" })}
+      >
+        Info
       </Button>
     </div>
   );

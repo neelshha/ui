@@ -8,7 +8,7 @@
     },
     {
       "path": "separator.css",
-      "content": "@layer components {\n  .ns-separator {\n    margin: 0;\n    border: 0;\n    padding: 0;\n  }\n\n  .ns-separator[data-orientation=\"horizontal\"] {\n    display: block;\n    width: 100%;\n    height: 2px;\n    background: linear-gradient(\n      180deg,\n      var(--shade, oklch(0 0 0 / 12%)),\n      var(--highlight, oklch(1 0 0 / 28%))\n    );\n  }\n\n  .ns-separator[data-orientation=\"vertical\"] {\n    display: inline-block;\n    width: 2px;\n    align-self: stretch;\n    min-height: 1.2em;\n    background: linear-gradient(\n      90deg,\n      var(--shade, oklch(0 0 0 / 12%)),\n      var(--highlight, oklch(1 0 0 / 28%))\n    );\n  }\n}\n"
+      "content": "@layer components {\n  .ns-separator {\n    margin: 0;\n    border: 0;\n    padding: 0;\n  }\n\n  .ns-separator[data-orientation=\"horizontal\"] {\n    display: block;\n    width: 100%;\n    height: 1px;\n    background: var(\n      --line,\n      color-mix(in srgb, var(--text-heading, #111) 18%, transparent)\n    );\n  }\n\n  .ns-separator[data-orientation=\"vertical\"] {\n    display: inline-block;\n    width: 1px;\n    align-self: stretch;\n    min-height: 1.2em;\n    background: var(\n      --line,\n      color-mix(in srgb, var(--text-heading, #111) 18%, transparent)\n    );\n  }\n}\n"
     }
   ],
   "dependencies": {

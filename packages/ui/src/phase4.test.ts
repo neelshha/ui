@@ -94,5 +94,6 @@ describe("Phase 4 primitives", () => {
     );
     expect(markup).toContain('role="tooltip"');
     expect(markup).toContain("Saved.");
+    expect(markup).toContain("aria-describedby");
   });
 });

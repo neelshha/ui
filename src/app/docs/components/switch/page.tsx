@@ -77,6 +77,18 @@ export default function SwitchPage() {
       </Example>
 
       <Example
+        title="Error"
+        description="A sentence. Marks the switch invalid."
+        code={`<Switch label="Alerts" name="alerts-err" error="Turn this on to continue." />`}
+      >
+        <Switch
+          label="Alerts"
+          name="alerts-err"
+          error="Turn this on to continue."
+        />
+      </Example>
+
+      <Example
         title="Disabled"
         description="Native disabled."
         code={`<Switch label="Alerts" name="alerts" disabled defaultChecked />`}

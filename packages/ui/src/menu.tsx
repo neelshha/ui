@@ -87,7 +87,13 @@ export function MenuTrigger({
   variant = "outline",
 }: MenuTriggerProps) {
   return (
-    <Button variant={variant} className={className} popoverTarget={menu}>
+    <Button
+      variant={variant}
+      className={className}
+      popoverTarget={menu}
+      aria-haspopup="menu"
+      aria-controls={menu}
+    >
       {children}
     </Button>
   );

@@ -12,14 +12,14 @@ export type AlertProps = ComponentProps<"div"> & {
 export function Alert({
   tone = "default",
   className,
-  role = "status",
+  role,
   ...rest
 }: AlertProps) {
   return (
     <div
       className={cx("ns-alert", className)}
       data-tone={tone}
-      role={role}
+      role={role ?? (tone === "danger" ? "alert" : "status")}
       {...rest}
     />
   );

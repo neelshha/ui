@@ -16,9 +16,15 @@ const rows = [
     notes: "Required. Matches PopoverTrigger popoverTarget.",
   },
   {
-    name: "popoverTarget",
+    name: "PopoverTrigger popoverTarget",
     type: "string",
     notes: "Native invoker. Light dismiss and Escape are the browser's.",
+  },
+  {
+    name: "PopoverTrigger variant",
+    type: "ButtonVariant",
+    def: '"outline"',
+    notes: "The key that opens the panel.",
   },
 ] as const;
 
