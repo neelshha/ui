@@ -28,8 +28,8 @@ export default function ProgressPage() {
       <header className="docLead">
         <h1>Progress</h1>
         <p>
-          Native <code>progress</code> and <code>meter</code>. A hairline
-          track, not a raised bar. Omit <code>value</code> for indeterminate.
+          Native <code>progress</code> and <code>meter</code>. A well, sky
+          fill flush to the track. Omit <code>value</code> for indeterminate.
         </p>
       </header>
 
@@ -45,7 +45,7 @@ export default function ProgressPage() {
 
       <Example
         title="Indeterminate"
-        description="Omit value. The browser draws the pending state."
+        description="Omit value. A sky pulse travels the well."
         code={`<Progress />`}
       >
         <Progress />

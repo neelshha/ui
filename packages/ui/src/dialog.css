@@ -10,7 +10,7 @@
     background: var(--bg-overlay, var(--bg, #fff));
     background-clip: padding-box;
     color: var(--text-body, #444);
-    box-shadow: var(--raise);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
   }
 
   .ns-dialog::backdrop {

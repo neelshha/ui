@@ -10,7 +10,7 @@
       var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
     border-radius: 999px;
     background: var(--bg-hover, #f3f2f1);
-    color: var(--text-sub, #767676);
+    color: var(--text-sub, #5c5c5c);
     font-size: var(--type-sm, 0.8rem);
     font-weight: var(--weight-medium, 500);
     line-height: 1;

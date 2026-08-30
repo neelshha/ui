@@ -2,7 +2,7 @@
   .ns-field {
     --ns-field-fg: var(--text-heading, #111);
     --ns-field-body: var(--text-body, #444);
-    --ns-field-muted: var(--text-sub, #767676);
+    --ns-field-muted: var(--text-sub, #5c5c5c);
     --ns-field-fill: var(--bg, #fff);
     --ns-field-line: var(
       --line,
@@ -153,20 +153,95 @@
   }
 
   select.ns-field__input {
-    appearance: none;
+    appearance: auto;
     cursor: pointer;
-    padding-inline-end: calc(var(--ns-field-inset-x) + 1.2em);
-    background-image: linear-gradient(
-        45deg,
-        transparent 50%,
-        var(--ns-field-fg) 50%
-      ),
-      linear-gradient(135deg, var(--ns-field-fg) 50%, transparent 50%);
-    background-position:
-      calc(100% - 0.95em) calc(50% - 0.12em),
-      calc(100% - 0.7em) calc(50% - 0.12em);
-    background-size: 0.28em 0.28em, 0.28em 0.28em;
-    background-repeat: no-repeat;
+    background-image: none;
+  }
+
+  @supports (appearance: base-select) {
+    select.ns-field__input {
+      appearance: base-select;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    select.ns-field__input::picker-icon {
+      content: "";
+      flex-shrink: 0;
+      align-self: center;
+      width: 0.36em;
+      height: 0.36em;
+      margin: 0;
+      border: solid currentColor;
+      border-width: 0 1.5px 1.5px 0;
+      background: none;
+      color: var(--ns-field-fg);
+      transform: translateY(-0.12em) rotate(45deg);
+    }
+
+    select.ns-field__input::picker(select) {
+      appearance: base-select;
+      box-sizing: border-box;
+      width: anchor-size(width);
+      min-width: anchor-size(width);
+      margin: 0;
+      margin-block-start: var(--space-2, 0.31rem);
+      padding: var(--inset-list, var(--space-2, 0.31rem));
+      border: 1px solid
+        var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+      border-radius: var(--radius-list, calc(var(--radius, 0.4rem) + var(--space-2, 0.31rem)));
+      background: var(--bg, #fff);
+      background-clip: padding-box;
+      color: var(--text-sub, #5c5c5c);
+      font: inherit;
+      box-shadow: none;
+    }
+
+    select.ns-field__input:open::picker(select) {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-1, 0.25rem);
+    }
+
+    select.ns-field__input option {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 0;
+      margin: 0;
+      padding: var(--space-1, 0.25rem) var(--space-3, 0.39rem);
+      border: 1px solid transparent;
+      border-radius: var(--radius, 0.4rem);
+      background: none;
+      background-clip: padding-box;
+      font: inherit;
+      line-height: inherit;
+      color: var(--text-sub, #5c5c5c);
+      box-shadow: var(--flat);
+      gap: 0;
+    }
+
+    select.ns-field__input option:hover {
+      color: var(--text-heading, #111);
+      background: var(--bg-hover, #f3f2f1);
+    }
+
+    select.ns-field__input option:checked,
+    select.ns-field__input option:focus {
+      color: var(--text-heading, #111);
+      border-color: transparent;
+      background: var(--bg-hover, #f3f2f1);
+      box-shadow: var(--flat);
+    }
+
+    select.ns-field__input option::checkmark {
+      display: none;
+      content: none;
+    }
   }
 
   .ns-choice {
@@ -184,12 +259,13 @@
     background: var(--ns-field-fill);
     background-clip: padding-box;
     box-shadow: var(--well);
-    color: var(--ns-on-key, var(--on-ink, #fff));
+    color: var(--on-key, #111);
     cursor: pointer;
     transition:
       border-color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
       box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
-      background var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+      background var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+      transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   }
 
   .ns-choice::after {
@@ -215,21 +291,35 @@
     transform: none;
   }
 
-  .ns-choice:checked {
-    --ns-key: var(--ink, #111);
-    --ns-on-key: var(--on-ink, #fff);
-    --key-face: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--ns-key) 68%, var(--shine, #fff)) 0%,
-      var(--ns-key) 52%,
-      color-mix(in srgb, var(--ns-key) 82%, oklch(0 0 0)) 100%
-    );
-    border-color: color-mix(in srgb, var(--ns-key) 28%, transparent);
+  .ns-choice:checked,
+  .ns-choice:indeterminate {
+    color: var(--on-key, #111);
+    border-color: var(--key-line, #221898);
     background: var(--key-face);
-    box-shadow: var(--press);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
+  }
+
+  .ns-choice:active:not(:disabled) {
+    transform: translateY(2px);
+  }
+
+  .ns-choice:checked:active:not(:disabled),
+  .ns-choice:indeterminate:active:not(:disabled) {
+    background: var(--key-face-press);
+    box-shadow: var(--float-press);
   }
 
   .ns-choice:checked::after {
+    opacity: 1;
+  }
+
+  .ns-choice:indeterminate::after {
+    width: 0.46em;
+    height: 0.1em;
+    border: 0;
+    border-radius: 1px;
+    background: currentColor;
+    transform: none;
     opacity: 1;
   }
 
@@ -244,19 +334,16 @@
     height: 0.72em;
     border: 0;
     border-radius: 999px;
-    background: var(
-      --face,
-      linear-gradient(180deg, #fff 0%, #f3f2f1 100%)
-    );
-    box-shadow: var(--raise);
+    background: var(--face);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     transform: translateX(-0.36em);
     opacity: 1;
     transition: transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   }
 
   .ns-choice[data-kind="switch"]:checked::after {
-    background: var(--ns-on-key, var(--on-ink, #fff));
-    box-shadow: var(--flat);
+    background: var(--face);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     transform: translateX(0.36em);
   }
 
@@ -271,9 +358,8 @@
   }
 
   .ns-choice:focus-visible {
-    outline: 5px auto Highlight;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: 0;
+    outline: 2px solid var(--focus, color-mix(in srgb, var(--text-heading, #111) 70%, transparent));
+    outline-offset: 2px;
   }
 
   .ns-field[data-invalid="true"] .ns-choice {
@@ -350,15 +436,14 @@
   @media (prefers-reduced-motion: reduce) {
     .ns-field__control,
     .ns-field__label,
+    .ns-choice,
     .ns-choice[data-kind="switch"]::after {
       transition: none;
     }
-  }
 
-  [dir="rtl"] select.ns-field__input {
-    background-position:
-      0.7em calc(50% - 0.12em),
-      0.95em calc(50% - 0.12em);
+    .ns-choice:active:not(:disabled) {
+      transform: none;
+    }
   }
 
   [dir="rtl"] .ns-choice[data-kind="switch"]::after {
@@ -372,7 +457,6 @@
 
 .ns-field__input:focus,
 .ns-field__input:focus-visible {
-  outline: 5px auto Highlight;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: 0;
+  outline: 2px solid var(--focus, color-mix(in srgb, var(--text-heading, #111) 70%, transparent));
+  outline-offset: 2px;
 }

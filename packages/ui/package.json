@@ -152,6 +152,7 @@
     },
     "./styles.css": "./src/styles.css",
     "./tokens.css": "./src/tokens.css",
+    "./fonts.css": "./src/fonts.css",
     "./accordion.css": "./src/accordion.css",
     "./alert.css": "./src/alert.css",
     "./avatar.css": "./src/avatar.css",

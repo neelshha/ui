@@ -15,7 +15,7 @@ const rows = [
     type: '"default" | "accent" | "success" | "warning" | "danger"',
     def: '"default"',
     notes:
-      "Default is a hairline. Accent is ink fill. Intent tones color the border and copy. No role unless you pass one.",
+      "Default is a hairline. Accent is the sky key. Intent tones color the border and copy. No role unless you pass one.",
   },
 ] as const;
 
@@ -24,7 +24,7 @@ export default function BadgePage() {
     <article className="doc">
       <header className="docLead">
         <h1>Badge</h1>
-        <p>A flat mark for status. Accent is ink, not a key.</p>
+        <p>A flat mark for status. Accent is the sky key.</p>
       </header>
 
       <Example>
@@ -47,7 +47,7 @@ export default function BadgePage() {
 
       <Example
         title="Tones"
-        description="Default is a hairline. Accent is ink fill. Intent is color, not a wash."
+        description="Default is a hairline. Accent is the sky key. Intent is color, not a wash."
         wide
         code={`<Badge>Draft</Badge>
 <Badge tone="accent">Live</Badge>

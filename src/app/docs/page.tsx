@@ -30,7 +30,7 @@ export default function DocsPage() {
         <p>
           Not Tailwind. Not Radix. Not shadcn. Components are native HTML, styled
           with CSS variables. Pages are paper. Chrome is skeuomorphic and rare:
-          raised keys, recessed wells, ink on focus.
+          sky keys, recessed wells, ink on focus.
         </p>
       </div>
 

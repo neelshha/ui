@@ -37,4 +37,10 @@
     opacity: 0;
     transition: none;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns-tooltip__tip {
+      transition: none;
+    }
+  }
 }

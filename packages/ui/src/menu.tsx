@@ -11,6 +11,7 @@ import {
   type MouseEvent,
   type ReactNode,
 } from "react";
+import { placeFromInvoker, popoverAnchorStyle, triggerAnchorStyle } from "./anchor";
 import { Button, type ButtonVariant } from "./button";
 import { cx } from "./cx";
 
@@ -44,7 +45,7 @@ function hidePopover(node: HTMLElement | null) {
   }
 }
 
-export function Menu({ className, onKeyDown, ...rest }: MenuProps) {
+export function Menu({ className, onKeyDown, id, style, ...rest }: MenuProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export function Menu({ className, onKeyDown, ...rest }: MenuProps) {
       if (!("newState" in event) || (event as ToggleEvent).newState !== "open") {
         return;
       }
+      placeFromInvoker(node);
       menuItems(node)[0]?.focus();
     };
     node.addEventListener("toggle", onToggle);
@@ -74,11 +76,13 @@ export function Menu({ className, onKeyDown, ...rest }: MenuProps) {
   return (
     <div
       {...rest}
+      id={id}
       ref={ref}
       popover="auto"
       role="menu"
       aria-orientation="vertical"
       className={cx("ns-popover ns-menu", className)}
+      style={{ ...popoverAnchorStyle(id), ...style }}
       onKeyDown={(event) => {
         if (event.key === "ArrowDown") move(event, 1);
         else if (event.key === "ArrowUp") move(event, -1);
@@ -131,6 +135,7 @@ export function MenuTrigger({
       variant={variant}
       className={className}
       popoverTarget={menu}
+      style={triggerAnchorStyle(menu)}
       aria-haspopup="menu"
       aria-expanded={expanded}
       aria-controls={menu}

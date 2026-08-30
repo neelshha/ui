@@ -7,7 +7,7 @@ export default function DocsLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <div className="shell frame">
-      <a href="#content" className="skip">
+      <a href="#content" className="skip ns-button" data-variant="outline">
         Skip to content
       </a>
       <DocsNav />

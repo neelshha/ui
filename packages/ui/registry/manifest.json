@@ -3,7 +3,7 @@
     {
       "name": "tokens",
       "title": "Tokens",
-      "files": ["src/tokens.css"],
+      "files": ["src/tokens.css", "src/fonts.css"],
       "dependencies": {
         "npm": [],
         "registry": []
@@ -255,7 +255,7 @@
     {
       "name": "popover",
       "title": "Popover",
-      "files": ["src/popover.tsx", "src/popover.css"],
+      "files": ["src/popover.tsx", "src/popover.css", "src/anchor.ts"],
       "dependencies": {
         "npm": [],
         "registry": ["cx", "button"]
@@ -273,7 +273,7 @@
     {
       "name": "menu",
       "title": "Menu",
-      "files": ["src/menu.tsx", "src/menu.css"],
+      "files": ["src/menu.tsx", "src/menu.css", "src/anchor.ts"],
       "dependencies": {
         "npm": [],
         "registry": ["cx", "button", "popover"]

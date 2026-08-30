@@ -57,8 +57,8 @@ export default function CheckboxPage() {
       <header className="docLead">
         <h1>Checkbox</h1>
         <p>
-          A native checkbox. The box is a well. Checked stamps it in. The label
-          is beside it, not floating. Composes <code>Field</code>.
+          A native checkbox. The box is a well. Checked is the sky key. The
+          label is beside it, not floating. Composes <code>Field</code>.
         </p>
       </header>
 
@@ -120,7 +120,7 @@ export default function CheckboxPage() {
 
       <Example
         title="Indeterminate"
-        description="The DOM mixed state. Not a third value."
+        description="The DOM mixed state. Candy face, a dash instead of a check. Not a third value."
         code={`<Checkbox label="Select all" name="all" indeterminate />`}
       >
         <Checkbox label="Select all" name="all" indeterminate />

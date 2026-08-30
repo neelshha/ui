@@ -1,8 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@neelshha/ui";
 import { pagerNav } from "@/lib/docs";
+import { icon } from "@/components/icons";
 
 export function DocsPager() {
   const pathname = usePathname();
@@ -16,18 +18,24 @@ export function DocsPager() {
   return (
     <nav className="pager" aria-label="Page">
       {prev ? (
-        <Link href={prev.href} className="pagerLink">
-          <span className="pagerDir">Previous</span>
+        <Button href={prev.href} variant="outline" className="pagerLink">
+          <span className="pagerDir">
+            <ChevronLeft {...icon} />
+            Previous
+          </span>
           {prev.label}
-        </Link>
+        </Button>
       ) : (
         <span />
       )}
       {next ? (
-        <Link href={next.href} className="pagerLink pagerLinkNext">
-          <span className="pagerDir">Next</span>
+        <Button href={next.href} className="pagerLink pagerLinkNext">
+          <span className="pagerDir">
+            Next
+            <ChevronRight {...icon} />
+          </span>
           {next.label}
-        </Link>
+        </Button>
       ) : null}
     </nav>
   );

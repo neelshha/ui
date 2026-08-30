@@ -14,7 +14,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Navbar",
-  description: "A paper rail. The current item is seated.",
+  description: "A paper rail. Links are ghost keys; the current one holds the hover wash.",
 };
 
 const rows = [
@@ -38,7 +38,7 @@ const rows = [
     name: "NavbarItem current",
     type: "boolean",
     def: "false",
-    notes: "Sets aria-current=page and seats the key.",
+    notes: "Sets aria-current=page and holds the ghost hover wash.",
   },
   {
     name: "NavbarSpacer",
@@ -54,7 +54,7 @@ export default function NavbarPage() {
         <h1>Navbar</h1>
         <p>
           A paper rail with a hairline under it. The wordmark is text. Links
-          are ghost keys; the current one is seated. The menu is{" "}
+          are ghost keys; the current one holds the hover wash. The menu is{" "}
           <code>details</code>, so it stays a Server Component.
         </p>
       </header>
@@ -112,8 +112,8 @@ import {
         description={
           <>
             Pass <code>current</code> on the item that matches the route. It
-            sets <code>aria-current=&quot;page&quot;</code> and seats the key.
-            The others stay ghost.
+            sets <code>aria-current=&quot;page&quot;</code> and holds the ghost
+            hover wash. The others stay quiet.
           </>
         }
         wide
@@ -138,7 +138,7 @@ import {
         description="Put keys after the spacer. They are ordinary buttons. Outline for a quiet action, solid for the one that matters."
         wide
         code={`<NavbarSpacer />
-<Button href="/login" variant="ghost">Log in</Button>
+<Button href="/login" variant="outline">Log in</Button>
 <Button href="/signup">Sign up</Button>`}
       >
         <Navbar>
@@ -149,7 +149,7 @@ import {
             </NavbarList>
           </NavbarMenu>
           <NavbarSpacer />
-          <Button href="/docs" variant="ghost">
+          <Button href="/docs" variant="outline">
             Log in
           </Button>
           <Button href="/docs/installation">Sign up</Button>

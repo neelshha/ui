@@ -34,8 +34,9 @@ export default function PopoverPage() {
       <header className="docLead">
         <h1>Popover</h1>
         <p>
-          A native <code>popover=&quot;auto&quot;</code> panel. Top layer.
-          Light dismiss. No portal. Trigger is an outline key.
+          A native <code>popover=&quot;auto&quot;</code> panel, anchored to
+          the trigger. Top layer. Light dismiss. No portal. Trigger is an
+          outline key.
         </p>
       </header>
 

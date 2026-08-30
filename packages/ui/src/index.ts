@@ -10,8 +10,13 @@ export type {
   AccordionProps,
   AccordionTriggerProps,
 } from "./accordion";
-export { Alert } from "./alert";
-export type { AlertProps, AlertTone } from "./alert";
+export { Alert, AlertDescription, AlertTitle } from "./alert";
+export type {
+  AlertDescriptionProps,
+  AlertProps,
+  AlertTitleProps,
+  AlertTone,
+} from "./alert";
 export { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 export type {
   AvatarFallbackProps,

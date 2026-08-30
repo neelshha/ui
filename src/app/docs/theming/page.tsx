@@ -26,7 +26,7 @@ export default function ThemingPage() {
           OS is dark and <code>&lt;html&gt;</code> is not <code>.light</code>.
           Force a mode with <code>.dark</code> or <code>.light</code> on{" "}
           <code>&lt;html&gt;</code>. Dark and light override type, surface,
-          key ink, shine, and the two light knobs. Chrome is derived from those.
+          key ink, shine, the candy faces, and the two light knobs.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function ThemingPage() {
 
       <Example
         title="Theme toggle"
-        description="The same key as the header. Light and dark only — it does not restore system."
+        description="A solid key. Light and dark only — it does not restore system. The header uses the same action with an icon."
         code={`import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 <ThemeToggle />`}
@@ -66,8 +66,8 @@ export default function ThemingPage() {
 --link
 
 /* type */
---font-sans
---font-mono
+--font-sans      /* Onest */
+--font-mono      /* DM Mono */
 
 /* surface */
 --bg
@@ -78,6 +78,9 @@ export default function ThemingPage() {
 /* key */
 --ink
 --on-ink
+--key            /* sky candy */
+--key-line
+--on-key         /* #111 on the candy */
 --shine
 
 /* intent */
@@ -103,10 +106,12 @@ export default function ThemingPage() {
 --ratio          /* 1.25 */
 --type-xs
 --type-sm
---type-md        /* 1rem */
+--type-md        /* 1rem — Onest */
 --type-lg
 --type-xl
 --type-2xl       /* page titles */
+--type-mono      /* 0.875rem — DM Mono */
+--type-mono-sm
 --control        /* button / navbar height */
 --space          /* 0.25rem */
 --space-1 … --space-14
@@ -115,6 +120,8 @@ export default function ThemingPage() {
 --weight-regular
 --weight-medium
 --radius         /* --space-3 */
+--inset-list     /* --space-2, pad around a list row */
+--radius-list    /* --radius + --inset-list */
 
 /* light */
 --highlight
@@ -128,7 +135,11 @@ export default function ThemingPage() {
 --well
 --press
 --face
+--face-line
+--face-hover
 --face-press
+--float
+--float-press
 --key-face
 --key-face-hover
 --key-face-press
@@ -138,20 +149,24 @@ export default function ThemingPage() {
 --duration       /* 0ms when prefers-reduced-motion */`}</Code>
         <p>
           Type and space share <code>--ratio</code>. Change that one number and
-          the ladder stays even. <code>--raise</code> is the bevel plus the
-          drop. <code>--well</code> inverts it. <code>--press</code> is the sunk
-          key. <code>--face</code> is the paper light. Unlayered rules win over
-          the token layer.
+          the ladder stays even. <code>--well</code> is the recessed field.
+          <code>--face</code> is the silver candy. <code>--focus</code> is the
+          ink ring. Unlayered rules win over the token layer.
         </p>
       </div>
 
       <div className="docBlock">
         <h2>Where chrome lives</h2>
         <p>
-          The page is paper. Cards, badges, alerts, outline buttons, and the
-          navbar rail are hairlines on <code>--bg</code>. <code>--raise</code>{" "}
-          is for the solid key and the dialog. Fields use <code>--well</code>.
-          Press stamps a key in. Ghost hover is a wash, not a plate.
+          The page is paper. Cards, default badges, and the navbar rail are
+          hairlines on <code>--bg</code>. Solid keys use the sky candy face
+          and <code>--float</code>. Outline keys use the silver face. Alerts
+          sit on a light tone wash with a start mark. Dialogs use{" "}
+          <code>--float</code>. Fields use <code>--well</code>. Progress fill
+          is <code>--key</code>. Inline <code>code</code> is a wash; a{" "}
+          <code>pre</code> block is a hairline plate. Press uses the press face
+          and <code>--float-press</code>, then travels 2px. Ghost hover is a
+          wash, not a plate.
         </p>
       </div>
 
@@ -170,10 +185,10 @@ export default function ThemingPage() {
       <div className="docBlock">
         <h2>Focus and chrome</h2>
         <p>
-          Focus is ink at 70% (<code>--focus</code>). Solid buttons and dialogs
-          use <code>--raise</code>. Fields use <code>--well</code>. Press swaps
-          to <code>--press</code> and travels 2px with the label. No scale.
-          Reduced motion turns the travel off.
+          Focus is a 2px ink ring at 70% (<code>--focus</code>). Solid and outline keys
+          press to their press face and <code>--float-press</code>, then travel
+          2px. Ghost press is the hover wash. Fields use <code>--well</code>.
+          No scale. Reduced motion turns the travel off.
         </p>
       </div>
     </article>

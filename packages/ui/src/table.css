@@ -16,7 +16,7 @@
     caption-side: top;
     text-align: start;
     padding-block-end: var(--space-4, 0.49rem);
-    color: var(--text-sub, #767676);
+    color: var(--text-sub, #5c5c5c);
     font-size: var(--type-sm, 0.8rem);
     line-height: var(--leading-tight, 1.25);
   }
@@ -31,7 +31,7 @@
   }
 
   .ns-table__head {
-    color: var(--text-sub, #767676);
+    color: var(--text-sub, #5c5c5c);
     font-size: var(--type-sm, 0.8rem);
     font-weight: var(--weight-medium, 500);
     line-height: var(--leading-tight, 1.25);

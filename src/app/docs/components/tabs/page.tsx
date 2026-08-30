@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Tabs",
-  description: "A tablist. The current tab is seated.",
+  description: "A tablist. Tabs are outline keys; the current one is solid.",
 };
 
 const rows = [
@@ -39,8 +39,8 @@ export default function TabsPage() {
       <header className="docLead">
         <h1>Tabs</h1>
         <p>
-          A native tablist. Tabs are ghost keys. The current one is seated,
-          same language as Navbar. This file is a client component.
+          A native tablist. Tabs are outline keys. The current one is solid.
+          Navbar links stay ghost. This file is a client component.
         </p>
       </header>
 

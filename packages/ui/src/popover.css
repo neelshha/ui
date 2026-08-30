@@ -2,14 +2,24 @@
   .ns-popover {
     box-sizing: border-box;
     min-width: 10rem;
+    width: max-content;
+    inset: unset;
     margin: 0;
-    padding: var(--space-3, 0.39rem);
+    margin-block-start: var(--space-3, 0.39rem);
+    padding: var(--inset-list, var(--space-2, 0.31rem));
     border: 1px solid
       var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
-    border-radius: var(--radius, 0.4rem);
+    border-radius: var(--radius-list, calc(var(--radius, 0.4rem) + var(--space-2, 0.31rem)));
     background: var(--bg-overlay, var(--bg, #fff));
     color: var(--text-body, #444);
     box-shadow: none;
+  }
+
+  @supports (top: anchor(bottom)) {
+    .ns-popover {
+      top: anchor(bottom);
+      inset-inline-start: anchor(start);
+    }
   }
 
   .ns-popover:popover-open {

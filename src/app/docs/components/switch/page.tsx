@@ -39,8 +39,9 @@ export default function SwitchPage() {
       <header className="docLead">
         <h1>Switch</h1>
         <p>
-          A checkbox with <code>role=&quot;switch&quot;</code>. The track is a
-          well. On stamps the thumb across. Same Field chrome as Checkbox.
+          A checkbox with <code>role=&quot;switch&quot;</code>. Off is a well.
+          On is the sky track with a silver thumb. Same Field chrome as
+          Checkbox.
         </p>
       </header>
 

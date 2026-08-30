@@ -6,7 +6,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Menu",
-  description: "A popover of ghost keys. Arrows move.",
+  description: "A hairline plate of wash rows. Arrows move.",
 };
 
 const rows = [
@@ -23,7 +23,7 @@ const rows = [
   {
     name: "MenuItem",
     type: "button",
-    notes: "Ghost key. role=menuitem. tabIndex=-1. Arrows move. Click hides the popover.",
+    notes: "Wash on focus. role=menuitem. tabIndex=-1. Arrows move. Click hides the popover.",
   },
   {
     name: "MenuItem disabled",
@@ -39,9 +39,9 @@ export default function MenuPage() {
       <header className="docLead">
         <h1>Menu</h1>
         <p>
-          A native popover of ghost keys. Opening moves focus to the first
-          item. Arrow keys move. Tab or a click hides it. This file is a
-          client component.
+          A hairline plate of wash rows, same type as the trigger.
+          Opening washes the first item. Arrow keys move. Tab or a click
+          hides it. This file is a client component.
         </p>
       </header>
 

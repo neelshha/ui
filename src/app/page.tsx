@@ -1,6 +1,8 @@
+import { ArrowRight, LayoutGrid } from "lucide-react";
 import { Button } from "@neelshha/ui";
 import { Catalog } from "@/components/Catalog";
 import { Code } from "@/components/Code";
+import { icon } from "@/components/icons";
 
 export default function HomePage() {
   return (
@@ -14,8 +16,12 @@ export default function HomePage() {
             shadcn.
           </p>
           <div className="heroActions">
-            <Button href="/docs">Get started</Button>
+            <Button href="/docs">
+              Get started
+              <ArrowRight {...icon} />
+            </Button>
             <Button href="/components" variant="outline">
+              <LayoutGrid {...icon} />
               View components
             </Button>
           </div>

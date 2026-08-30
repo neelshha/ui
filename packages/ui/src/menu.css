@@ -1,27 +1,64 @@
 @layer components {
-  .ns-menu {
-    box-sizing: border-box;
-    min-width: 10rem;
-    margin: 0;
-    display: flex;
+  .ns-popover.ns-menu {
     flex-direction: column;
     gap: var(--space-1, 0.25rem);
-    padding: var(--space-2, 0.31rem);
-    border: 1px solid
-      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
-    border-radius: var(--radius, 0.4rem);
-    background: var(--bg-overlay, var(--bg, #fff));
-    color: var(--text-body, #444);
+    padding: var(--inset-list, var(--space-2, 0.31rem));
+    border-radius: var(--radius-list, calc(var(--radius, 0.4rem) + var(--space-2, 0.31rem)));
+    background: var(--bg, #fff);
+    background-clip: padding-box;
+    font: inherit;
     box-shadow: none;
   }
 
-  .ns-menu:popover-open {
-    z-index: var(--z-overlay, 20);
+  .ns-popover.ns-menu:popover-open {
+    display: flex;
   }
 
   .ns-button.ns-menu__item {
     width: 100%;
+    min-height: 0;
     justify-content: flex-start;
+    padding: var(--space-1, 0.25rem) var(--space-3, 0.39rem);
+    border: 1px solid transparent;
+    border-radius: var(--radius, 0.4rem);
+    background: none;
+    background-clip: padding-box;
+    color: var(--text-sub, #5c5c5c);
+    box-shadow: var(--flat);
+  }
+
+  .ns-button.ns-menu__item:focus,
+  .ns-button.ns-menu__item:focus-visible {
     color: var(--text-heading, #111);
+    border-color: transparent;
+    background: var(--bg-hover, #f3f2f1);
+    box-shadow: var(--flat);
+  }
+
+  .ns-button.ns-menu__item:active:not(:disabled):not([aria-disabled="true"]) {
+    transform: translateY(2px);
+    color: var(--text-heading, #111);
+    background: var(--bg-hover, #f3f2f1);
+    box-shadow: var(--flat);
+  }
+
+  @media (hover: hover) {
+    .ns-button.ns-menu__item:hover:not(:disabled):not([aria-disabled="true"]) {
+      color: var(--text-heading, #111);
+      background: var(--bg-hover, #f3f2f1);
+    }
+
+    .ns-button.ns-menu__item:hover:focus:not(:disabled):not(
+        [aria-disabled="true"]
+      ) {
+      border-color: transparent;
+      box-shadow: var(--flat);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns-button.ns-menu__item:active:not(:disabled):not([aria-disabled="true"]) {
+      transform: none;
+    }
   }
 }

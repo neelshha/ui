@@ -1,7 +1,7 @@
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import { Alert } from "./alert";
+import { Alert, AlertDescription, AlertTitle } from "./alert";
 import { Checkbox } from "./checkbox";
 import { Dialog, DialogDescription, DialogTitle } from "./dialog";
 import { Radio, RadioGroup } from "./radio";
@@ -180,6 +180,18 @@ describe("Alert", () => {
     );
     expect(markup).toContain('role="alert"');
     expect(markup).toContain('data-tone="danger"');
+  });
+
+  it("renders a title and description", () => {
+    const markup = renderToStaticMarkup(
+      h(Alert, { tone: "success" }, [
+        h(AlertTitle, { key: "t" }, "Saved."),
+        h(AlertDescription, { key: "d" }, "Your changes are on the server."),
+      ]),
+    );
+    expect(markup).toContain("ns-alert__title");
+    expect(markup).toContain("ns-alert__description");
+    expect(markup).toContain("Your changes are on the server.");
   });
 });
 

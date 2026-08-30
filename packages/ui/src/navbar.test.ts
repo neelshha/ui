@@ -51,6 +51,7 @@ describe("Navbar", () => {
     expect(markup).toContain('href="/docs"');
     expect(markup).toContain("ns-navbar__item");
     expect(markup).toContain("ns-button");
+    expect(markup).toContain('data-variant="ghost"');
     expect(markup).toContain('aria-current="page"');
     expect(markup).not.toContain("<button");
   });
@@ -65,5 +66,6 @@ describe("Navbar", () => {
     expect(markup).toContain('aria-current="page"');
     expect(markup).toContain("ns-navbar__item");
     expect(markup).toContain("ns-button");
+    expect(markup).toContain('data-variant="ghost"');
   });
 });

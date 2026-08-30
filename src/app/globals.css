@@ -1,9 +1,6 @@
-@import "@neelshha/ui/tokens.css";
 @import "@neelshha/ui/styles.css";
 
 :root {
-  --font-sans: system-ui, sans-serif;
-  --font-mono: ui-monospace, monospace;
   --gutter: var(--space-10);
   --sidebar: 12rem;
   --rail: var(--space-10);
@@ -87,13 +84,14 @@ a {
 code,
 pre {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: inherit;
+  font-size: var(--type-mono);
 }
 
 code {
-  background: var(--bg-well);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius);
+  background: var(--bg-hover);
+  color: var(--text-heading);
 }
 
 pre {
@@ -101,6 +99,7 @@ pre {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: var(--space-7) var(--space-8);
+  padding-inline-end: var(--space-12);
   overflow-x: auto;
   white-space: pre-wrap;
 }
@@ -115,9 +114,8 @@ pre code {
 }
 
 :focus-visible {
-  outline: 5px auto Highlight;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: 0;
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .site {
@@ -187,9 +185,6 @@ pre code {
   inset-inline-start: var(--space-4);
   inset-block-start: var(--space-4);
   z-index: calc(var(--z-toast, 30) + 1);
-  padding: var(--space-3) var(--space-5);
-  background: var(--bg);
-  color: var(--text-heading);
   transform: translateY(-200%);
 }
 
@@ -286,7 +281,7 @@ pre code {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--bg);
-  box-shadow: none;
+  box-shadow: var(--float);
   color: var(--text-sub);
 }
 
@@ -314,21 +309,41 @@ pre code {
   border-top: 1px solid var(--line);
 }
 
-.pagerLink {
-  display: flex;
+.pager .ns-button {
   flex-direction: column;
-  gap: var(--space-1);
-  text-decoration: none;
-  color: var(--text-heading);
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  min-height: var(--control);
+  padding-block: var(--space-4);
 }
 
 .pagerLinkNext {
+  align-items: flex-end;
   text-align: end;
 }
 
 .pagerDir {
-  color: var(--text-sub);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   font-size: var(--type-sm);
+  opacity: 0.72;
+}
+
+.pagerLinkNext .pagerDir {
+  justify-content: flex-end;
+}
+
+.code {
+  position: relative;
+}
+
+.codeCopy {
+  position: absolute;
+  inset-block-start: var(--space-3);
+  inset-inline-end: var(--space-3);
+  z-index: 1;
 }
 
 .footer {
@@ -365,7 +380,7 @@ pre code {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 48rem) {
   :root {
     --gutter: var(--space-8);
   }
@@ -385,9 +400,9 @@ pre code {
 .demo {
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--bg-well);
+  background: var(--bg);
   background-clip: padding-box;
-  box-shadow: var(--well);
+  box-shadow: none;
   padding: var(--space-11) var(--space-9);
   display: flex;
   align-items: center;
@@ -420,9 +435,8 @@ pre code {
 
 .demo input:not([class]):focus,
 .demo input:not([class]):focus-visible {
-  outline: 5px auto Highlight;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: 0;
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .demoRow {

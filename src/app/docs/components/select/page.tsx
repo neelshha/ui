@@ -13,7 +13,7 @@ const rows = [
   {
     name: "label",
     type: "ReactNode",
-    notes: "Required. Sits above the well.",
+    notes: "Required. Sits above the well. The open list is an in-page picker where the browser allows it.",
   },
   {
     name: "optional",
@@ -51,8 +51,9 @@ export default function SelectPage() {
       <header className="docLead">
         <h1>Select</h1>
         <p>
-          A native <code>select</code> in the Field well. The label sits
-          above it. Options are children. No listbox, no combobox.
+          A native <code>select</code> in the Field well. Options are
+          children. The open list is a hairline plate of wash rows, as
+          wide as the field. Safari still uses the platform picker.
         </p>
       </header>
 

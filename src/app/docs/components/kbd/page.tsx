@@ -6,14 +6,14 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Kbd",
-  description: "A tiny raised key.",
+  description: "A tiny silver key.",
 };
 
 const rows = [
   {
     name: "Kbd",
     type: "kbd",
-    notes: "A raised key. Mono. One of the few places raise stays.",
+    notes: "A silver key. Mono. Same face as outline buttons.",
   },
 ] as const;
 
@@ -23,7 +23,7 @@ export default function KbdPage() {
       <header className="docLead">
         <h1>Kbd</h1>
         <p>
-          A tiny raised key. Mono face. Use it next to copy, not as a button.
+          A tiny silver key. Mono face. Use it next to copy, not as a button.
         </p>
       </header>
 

@@ -9,6 +9,10 @@ export type AlertProps = ComponentProps<"div"> & {
   tone?: AlertTone;
 };
 
+export type AlertTitleProps = ComponentProps<"div">;
+
+export type AlertDescriptionProps = ComponentProps<"div">;
+
 export function Alert({
   tone = "default",
   className,
@@ -23,4 +27,12 @@ export function Alert({
       {...rest}
     />
   );
+}
+
+export function AlertTitle({ className, ...rest }: AlertTitleProps) {
+  return <div className={cx("ns-alert__title", className)} {...rest} />;
+}
+
+export function AlertDescription({ className, ...rest }: AlertDescriptionProps) {
+  return <div className={cx("ns-alert__description", className)} {...rest} />;
 }

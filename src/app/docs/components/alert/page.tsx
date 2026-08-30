@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { Alert } from "@neelshha/ui";
+import { CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@neelshha/ui";
+import { icon } from "@/components/icons";
 import { ApiTable } from "@/components/ApiTable";
 import { Code, Install } from "@/components/Code";
 import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Alert",
-  description: "A hairline status. Tone is color.",
+  description: "A status plate. Tone is a wash and a start mark.",
 };
 
 const rows = [
@@ -14,13 +16,23 @@ const rows = [
     name: "tone",
     type: '"default" | "success" | "warning" | "danger" | "info"',
     def: '"default"',
-    notes: "Intent color on the border and copy. Uses the tone tokens.",
+    notes: "Washes the plate and marks the start edge. Title picks up the tone.",
   },
   {
     name: "role",
     type: "string",
     def: 'tone === "danger" ? "alert" : "status"',
     notes: "Danger interrupts. Other tones are polite status. Pass role to override.",
+  },
+  {
+    name: "AlertTitle",
+    type: "div",
+    notes: "The lead line. Medium weight. Tone colors it.",
+  },
+  {
+    name: "AlertDescription",
+    type: "div",
+    notes: "Supporting copy. Stays body color.",
   },
 ] as const;
 
@@ -30,13 +42,26 @@ export default function AlertPage() {
       <header className="docLead">
         <h1>Alert</h1>
         <p>
-          A hairline on paper for a short status. Children go in. Tone is
-          color, not a wash.
+          A status plate. Soft wash, start mark, body stays readable. Children
+          go in. Compose a title and description when there is more than one
+          line.
         </p>
       </header>
 
-      <Example>
-        <Alert>Saved.</Alert>
+      <Example
+        wide
+        code={`<Alert>
+  <AlertTitle>Saved.</AlertTitle>
+  <AlertDescription>Your changes are on the server.</AlertDescription>
+</Alert>`}
+      >
+        <Alert>
+          <AlertTitle>
+            <CircleCheck {...icon} />
+            Saved.
+          </AlertTitle>
+          <AlertDescription>Your changes are on the server.</AlertDescription>
+        </Alert>
       </Example>
 
       <div className="docBlock">
@@ -46,27 +71,68 @@ export default function AlertPage() {
 
       <div className="docBlock">
         <h2>Usage</h2>
-        <Code>{`import { Alert } from "@/components/ui/alert";
+        <Code>{`import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-<Alert>Saved.</Alert>`}</Code>
+<Alert>
+  <AlertTitle>Saved.</AlertTitle>
+  <AlertDescription>Your changes are on the server.</AlertDescription>
+</Alert>`}</Code>
       </div>
 
       <Example
         title="Tones"
         description="Success, warning, danger, and info. Danger should set role=alert when it interrupts."
         wide
-        code={`<Alert tone="success">Saved.</Alert>
-<Alert tone="warning">This will replace the file.</Alert>
-<Alert tone="danger" role="alert">Payment failed.</Alert>
-<Alert tone="info">A new version is ready.</Alert>`}
+        code={`<Alert tone="success">
+  <AlertTitle>Saved.</AlertTitle>
+  <AlertDescription>Your changes are on the server.</AlertDescription>
+</Alert>
+<Alert tone="warning">
+  <AlertTitle>Replace this file?</AlertTitle>
+  <AlertDescription>The current copy will be lost.</AlertDescription>
+</Alert>
+<Alert tone="danger" role="alert">
+  <AlertTitle>Payment failed.</AlertTitle>
+  <AlertDescription>Try another card or try again later.</AlertDescription>
+</Alert>
+<Alert tone="info">
+  <AlertTitle>A new version is ready.</AlertTitle>
+  <AlertDescription>Reload to pick it up.</AlertDescription>
+</Alert>`}
       >
         <div className="stack">
-          <Alert tone="success">Saved.</Alert>
-          <Alert tone="warning">This will replace the file.</Alert>
-          <Alert tone="danger" role="alert">
-            Payment failed.
+          <Alert tone="success">
+            <AlertTitle>
+              <CircleCheck {...icon} />
+              Saved.
+            </AlertTitle>
+            <AlertDescription>
+              Your changes are on the server.
+            </AlertDescription>
           </Alert>
-          <Alert tone="info">A new version is ready.</Alert>
+          <Alert tone="warning">
+            <AlertTitle>
+              <TriangleAlert {...icon} />
+              Replace this file?
+            </AlertTitle>
+            <AlertDescription>The current copy will be lost.</AlertDescription>
+          </Alert>
+          <Alert tone="danger" role="alert">
+            <AlertTitle>
+              <CircleAlert {...icon} />
+              Payment failed.
+            </AlertTitle>
+            <AlertDescription>
+              Try another card or try again later.
+            </AlertDescription>
+          </Alert>
+          <Alert tone="info">
+            <AlertTitle>
+              <Info {...icon} />
+              A new version is ready.
+            </AlertTitle>
+            <AlertDescription>Reload to pick it up.</AlertDescription>
+          </Alert>
         </div>
       </Example>
 

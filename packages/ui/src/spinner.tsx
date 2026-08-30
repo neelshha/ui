@@ -7,6 +7,16 @@ export type SpinnerProps = ComponentProps<"span"> & {
   label?: string | undefined;
 };
 
+function Ticks() {
+  return (
+    <>
+      <span />
+      <span />
+      <span />
+    </>
+  );
+}
+
 export function Spinner({ className, label, ...rest }: SpinnerProps) {
   if (label) {
     return (
@@ -15,7 +25,9 @@ export function Spinner({ className, label, ...rest }: SpinnerProps) {
         role="status"
         aria-label={label}
         {...rest}
-      />
+      >
+        <Ticks />
+      </span>
     );
   }
 
@@ -24,6 +36,8 @@ export function Spinner({ className, label, ...rest }: SpinnerProps) {
       className={cx("ns-spinner", className)}
       aria-hidden="true"
       {...rest}
-    />
+    >
+      <Ticks />
+    </span>
   );
 }

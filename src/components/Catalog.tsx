@@ -1,10 +1,13 @@
 import NextLink from "next/link";
+import { CircleCheck } from "lucide-react";
 import {
   Accordion,
   AccordionItem,
   AccordionPanel,
   AccordionTrigger,
   Alert,
+  AlertDescription,
+  AlertTitle,
   Avatar,
   AvatarFallback,
   Badge,
@@ -54,6 +57,7 @@ import {
   TextField,
   Tooltip,
 } from "@neelshha/ui";
+import { icon } from "@/components/icons";
 import { componentHref, components } from "@/lib/docs";
 
 const thumbs = {
@@ -65,7 +69,15 @@ const thumbs = {
       </AccordionItem>
     </Accordion>
   ),
-  alert: <Alert>Saved.</Alert>,
+  alert: (
+    <Alert tone="success">
+      <AlertTitle>
+        <CircleCheck {...icon} />
+        Saved.
+      </AlertTitle>
+      <AlertDescription>On the server.</AlertDescription>
+    </Alert>
+  ),
   avatar: (
     <Avatar>
       <AvatarFallback>AS</AvatarFallback>

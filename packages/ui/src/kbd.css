@@ -5,16 +5,15 @@
     justify-content: center;
     min-width: 1.5em;
     padding: 0 var(--space-2, 0.31rem);
-    border: 1px solid
-      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border: 1px solid var(--face-line, #626262);
     border-radius: var(--radius, 0.4rem);
-    background: var(--bg, #fff);
+    background: var(--face);
     background-clip: padding-box;
-    box-shadow: var(--raise);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     color: var(--text-heading, #111);
     font: inherit;
-    font-size: var(--type-sm, 0.8rem);
-    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: var(--type-mono, 0.875rem);
+    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
     line-height: var(--leading-tight, 1.25);
   }
 }

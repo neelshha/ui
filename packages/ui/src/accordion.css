@@ -40,9 +40,8 @@
   }
 
   .ns-accordion__trigger:focus-visible {
-    outline: 5px auto Highlight;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: 0;
+    outline: 2px solid var(--focus, color-mix(in srgb, var(--text-heading, #111) 70%, transparent));
+    outline-offset: 2px;
   }
 
   .ns-accordion__trigger::-webkit-details-marker,

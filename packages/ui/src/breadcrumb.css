@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    color: var(--text-sub, #767676);
+    color: var(--text-sub, #5c5c5c);
     font-size: var(--type-sm, 0.8rem);
   }
 
@@ -18,7 +18,7 @@
   }
 
   .ns-breadcrumb__sep {
-    color: var(--text-disabled, var(--text-sub, #767676));
+    color: var(--text-disabled, var(--text-sub, #5c5c5c));
   }
 
   .ns-breadcrumb__item:last-child .ns-breadcrumb__sep {
@@ -46,7 +46,7 @@
 }
 
 a.ns-breadcrumb__link {
-  color: var(--text-sub, #767676);
+  color: var(--text-sub, #5c5c5c);
 }
 
 @media (hover: hover) {

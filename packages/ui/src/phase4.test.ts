@@ -106,6 +106,14 @@ describe("Phase 4 primitives", () => {
     ).toContain("Actions");
     expect(
       renderToStaticMarkup(h(MenuTrigger, { menu: "actions" }, "Actions")),
+    ).toContain("--ns-actions");
+    expect(
+      renderToStaticMarkup(
+        h(Menu, { id: "actions" }, h(MenuItem, {}, "Archive")),
+      ),
+    ).toContain("--ns-actions");
+    expect(
+      renderToStaticMarkup(h(MenuTrigger, { menu: "actions" }, "Actions")),
     ).toContain('aria-expanded="false"');
     expect(
       renderToStaticMarkup(

@@ -1,28 +1,54 @@
 @layer components {
   .ns-spinner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.14em;
     box-sizing: border-box;
-    display: inline-block;
     width: 1em;
     height: 1em;
     flex-shrink: 0;
-    border: 1.5px solid currentColor;
-    border-inline-end-color: transparent;
-    border-radius: 50%;
     pointer-events: none;
-    animation: ns-spin 0.6s linear infinite;
+    color: inherit;
   }
 
-  @keyframes ns-spin {
-    to {
-      transform: rotate(1turn);
+  .ns-spinner > span {
+    display: block;
+    width: 0.2em;
+    height: 0.55em;
+    border-radius: 1px;
+    background: currentColor;
+    opacity: 0.22;
+    animation: ns-spinner-tick 0.9s var(--ease, cubic-bezier(0.22, 1, 0.36, 1))
+      infinite;
+  }
+
+  .ns-spinner > span:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+
+  .ns-spinner > span:nth-child(3) {
+    animation-delay: 0.24s;
+  }
+
+  @keyframes ns-spinner-tick {
+    0%,
+    70%,
+    100% {
+      opacity: 0.22;
+      transform: none;
+    }
+    35% {
+      opacity: 1;
+      transform: translateY(0.08em);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ns-spinner {
+    .ns-spinner > span {
       animation: none;
-      border-inline-end-color: currentColor;
-      opacity: 0.6;
+      opacity: 0.55;
+      transform: none;
     }
   }
 }

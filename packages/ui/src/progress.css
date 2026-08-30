@@ -1,44 +1,76 @@
 @layer components {
   .ns-progress,
   .ns-meter {
+    -webkit-appearance: none;
     appearance: none;
     display: block;
     box-sizing: border-box;
     width: 100%;
-    height: 0.5em;
+    height: var(--space-4, 0.49rem);
     margin: 0;
     border: 1px solid
       var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
-    border-radius: 999px;
-    background: var(--bg, #fff);
-    box-shadow: none;
+    border-radius: var(--radius, 0.4rem);
+    --ns-amt: var(--ns-progress, var(--ns-meter, 0));
+    --ns-cap: var(--space-4, 0.49rem);
+    background-color: var(--bg-well, #e8e6e4);
+    background-image:
+      radial-gradient(circle closest-side, var(--key, #a2c7ff) 99%, transparent),
+      linear-gradient(var(--key, #a2c7ff), var(--key, #a2c7ff));
+    background-size:
+      var(--ns-cap) var(--ns-cap),
+      max(0%, calc(var(--ns-amt) * 100% - var(--ns-cap) / 2)) 100%;
+    background-position:
+      calc(var(--ns-amt) * 100% - var(--ns-cap)) 50%,
+      0 0;
+    background-repeat: no-repeat;
+    background-clip: padding-box;
+    box-shadow: inset 0 1px 0
+      color-mix(in srgb, var(--shade, oklch(0 0 0 / 28%)) 55%, transparent);
     overflow: hidden;
   }
 
   .ns-progress::-webkit-progress-bar,
-  .ns-meter::-webkit-meter-bar {
-    background: transparent;
-  }
-
-  .ns-progress::-webkit-progress-value {
-    background: var(--ink, #111);
-  }
-
-  .ns-progress::-moz-progress-bar {
-    background: var(--ink, #111);
-  }
-
+  .ns-progress::-webkit-progress-value,
+  .ns-progress::-moz-progress-bar,
+  .ns-meter::-webkit-meter-bar,
+  .ns-meter::-webkit-meter-inner-element,
   .ns-meter::-webkit-meter-optimum-value,
   .ns-meter::-webkit-meter-suboptimum-value,
-  .ns-meter::-webkit-meter-even-less-good-value {
-    background: var(--ink, #111);
-  }
-
+  .ns-meter::-webkit-meter-even-less-good-value,
   .ns-meter::-moz-meter-bar {
-    background: var(--ink, #111);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
-  .ns-progress:indeterminate::-webkit-progress-value {
-    background: color-mix(in srgb, var(--ink, #111) 40%, transparent);
+  .ns-progress:indeterminate {
+    background-color: var(--bg-well, #e8e6e4);
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--key, #a2c7ff) 42%,
+      var(--key, #a2c7ff) 58%,
+      transparent 100%
+    );
+    background-size: 38% 100%;
+    animation: ns-progress-indeterminate 1.2s
+      var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) infinite;
+  }
+
+  @keyframes ns-progress-indeterminate {
+    0% {
+      background-position: -40% 0;
+    }
+    100% {
+      background-position: 140% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns-progress:indeterminate {
+      animation: none;
+      background-position: 50% 0;
+    }
   }
 }

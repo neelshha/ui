@@ -15,9 +15,10 @@
   }
 
   .ns-badge[data-tone="accent"] {
-    color: var(--on-ink, #fff);
-    border-color: color-mix(in srgb, var(--ink, #111) 28%, transparent);
-    background: var(--ink, #111);
+    color: var(--on-key, #111);
+    border-color: var(--key-line, #221898);
+    background: var(--key-face);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
   }
 
   .ns-badge[data-tone="success"] {

@@ -13,7 +13,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Sidebar",
-  description: "A paper rail. The current item is seated.",
+  description: "A paper rail. The current item holds the hover wash.",
 };
 
 const rows = [
@@ -36,7 +36,7 @@ const rows = [
     name: "SidebarItem current",
     type: "boolean",
     def: "false",
-    notes: "Sets aria-current=page and seats the item. Same language as Navbar and Tabs.",
+    notes: "Sets aria-current=page and a wash. Same mark as the docs rail.",
   },
 ] as const;
 
@@ -46,8 +46,8 @@ export default function SidebarPage() {
       <header className="docLead">
         <h1>Sidebar</h1>
         <p>
-          A paper rail. Links are type. The current one is seated — same
-          language as Navbar and Tabs. This site uses it. No JS.
+          A paper rail. Links are type. The current one is a wash. This
+          site uses it. No JS.
         </p>
       </header>
 
@@ -126,8 +126,8 @@ export default function SidebarPage() {
         <h2>Current</h2>
         <p>
           Pass <code>current</code> on the item that matches the page. It sets{" "}
-          <code>aria-current=&quot;page&quot;</code> and seats the item. The
-          others stay type.
+          <code>aria-current=&quot;page&quot;</code> and a wash. The others
+          stay type.
         </p>
         <p>
           <code>href</code> is a native <code>a</code>. In Next, omit{" "}

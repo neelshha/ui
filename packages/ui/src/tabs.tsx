@@ -171,7 +171,7 @@ export function Tab({ value, disabled, className, children }: TabProps) {
 
   return (
     <Button
-      variant="ghost"
+      variant={selected ? "solid" : "outline"}
       role="tab"
       id={`${uid}-tab-${token(value)}`}
       aria-controls={`${uid}-panel-${token(value)}`}

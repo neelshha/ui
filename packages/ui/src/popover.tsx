@@ -3,6 +3,7 @@
 import "./popover.css";
 
 import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
+import { placeFromInvoker, popoverAnchorStyle, triggerAnchorStyle } from "./anchor";
 import { Button, type ButtonVariant } from "./button";
 import { cx } from "./cx";
 
@@ -16,12 +17,14 @@ export type PopoverTriggerProps = {
   disabled?: boolean | undefined;
 };
 
-export function Popover({ className, ...rest }: PopoverProps) {
+export function Popover({ className, id, style, ...rest }: PopoverProps) {
   return (
     <div
+      {...rest}
+      id={id}
       popover="auto"
       className={cx("ns-popover", className)}
-      {...rest}
+      style={{ ...popoverAnchorStyle(id), ...style }}
     />
   );
 }
@@ -39,12 +42,14 @@ export function PopoverTrigger({
     const node = document.getElementById(popoverTarget);
     if (!node) return;
     const onToggle = (event: Event) => {
-      setExpanded(
-        "newState" in event && (event as ToggleEvent).newState === "open",
-      );
+      const open =
+        "newState" in event && (event as ToggleEvent).newState === "open";
+      setExpanded(open);
+      if (open) placeFromInvoker(node);
     };
     node.addEventListener("toggle", onToggle);
     setExpanded(node.matches(":popover-open"));
+    if (node.matches(":popover-open")) placeFromInvoker(node);
     return () => node.removeEventListener("toggle", onToggle);
   }, [popoverTarget]);
 
@@ -53,6 +58,7 @@ export function PopoverTrigger({
       variant={variant}
       className={className}
       popoverTarget={popoverTarget}
+      style={triggerAnchorStyle(popoverTarget)}
       aria-haspopup="true"
       aria-expanded={expanded}
       aria-controls={popoverTarget}

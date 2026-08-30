@@ -10,31 +10,10 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-1, 0.25rem);
+    gap: var(--space-3, 0.39rem);
     border-bottom: 1px solid
       var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
-  }
-
-  .ns-button.ns-tabs__tab {
-    color: var(--text-sub, #767676);
-  }
-
-  .ns-button.ns-tabs__tab[aria-selected="true"] {
-    color: var(--text-heading, #111);
-    border-color: var(--shade, oklch(0 0 0 / 28%));
-    background: var(--bg-hover, #f3f2f1);
-    box-shadow: var(--press);
-  }
-
-  @media (hover: hover) {
-    .ns-button.ns-tabs__tab[aria-selected="true"]:hover:not(:disabled):not(
-        [aria-disabled="true"]
-      ) {
-      color: var(--text-heading, #111);
-      border-color: var(--shade, oklch(0 0 0 / 28%));
-      background: var(--bg-hover, #f3f2f1);
-      box-shadow: var(--press);
-    }
+    padding-bottom: var(--space-3, 0.39rem);
   }
 
   .ns-tabs__panel {

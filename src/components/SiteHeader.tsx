@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Navbar, NavbarBrand, NavbarSpacer, ThemeToggle } from "@neelshha/ui";
+import { Navbar, NavbarBrand, NavbarSpacer } from "@neelshha/ui";
 import { SiteNav } from "@/components/SiteNav";
+import { SiteThemeToggle } from "@/components/SiteThemeToggle";
 
 export function SiteHeader() {
   return (
@@ -11,7 +12,7 @@ export function SiteHeader() {
         </NavbarBrand>
         <SiteNav />
         <NavbarSpacer />
-        <ThemeToggle />
+        <SiteThemeToggle />
       </Navbar>
     </header>
   );

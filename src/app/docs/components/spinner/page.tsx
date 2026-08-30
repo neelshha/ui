@@ -6,14 +6,14 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Spinner",
-  description: "The pending glyph, extracted.",
+  description: "Three ticks. The pending mark.",
 };
 
 const rows = [
   {
     name: "Spinner",
     type: "span",
-    notes: "aria-hidden by default. Pass label to expose it as a status. Button pending renders this.",
+    notes: "Three ticks. aria-hidden by default. Pass label to expose it as a status. Button pending renders this.",
   },
 ] as const;
 
@@ -23,8 +23,8 @@ export default function SpinnerPage() {
       <header className="docLead">
         <h1>Spinner</h1>
         <p>
-          The pending glyph, extracted. Button already uses it. Add this when
-          you want the same mark next to copy.
+          Three ink ticks. Button already uses it. Add this when you want the
+          same mark next to copy.
         </p>
       </header>
 

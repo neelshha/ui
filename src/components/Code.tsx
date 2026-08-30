@@ -1,8 +1,13 @@
+import { CopyCode } from "@/components/CopyCode";
+
 export function Code({ children }: { children: string }) {
   return (
-    <pre>
-      <code>{children}</code>
-    </pre>
+    <div className="code">
+      <CopyCode value={children} />
+      <pre>
+        <code>{children}</code>
+      </pre>
+    </div>
   );
 }
 
