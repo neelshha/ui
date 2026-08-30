@@ -92,8 +92,20 @@ export default function ThemingPage() {
 --on-warning
 --info
 --on-info
+--accent-surface
+--accent-line
+--success-surface
+--success-line
+--warning-surface
+--warning-line
+--error-surface
+--error-line
+--info-surface
+--info-line
 --line
+--line-strong
 --focus
+--selection
 
 /* stack */
 --z-base         /* 0 */
@@ -158,7 +170,7 @@ export default function ThemingPage() {
       <div className="docBlock">
         <h2>Where chrome lives</h2>
         <p>
-          The page is paper. Solid keys use the sky candy face and{" "}
+          The page follows the active color scheme. Solid keys use the sky candy face and{" "}
           <code>--float</code>. Outline keys — buttons, accordion, card,
           alert, dialog, menu, popover, toast, tooltip, badge, avatar — use
           the silver face, <code>--face-line</code>, and <code>--float</code>.
