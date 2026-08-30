@@ -70,8 +70,8 @@ export default function ButtonPage() {
         <h1>Button</h1>
         <p>
           A native button. Solid is the sky key. Outline is silver. Press
-          stamps it in. SVG children size to the type. <code>href</code> makes
-          an <code>a</code>.
+          uses the press face and travels 2px. SVG children size to the type.{" "}
+          <code>href</code> makes an <code>a</code>.
         </p>
       </header>
 

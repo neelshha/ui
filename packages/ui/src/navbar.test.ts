@@ -32,6 +32,7 @@ describe("Navbar", () => {
     expect(markup).toContain("<details");
     expect(markup).toContain("<summary");
     expect(markup).toContain("ns-navbar__toggle");
+    expect(markup).toContain('data-variant="ghost"');
     expect(markup).toContain("Menu");
   });
 

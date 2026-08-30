@@ -57,7 +57,7 @@ export function NavbarMenu({
 }: NavbarMenuProps) {
   return (
     <details className={cx("ns-navbar__menu", className)} {...rest}>
-      <summary className="ns-button ns-navbar__toggle" data-variant="outline">
+      <summary className="ns-button ns-navbar__toggle" data-variant="ghost">
         {label}
       </summary>
       {children}
