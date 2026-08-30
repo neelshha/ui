@@ -18,6 +18,7 @@
     --ns-key: var(--key, #a2c7ff);
     --ns-on-key: var(--on-key, #111);
     --ns-key-line: var(--key-line, #221898);
+    --ns-key-mix: var(--chrome-mix, #fff);
     border: 1px solid var(--ns-key-line);
     border-radius: var(--radius, 0.4rem);
     background-clip: padding-box;
@@ -57,40 +58,44 @@
   .ns-button[data-variant="success"],
   .ns-button[data-variant="warning"] {
     --ns-on-key: var(--on-key, #111);
-    --ns-key-line: color-mix(in srgb, var(--ns-key) 72%, #111);
+    --ns-key-mix: var(--chrome-mix, #fff);
+    --ns-key-line: color-mix(in srgb, var(--ns-key) 72%, var(--ns-key-mix));
     --key-face: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--ns-key) 18%, #fff) 0%,
-      color-mix(in srgb, var(--ns-key) 38%, #fff) 18%,
-      color-mix(in srgb, var(--ns-key) 58%, #fff) 50%,
-      color-mix(in srgb, var(--ns-key) 62%, #fff) 80%,
-      color-mix(in srgb, var(--ns-key) 55%, #fff) 100%
+      color-mix(in srgb, var(--ns-key) 18%, var(--ns-key-mix)) 0%,
+      color-mix(in srgb, var(--ns-key) 38%, var(--ns-key-mix)) 18%,
+      color-mix(in srgb, var(--ns-key) 58%, var(--ns-key-mix)) 50%,
+      color-mix(in srgb, var(--ns-key) 62%, var(--ns-key-mix)) 80%,
+      color-mix(in srgb, var(--ns-key) 55%, var(--ns-key-mix)) 100%
     );
     --key-face-hover: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--ns-key) 12%, #fff) 0%,
-      color-mix(in srgb, var(--ns-key) 30%, #fff) 18%,
-      color-mix(in srgb, var(--ns-key) 50%, #fff) 50%,
-      color-mix(in srgb, var(--ns-key) 54%, #fff) 100%
+      color-mix(in srgb, var(--ns-key) 12%, var(--ns-key-mix)) 0%,
+      color-mix(in srgb, var(--ns-key) 30%, var(--ns-key-mix)) 18%,
+      color-mix(in srgb, var(--ns-key) 50%, var(--ns-key-mix)) 50%,
+      color-mix(in srgb, var(--ns-key) 54%, var(--ns-key-mix)) 100%
     );
     --key-face-press: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--ns-key) 38%, #fff) 0%,
-      color-mix(in srgb, var(--ns-key) 62%, #fff) 50%,
-      color-mix(in srgb, var(--ns-key) 72%, #fff) 100%
+      color-mix(in srgb, var(--ns-key) 38%, var(--ns-key-mix)) 0%,
+      color-mix(in srgb, var(--ns-key) 62%, var(--ns-key-mix)) 50%,
+      color-mix(in srgb, var(--ns-key) 72%, var(--ns-key-mix)) 100%
     );
   }
 
   .ns-button[data-variant="danger"] {
     --ns-key: var(--error, #8f3232);
+    --ns-on-key: var(--on-error, #fff);
   }
 
   .ns-button[data-variant="success"] {
     --ns-key: var(--success, #2f6b3a);
+    --ns-on-key: var(--on-success, #fff);
   }
 
   .ns-button[data-variant="warning"] {
     --ns-key: var(--warning, #8a5a12);
+    --ns-on-key: var(--on-warning, #fff);
   }
 
   .ns-button[data-variant="link"] {
