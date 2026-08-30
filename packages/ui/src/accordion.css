@@ -15,7 +15,7 @@
     background: var(--face);
     background-clip: padding-box;
     box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
-    color: var(--on-key, #111);
+    color: var(--text-heading, #111);
     interpolate-size: allow-keywords;
     transition:
       background var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),

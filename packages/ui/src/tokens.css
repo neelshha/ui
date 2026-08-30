@@ -28,13 +28,13 @@
     --shine: #fff;
     --chrome-mix: #fff;
     --error: #8f3232;
-    --on-error: #fff;
+    --on-error: #111;
     --success: #2f6b3a;
-    --on-success: #fff;
+    --on-success: #111;
     --warning: #8a5a12;
-    --on-warning: #fff;
+    --on-warning: #111;
     --info: #2c4a6e;
-    --on-info: #fff;
+    --on-info: #111;
     --line: color-mix(in srgb, var(--text-heading) 18%, transparent);
     --line-strong: color-mix(in srgb, var(--text-heading) 32%, transparent);
     --focus: color-mix(in srgb, var(--text-heading) 70%, transparent);
@@ -42,6 +42,7 @@
 
     --accent-surface: color-mix(in srgb, var(--key) 14%, var(--bg));
     --accent-line: color-mix(in srgb, var(--key-line) 42%, transparent);
+    --accent-ink: var(--key-line);
     --success-surface: color-mix(in srgb, var(--success) 12%, var(--bg));
     --success-line: color-mix(in srgb, var(--success) 42%, transparent);
     --warning-surface: color-mix(in srgb, var(--warning) 12%, var(--bg));
@@ -208,20 +209,25 @@
       --shine: #303030;
      --chrome-mix: #111;
       --error: #b33b3b;
-      --on-error: #fff;
+      --on-error: #f5f5f5;
       --success: #4a9a58;
-      --on-success: #111;
+      --on-success: #f5f5f5;
       --warning: #c4922a;
-      --on-warning: #111;
+      --on-warning: #f5f5f5;
       --info: #6a92c4;
-      --on-info: #111;
+      --on-info: #f5f5f5;
       --highlight: oklch(1 0 0 / 36%);
       --shade: oklch(0 0 0 / 58%);
       --lift:
         0 1px 0 oklch(0 0 0 / 40%),
         0 2px 0 oklch(0 0 0 / 16%);
-      --on-key: #111;
+      --float: 0 8px 20px oklch(0 0 0 / 45%);
+      --float-press: 0 2px 8px oklch(0 0 0 / 35%);
+      --on-key: #f5f5f5;
       --key: #b4d2ff;
+      --key-line: var(--key);
+      --accent-ink: var(--key);
+      --accent-line: color-mix(in srgb, var(--key) 42%, transparent);
       --face-line: #737373;
       --face: linear-gradient(
             180deg,
@@ -243,25 +249,24 @@
           );
       --key-face: linear-gradient(
         180deg,
-        #f4f8ff 0%,
-        #dceaff 18%,
-        #b4d2ff 50%,
-        #a8d0fa 80%,
-        #b4def9 100%
+        color-mix(in srgb, var(--key) 18%, var(--chrome-mix)) 0%,
+        color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 18%,
+        color-mix(in srgb, var(--key) 58%, var(--chrome-mix)) 50%,
+        color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 80%,
+        color-mix(in srgb, var(--key) 55%, var(--chrome-mix)) 100%
       );
       --key-face-hover: linear-gradient(
         180deg,
-        #f8fbff 0%,
-        #e8f0ff 18%,
-        #c4dcff 50%,
-        #b8dcfc 80%,
-        #c4e8fb 100%
+        color-mix(in srgb, var(--key) 12%, var(--chrome-mix)) 0%,
+        color-mix(in srgb, var(--key) 30%, var(--chrome-mix)) 18%,
+        color-mix(in srgb, var(--key) 50%, var(--chrome-mix)) 50%,
+        color-mix(in srgb, var(--key) 54%, var(--chrome-mix)) 100%
       );
       --key-face-press: linear-gradient(
         180deg,
-        #dceaff 0%,
-        #b4d2ff 45%,
-        #8eb8f4 100%
+        color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 0%,
+        color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 50%,
+        color-mix(in srgb, var(--key) 72%, var(--chrome-mix)) 100%
       );
     }
   }
@@ -280,60 +285,64 @@
     --shine: #303030;
     --chrome-mix: #111;
     --error: #b33b3b;
-    --on-error: #fff;
+    --on-error: #f5f5f5;
     --success: #4a9a58;
-    --on-success: #111;
+    --on-success: #f5f5f5;
     --warning: #c4922a;
-    --on-warning: #111;
+    --on-warning: #f5f5f5;
     --info: #6a92c4;
-    --on-info: #111;
+    --on-info: #f5f5f5;
     --highlight: oklch(1 0 0 / 36%);
     --shade: oklch(0 0 0 / 58%);
     --lift:
       0 1px 0 oklch(0 0 0 / 40%),
       0 2px 0 oklch(0 0 0 / 16%);
-    --on-key: #111;
+    --float: 0 8px 20px oklch(0 0 0 / 45%);
+    --float-press: 0 2px 8px oklch(0 0 0 / 35%);
+    --on-key: #f5f5f5;
     --key: #b4d2ff;
+    --key-line: var(--key);
+    --accent-ink: var(--key);
+    --accent-line: color-mix(in srgb, var(--key) 42%, transparent);
     --face-line: #737373;
     --face: linear-gradient(
       180deg,
-      #f7f7f7 0%,
-      #e4e4e4 42%,
-      #d2d2d2 100%
+      #363636 0%,
+      #2a2a2a 42%,
+      #202020 100%
     );
     --face-hover: linear-gradient(
       180deg,
-      #ffffff 0%,
-      #ececec 42%,
-      #d8d8d8 100%
+      #424242 0%,
+      #333333 42%,
+      #282828 100%
     );
     --face-press: linear-gradient(
       180deg,
-      #e4e4e4 0%,
-      #d4d4d4 50%,
-      #c4c4c4 100%
+      #2a2a2a 0%,
+      #222222 50%,
+      #1a1a1a 100%
     );
     --key-face: linear-gradient(
       180deg,
-      #f4f8ff 0%,
-      #dceaff 18%,
-      #b4d2ff 50%,
-      #a8d0fa 80%,
-      #b4def9 100%
+      color-mix(in srgb, var(--key) 18%, var(--chrome-mix)) 0%,
+      color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 18%,
+      color-mix(in srgb, var(--key) 58%, var(--chrome-mix)) 50%,
+      color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 80%,
+      color-mix(in srgb, var(--key) 55%, var(--chrome-mix)) 100%
     );
     --key-face-hover: linear-gradient(
       180deg,
-      #f8fbff 0%,
-      #e8f0ff 18%,
-      #c4dcff 50%,
-      #b8dcfc 80%,
-      #c4e8fb 100%
+      color-mix(in srgb, var(--key) 12%, var(--chrome-mix)) 0%,
+      color-mix(in srgb, var(--key) 30%, var(--chrome-mix)) 18%,
+      color-mix(in srgb, var(--key) 50%, var(--chrome-mix)) 50%,
+      color-mix(in srgb, var(--key) 54%, var(--chrome-mix)) 100%
     );
     --key-face-press: linear-gradient(
       180deg,
-      #dceaff 0%,
-      #b4d2ff 45%,
-      #8eb8f4 100%
+      color-mix(in srgb, var(--key) 38%, var(--chrome-mix)) 0%,
+      color-mix(in srgb, var(--key) 62%, var(--chrome-mix)) 50%,
+      color-mix(in srgb, var(--key) 72%, var(--chrome-mix)) 100%
     );
   }
 
@@ -350,13 +359,13 @@
     --on-ink: #fff;
     --shine: #fff;
     --error: #8f3232;
-    --on-error: #fff;
+    --on-error: #111;
     --success: #2f6b3a;
-    --on-success: #fff;
+    --on-success: #111;
     --warning: #8a5a12;
-    --on-warning: #fff;
+    --on-warning: #111;
     --info: #2c4a6e;
-    --on-info: #fff;
+    --on-info: #111;
     --highlight: oklch(1 0 0 / 62%);
     --shade: oklch(0 0 0 / 28%);
   }
