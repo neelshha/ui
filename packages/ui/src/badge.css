@@ -2,34 +2,42 @@
   .ns-badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-1, 0.25rem) var(--space-4, 0.49rem);
-    border: 1px solid var(--face-line, #626262);
-    border-radius: var(--radius, 0.4rem);
+    gap: var(--space-1, 0.25rem);
+    padding: var(--space-1, 0.25rem) var(--space-3, 0.39rem);
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border-radius: 999px;
     font: inherit;
-    font-size: var(--type-sm, 0.8rem);
+    font-size: var(--type-xs, 0.64rem);
+    font-weight: var(--weight-medium, 500);
     line-height: var(--leading-tight, 1.25);
-    color: var(--on-key, #111);
-    background: var(--face);
-    background-clip: padding-box;
-    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
+    letter-spacing: 0.02em;
+    color: var(--text-sub, #5c5c5c);
+    background: none;
+    box-shadow: var(--flat);
   }
 
   .ns-badge[data-tone="accent"] {
-    color: var(--on-key, #111);
-    border-color: var(--key-line, #221898);
-    background: var(--key-face);
-    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
+    color: var(--key-line, #221898);
+    border-color: color-mix(in srgb, var(--key-line, #221898) 35%, transparent);
+    background: color-mix(in srgb, var(--key, #a2c7ff) 18%, transparent);
   }
 
   .ns-badge[data-tone="success"] {
     color: var(--success, #2f6b3a);
+    border-color: color-mix(in srgb, var(--success, #2f6b3a) 35%, transparent);
+    background: color-mix(in srgb, var(--success, #2f6b3a) 10%, transparent);
   }
 
   .ns-badge[data-tone="warning"] {
     color: var(--warning, #8a5a12);
+    border-color: color-mix(in srgb, var(--warning, #8a5a12) 35%, transparent);
+    background: color-mix(in srgb, var(--warning, #8a5a12) 10%, transparent);
   }
 
   .ns-badge[data-tone="danger"] {
     color: var(--error, #8f3232);
+    border-color: color-mix(in srgb, var(--error, #8f3232) 35%, transparent);
+    background: color-mix(in srgb, var(--error, #8f3232) 10%, transparent);
   }
 }
