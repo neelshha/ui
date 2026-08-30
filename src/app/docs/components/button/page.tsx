@@ -286,7 +286,8 @@ export default function ButtonPage() {
         description={
           <>
             <code>ButtonGroup</code> joins keys. Outer corners keep the radius.
-            Press does not travel, so the seam stays closed.
+            Press does not travel, so the seam stays closed. It ships with
+            button. It is not a separate catalog item.
           </>
         }
         wide

@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "spinner.tsx",
-      "content": "import \"./spinner.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type SpinnerProps = ComponentProps<\"span\">;\n\nexport function Spinner({ className, ...rest }: SpinnerProps) {\n  return (\n    <span\n      className={cx(\"ns-spinner\", className)}\n      aria-hidden=\"true\"\n      {...rest}\n    />\n  );\n}\n"
+      "content": "import \"./spinner.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type SpinnerProps = ComponentProps<\"span\"> & {\n  label?: string | undefined;\n};\n\nexport function Spinner({ className, label, ...rest }: SpinnerProps) {\n  if (label) {\n    return (\n      <span\n        className={cx(\"ns-spinner\", className)}\n        role=\"status\"\n        aria-label={label}\n        {...rest}\n      />\n    );\n  }\n\n  return (\n    <span\n      className={cx(\"ns-spinner\", className)}\n      aria-hidden=\"true\"\n      {...rest}\n    />\n  );\n}\n"
     },
     {
       "path": "spinner.css",

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { ThemeToggle } from "@neelshha/ui";
 import { Code } from "@/components/Code";
+import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Theming",
@@ -38,10 +40,20 @@ export default function ThemingPage() {
           <code>strategy=&quot;beforeInteractive&quot;</code>.{" "}
           <code>ThemeProvider</code> keeps it in sync.{" "}
           <code>ThemeToggle</code> flips light and dark. Until you touch it,
-          the page follows the system.
+          the page follows the system. It lives here, not in the catalog.
         </p>
         <Code>{`npx @neelshha/ui@latest add theme-toggle`}</Code>
       </div>
+
+      <Example
+        title="Theme toggle"
+        description="The same key as the header. Light and dark only — it does not restore system."
+        code={`import { ThemeToggle } from "@/components/ui/theme-toggle";
+
+<ThemeToggle />`}
+      >
+        <ThemeToggle />
+      </Example>
 
       <div className="docBlock">
         <h2>Tokens</h2>

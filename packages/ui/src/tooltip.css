@@ -31,8 +31,10 @@
     opacity: 1;
   }
 
-  .ns-tooltip[data-dismissed] .ns-tooltip__tip {
+  .ns-tooltip[data-dismissed] .ns-tooltip__tip,
+  .ns-tooltip[data-dismissed]:hover .ns-tooltip__tip,
+  .ns-tooltip[data-dismissed]:focus-within .ns-tooltip__tip {
     opacity: 0;
-    transition-delay: 0s;
+    transition: none;
   }
 }

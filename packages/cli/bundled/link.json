@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "link.tsx",
-      "content": "import \"./link.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type LinkProps = ComponentProps<\"a\">;\n\nexport function Link({ className, ...rest }: LinkProps) {\n  return <a className={cx(\"ns-link\", className)} {...rest} />;\n}\n"
+      "content": "import \"./link.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type LinkProps = ComponentProps<\"a\">;\n\nexport function Link({ className, target, rel, ...rest }: LinkProps) {\n  return (\n    <a\n      className={cx(\"ns-link\", className)}\n      target={target}\n      rel={rel ?? (target === \"_blank\" ? \"noopener noreferrer\" : undefined)}\n      {...rest}\n    />\n  );\n}\n"
     },
     {
       "path": "link.css",
