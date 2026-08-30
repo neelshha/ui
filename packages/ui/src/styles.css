@@ -24,3 +24,21 @@
 @import "./text.css";
 @import "./toast.css";
 @import "./tooltip.css";
+
+:where(button, input, select, textarea) {
+  color-scheme: inherit;
+}
+
+:where(input, select, textarea) {
+  accent-color: var(--key-line);
+}
+
+:where(input, textarea)::placeholder {
+  color: var(--text-sub);
+  opacity: 1;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--text-heading);
+}
