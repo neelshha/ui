@@ -26,6 +26,7 @@
     --key-line: #221898;
     --on-key: #111;
     --shine: #fff;
+    --chrome-mix: #fff;
     --error: #8f3232;
     --on-error: #fff;
     --success: #2f6b3a;
@@ -205,6 +206,7 @@
       --ink: #f5f5f5;
       --on-ink: #111;
       --shine: #303030;
+     --chrome-mix: #111;
       --error: #b33b3b;
       --on-error: #fff;
       --success: #4a9a58;
@@ -276,6 +278,7 @@
     --ink: #f5f5f5;
     --on-ink: #111;
     --shine: #303030;
+    --chrome-mix: #111;
     --error: #b33b3b;
     --on-error: #fff;
     --success: #4a9a58;
