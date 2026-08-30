@@ -39,6 +39,34 @@ describe("Table", () => {
     expect(markup).toContain("<td");
     expect(markup).toContain("Atlas");
   });
+
+  it("omits the interactive mark unless asked", () => {
+    const plain = renderToStaticMarkup(
+      h(
+        Table,
+        {},
+        h(
+          TableBody,
+          {},
+          h(TableRow, {}, h(TableCell, {}, "Atlas")),
+        ),
+      ),
+    );
+    expect(plain).not.toContain("data-interactive");
+
+    const interactive = renderToStaticMarkup(
+      h(
+        Table,
+        { interactive: true },
+        h(
+          TableBody,
+          {},
+          h(TableRow, {}, h(TableCell, {}, "Atlas")),
+        ),
+      ),
+    );
+    expect(interactive).toContain("data-interactive");
+  });
 });
 
 describe("Tabs", () => {

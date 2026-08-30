@@ -37,7 +37,7 @@ export const components = [
   { slug: "skeleton", title: "Skeleton", description: "A pulsing well. Holds still if you reduce motion." },
   { slug: "spinner", title: "Spinner", description: "Three ticks. The pending mark." },
   { slug: "switch", title: "Switch", description: "A checkbox that reads as a switch." },
-  { slug: "table", title: "Table", description: "A semantic table on a silver key. Hairline rows." },
+  { slug: "table", title: "Table", description: "A semantic table on a silver key. Hairline rows and column rules." },
   { slug: "tabs", title: "Tabs", description: "A tablist. Outline keys; the current one is solid." },
   { slug: "text", title: "Text", description: "Typed copy that reads the tone tokens." },
   { slug: "toast", title: "Toast", description: "A silver key. A live region, not a modal." },

@@ -420,57 +420,6 @@ pre code {
     grid-column: 2;
     width: min(100%, var(--content));
   }
-
-  .mobileDocsNavSlot {
-    display: none;
-  }
-}
-
-.mobileDocsNav {
-  display: none;
-}
-
-@media (max-width: 47.99rem) {
-  .mobileDocsNav {
-    display: block;
-    margin-bottom: var(--space-6);
-  }
-
-  .mobileDocsNavToggle {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    min-height: var(--control);
-    padding-inline: var(--space-5);
-  }
-
-  .mobileDocsNavChevron {
-    font-size: var(--type-sm);
-    opacity: 0.6;
-  }
-
-  .mobileDocsNavList {
-    margin: var(--space-2) 0 0;
-    padding: var(--space-2) 0;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-list);
-    background: var(--bg);
-    max-height: 18rem;
-    overflow-y: auto;
-  }
-
-  .mobileDocsNavList a {
-    display: block;
-    padding: var(--space-2) var(--space-5);
-    text-decoration: none;
-    color: var(--text-body);
-  }
-
-  .mobileDocsNavList a[aria-current="page"] {
-    background: var(--bg-hover);
-    color: var(--text-heading);
-  }
 }
 
 @media (max-width: 48rem) {
@@ -537,7 +486,6 @@ pre code {
     margin-inline: 0;
   }
 }
-
 .stack {
   display: flex;
   flex-direction: column;
@@ -600,34 +548,7 @@ pre code {
   gap: var(--space-7);
 }
 
-.apiWrap {
-  width: 100%;
-  overflow-x: auto;
-}
-
 .api {
-  width: 100%;
   min-width: 36rem;
-  border-collapse: collapse;
   font-variant-numeric: tabular-nums;
-}
-
-.api th,
-.api td {
-  text-align: left;
-  vertical-align: top;
-  padding: var(--space-4) var(--space-6) var(--space-4) 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.api th {
-  color: var(--text-sub);
-  font-size: var(--type-sm);
-  font-weight: var(--weight-regular);
-}
-
-.api td:first-child {
-  color: var(--text-heading);
-  white-space: nowrap;
-  padding-right: var(--space-8);
 }

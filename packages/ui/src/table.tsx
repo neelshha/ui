@@ -3,7 +3,10 @@ import "./table.css";
 import type { ComponentProps } from "react";
 import { cx } from "./cx";
 
-export type TableProps = ComponentProps<"table">;
+export type TableProps = ComponentProps<"table"> & {
+  /** Row hover wash. Only for tables whose rows are clickable. */
+  interactive?: boolean | undefined;
+};
 export type TableCaptionProps = ComponentProps<"caption">;
 export type TableHeaderProps = ComponentProps<"thead">;
 export type TableBodyProps = ComponentProps<"tbody">;
@@ -11,10 +14,14 @@ export type TableRowProps = ComponentProps<"tr">;
 export type TableHeadProps = ComponentProps<"th">;
 export type TableCellProps = ComponentProps<"td">;
 
-export function Table({ className, ...rest }: TableProps) {
+export function Table({ className, interactive, ...rest }: TableProps) {
   return (
     <div className="ns-table-wrap">
-      <table className={cx("ns-table", className)} {...rest} />
+      <table
+        className={cx("ns-table", className)}
+        {...(interactive ? { "data-interactive": "" } : {})}
+        {...rest}
+      />
     </div>
   );
 }

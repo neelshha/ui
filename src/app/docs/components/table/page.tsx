@@ -15,7 +15,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Table",
-  description: "A semantic table on a silver key. Hairline rows.",
+  description: "A semantic table on a silver key. Hairline rows and column rules.",
 };
 
 const rows = [
@@ -25,6 +25,12 @@ const rows = [
     notes: "Wraps a native table. Overflow scrolls on the wrap.",
   },
   {
+    name: "Table interactive",
+    type: "boolean",
+    def: "false",
+    notes: "Row hover wash for clickable rows. Off by default — a plain table is not clickable, so rows stay quiet.",
+  },
+  {
     name: "TableCaption",
     type: "caption",
     notes: "Sits above. Sub type.",
@@ -32,7 +38,7 @@ const rows = [
   {
     name: "TableHead / TableCell",
     type: "th / td",
-    notes: "Hairline under the row. TableHead defaults to scope=col. No sort. No virtualization.",
+    notes: "Hairline under the row and between columns. TableHead defaults to scope=col. No sort. No virtualization.",
   },
 ] as const;
 
@@ -43,7 +49,10 @@ export default function TablePage() {
         <h1>Table</h1>
         <p>
           A native <code>table</code> on a silver key. Hairlines between
-          rows. Not a data grid. Compact density tightens the cells.
+          rows and between columns. Not a data grid. Compact density
+          tightens the cells. Rows are quiet until you pass{" "}
+          <code>interactive</code> — the hover wash is only for tables whose
+          rows are clickable.
         </p>
       </header>
 

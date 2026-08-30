@@ -35,6 +35,12 @@
       var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
   }
 
+  .ns-table__head:not(:last-child),
+  .ns-table__cell:not(:last-child) {
+    border-inline-end: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+  }
+
   .ns-table__head {
     color: var(--text-sub, #5c5c5c);
     font-size: var(--type-sm, 0.8rem);
@@ -51,7 +57,7 @@
   }
 
   @media (hover: hover) {
-    .ns-table__body .ns-table__row:hover {
+    .ns-table[data-interactive] .ns-table__body .ns-table__row:hover {
       background: var(--bg-hover, #f3f2f1);
     }
   }
