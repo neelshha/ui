@@ -9,7 +9,8 @@ export function ApiTable({ rows }: { rows: readonly Row[] }) {
   const showDefault = rows.some((row) => row.def !== undefined);
 
   return (
-    <table className="api">
+    <div className="apiWrap">
+      <table className="api">
       <thead>
         <tr>
           <th>Prop</th>
@@ -34,6 +35,7 @@ export function ApiTable({ rows }: { rows: readonly Row[] }) {
           </tr>
         ))}
       </tbody>
-    </table>
+      </table>
+    </div>
   );
 }
