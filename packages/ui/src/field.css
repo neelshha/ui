@@ -1,0 +1,196 @@
+.ns-field {
+  --ns-field-fg: var(--text-heading, #111);
+  --ns-field-body: var(--text-body, #444);
+  --ns-field-muted: var(--text-sub, #767676);
+  --ns-field-fill: var(--bg, #fff);
+  --ns-field-line: color-mix(in srgb, var(--ns-field-fg) 18%, transparent);
+  --ns-field-line-strong: var(--ns-field-fg);
+  --ns-field-error: #a33a3a;
+  --ns-field-radius: var(--radius, 0.25rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  padding-top: 0.45em;
+  color: var(--ns-field-body);
+}
+
+@media (prefers-color-scheme: dark) {
+  .ns-field {
+    --ns-field-fg: var(--text-heading, #f5f5f5);
+    --ns-field-body: var(--text-body, #b3b3b3);
+    --ns-field-muted: var(--text-sub, #8a8a8a);
+    --ns-field-fill: var(--bg, #1a1a1a);
+    --ns-field-error: #e07070;
+  }
+}
+
+.ns-field__control {
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+  height: calc(1em * var(--leading, 1.6) + 1.4rem);
+  border: 1px solid var(--ns-field-line);
+  border-radius: var(--ns-field-radius);
+  background: var(--ns-field-fill);
+}
+
+.ns-field__control:focus-within {
+  border-color: var(--ns-field-line-strong);
+}
+
+.ns-field[data-invalid="true"] .ns-field__control {
+  border-color: var(--ns-field-error);
+}
+
+.ns-field[data-disabled="true"] .ns-field__control {
+  border-style: dashed;
+}
+
+.ns-field[data-readonly="true"]:not([data-disabled="true"]) .ns-field__control {
+  border-style: dotted;
+}
+
+.ns-field[data-multiline="true"] .ns-field__control {
+  height: auto;
+}
+
+.ns-field[data-label="placeholder"] .ns-field__input::placeholder {
+  color: var(--ns-field-muted);
+  opacity: 1;
+}
+
+.ns-field__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ns-field__input {
+  appearance: none;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0.7rem 0.75rem;
+  border: 0;
+  border-radius: inherit;
+  background: var(--ns-field-fill);
+  color: var(--ns-field-fg);
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.ns-field__input:focus,
+.ns-field__input:focus-visible {
+  outline: none;
+}
+
+.ns-field__input:disabled {
+  color: var(--ns-field-muted);
+  cursor: not-allowed;
+}
+
+.ns-field__input::placeholder {
+  color: transparent;
+  opacity: 0;
+}
+
+textarea.ns-field__input {
+  height: auto;
+  resize: vertical;
+  min-height: 6.5rem;
+  line-height: var(--leading, 1.6);
+}
+
+.ns-field__input::-webkit-search-decoration,
+.ns-field__input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.ns-field__input:-webkit-autofill,
+.ns-field__input:-webkit-autofill:hover,
+.ns-field__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ns-field-fg);
+  caret-color: var(--ns-field-fg);
+  box-shadow: 0 0 0 1000px var(--ns-field-fill) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.ns-field__label {
+  position: absolute;
+  z-index: 1;
+  left: 0.75rem;
+  top: 0;
+  transform: translateY(calc(0.5em * var(--leading, 1.6) + 0.7rem - 50%));
+  max-width: calc(100% - 1.5rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ns-field-muted);
+  cursor: text;
+  transform-origin: left center;
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    color 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ns-field[data-multiline="true"] .ns-field__label {
+  transform: translateY(0.7rem);
+}
+
+.ns-field__input:focus + .ns-field__label,
+.ns-field__input:not(:placeholder-shown) + .ns-field__label,
+.ns-field__input:-webkit-autofill + .ns-field__label {
+  transform: translateY(-50%) scale(0.8125);
+  color: var(--ns-field-fg);
+  background: var(--ns-field-fill);
+  padding: 0 0.28rem;
+  max-width: calc(100% - 1.1rem);
+}
+
+.ns-field[data-invalid="true"] .ns-field__input:focus + .ns-field__label,
+.ns-field[data-invalid="true"] .ns-field__input:not(:placeholder-shown) + .ns-field__label,
+.ns-field[data-invalid="true"] .ns-field__input:-webkit-autofill + .ns-field__label {
+  color: var(--ns-field-error);
+}
+
+.ns-field__optional {
+  color: var(--ns-field-muted);
+}
+
+.ns-field__meta {
+  min-height: 1.6em;
+  min-height: 1lh;
+  line-height: var(--leading, 1.6);
+}
+
+.ns-field__description,
+.ns-field__error {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ns-field__description {
+  color: var(--ns-field-muted);
+}
+
+.ns-field__error {
+  color: var(--ns-field-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ns-field__label {
+    transition: none;
+  }
+}

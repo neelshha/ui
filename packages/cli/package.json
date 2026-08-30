@@ -1,0 +1,28 @@
+{
+  "name": "@neelshha/cli",
+  "version": "0.1.0",
+  "description": "CLI for @neelshha/ui — copy components into a React or Next app",
+  "homepage": "https://ui.neelshha.com",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "ns": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": ["dist", "bundled"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "node ../ui/scripts/build-registry.mjs",
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

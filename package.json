@@ -1,0 +1,32 @@
+{
+  "name": "ui",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "predev": "node packages/ui/scripts/build-registry.mjs",
+    "prebuild": "node packages/ui/scripts/build-registry.mjs",
+    "build": "next build",
+    "start": "next start",
+    "build:cli": "npm run build -w @neelshha/cli",
+    "ns": "node packages/cli/dist/index.js"
+  },
+  "dependencies": {
+    "@neelshha/ui": "*",
+    "next": "^16.2.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,18 @@
+:root {
+  color-scheme: light dark;
+  --text-heading: #111;
+  --text-body: #444;
+  --text-sub: #767676;
+  --bg: #fff;
+  --radius: 0.25rem;
+  --leading: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-heading: #f5f5f5;
+    --text-body: #b3b3b3;
+    --text-sub: #8a8a8a;
+    --bg: #1a1a1a;
+  }
+}
