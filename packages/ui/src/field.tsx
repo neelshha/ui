@@ -100,7 +100,7 @@ export function FieldMark({
   optional,
   required,
   optionalLabel = "Optional",
-  requiredLabel = "Required",
+  requiredLabel,
 }: {
   optional?: boolean | undefined;
   required?: boolean | undefined;
@@ -111,7 +111,20 @@ export function FieldMark({
     return <span className="ns-field__optional"> {optionalLabel}</span>;
   }
   if (required) {
-    return <span className="ns-field__required"> {requiredLabel}</span>;
+    if (requiredLabel != null) {
+      return <span className="ns-field__required"> {requiredLabel}</span>;
+    }
+    return (
+      <>
+        <span
+          className="ns-field__required ns-field__required--asterisk"
+          aria-hidden="true"
+        >
+          *
+        </span>
+        <span className="ns-field__sr"> Required</span>
+      </>
+    );
   }
   return null;
 }

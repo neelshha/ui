@@ -114,7 +114,7 @@ const thumbs = {
       <span className="ns-dialog__description">This cannot be undone.</span>
     </div>
   ),
-  field: <TextField label="Name" name="catalog-name" />,
+  field: <TextField label="Name" name="catalog-name" placeholder="John Doe" />,
   kbd: <Kbd>⌘K</Kbd>,
   label: <Label>Email</Label>,
   link: <Link href="/docs">Docs</Link>,

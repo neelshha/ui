@@ -6,7 +6,7 @@
     z-index: var(--z-toast, 30);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3, 0.39rem);
+    gap: var(--space-4, 0.49rem);
     width: min(22rem, calc(100% - var(--space-10, 1.86rem)));
     pointer-events: none;
   }
@@ -16,12 +16,14 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-4, 0.49rem);
-    padding: var(--space-4, 0.49rem) var(--space-5, 0.61rem);
+    padding: var(--space-8, 1.19rem);
     border: 1px solid var(--face-line, #626262);
     border-radius: var(--radius, 0.4rem);
     background: var(--face);
     background-clip: padding-box;
-    color: var(--text-body, #444);
+    color: var(--text-heading, #111);
+    font-weight: var(--weight-medium, 500);
+    line-height: var(--leading-tight, 1.25);
     box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     pointer-events: auto;
   }
@@ -49,27 +51,20 @@
     opacity: 1;
   }
 
+  /* Tone is the message ink, on the same silver chrome as every other tone. */
   .ns-toast[data-tone="success"] {
-    border-color: var(--success-line, color-mix(in srgb, var(--success, #2f6b3a) 42%, transparent));
-    background: var(--success-surface, var(--face));
     color: var(--success, #2f6b3a);
   }
 
   .ns-toast[data-tone="warning"] {
-    border-color: var(--warning-line, color-mix(in srgb, var(--warning, #8a5a12) 42%, transparent));
-    background: var(--warning-surface, var(--face));
     color: var(--warning, #8a5a12);
   }
 
   .ns-toast[data-tone="danger"] {
-    border-color: var(--error-line, color-mix(in srgb, var(--error, #8f3232) 42%, transparent));
-    background: var(--error-surface, var(--face));
     color: var(--error, #8f3232);
   }
 
   .ns-toast[data-tone="info"] {
-    border-color: var(--info-line, color-mix(in srgb, var(--info, #2c4a6e) 42%, transparent));
-    background: var(--info-surface, var(--face));
     color: var(--info, #2c4a6e);
   }
 }

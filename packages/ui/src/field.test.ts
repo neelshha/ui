@@ -30,9 +30,19 @@ describe("Field", () => {
     const markup = renderToStaticMarkup(
       h(TextField, { label: "Email", required: true }),
     );
+    expect(markup).toContain("ns-field__required");
+    expect(markup).toContain("*");
     expect(markup).toContain(" Required");
     expect(markup).toContain("aria-required");
     expect(markup).toContain("required");
+  });
+
+  it("renders a custom required label instead of the asterisk", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Email", required: true, requiredLabel: "Obligatorisk" }),
+    );
+    expect(markup).toContain("Obligatorisk");
+    expect(markup).not.toContain("aria-hidden");
   });
 
   it("keeps Optional when both optional and required are set", () => {

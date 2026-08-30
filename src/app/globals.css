@@ -467,19 +467,19 @@ pre code {
   width: 100%;
   margin: 0;
   padding: var(--space-3) var(--space-5);
-  border: 1px solid var(--line);
+  border: 1px solid var(--face-line);
   border-radius: var(--radius);
-  background: var(--bg);
+  background: var(--face);
   background-clip: padding-box;
   color: var(--text-heading);
   font: inherit;
-  box-shadow: var(--well);
+  box-shadow: var(--float);
 }
 
 .demo input:not([class]):focus,
 .demo input:not([class]):focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--focus);
 }
 
 .demoRow {

@@ -3,11 +3,8 @@
     --ns-field-fg: var(--text-heading, #111);
     --ns-field-body: var(--text-body, #444);
     --ns-field-muted: var(--text-sub, #5c5c5c);
-    --ns-field-fill: var(--bg, #fff);
-    --ns-field-line: var(
-      --line,
-      color-mix(in srgb, var(--ns-field-fg) 12%, transparent)
-    );
+    --ns-field-fill: color-mix(in srgb, var(--text-heading, #111) 7%, var(--bg, #fff));
+    --ns-field-line: var(--face-line, #626262);
     --ns-field-line-strong: var(
       --focus,
       color-mix(in srgb, var(--text-heading, #111) 70%, transparent)
@@ -36,14 +33,19 @@
     height: calc(1em * var(--leading, 1.5625) + var(--ns-field-inset-y) * 2);
     border: 1px solid var(--ns-field-line);
     border-radius: var(--ns-field-radius);
-    background: var(--ns-field-fill);
+    background: var(--face);
     background-clip: padding-box;
-    box-shadow: var(--well);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     transition: box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   }
 
   .ns-field[data-invalid="true"] .ns-field__control {
     border-color: var(--ns-field-error);
+  }
+
+  /* Focus reads through the border, not a floating ring. */
+  .ns-field__control:focus-within {
+    border-color: var(--ns-field-line-strong);
   }
 
   .ns-field[data-disabled="true"] .ns-field__control {
@@ -56,11 +58,6 @@
 
   .ns-field[data-multiline="true"] .ns-field__control {
     height: auto;
-  }
-
-  .ns-field[data-label="placeholder"] .ns-field__input::placeholder {
-    color: var(--ns-field-muted);
-    opacity: 1;
   }
 
   .ns-field[data-kind="choice"] {
@@ -260,7 +257,7 @@
     border-radius: calc(var(--ns-field-radius) * 0.7);
     background: var(--ns-field-fill);
     background-clip: padding-box;
-    box-shadow: var(--well);
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     color: var(--on-key, #111);
     cursor: pointer;
     transition:
@@ -373,9 +370,10 @@
     cursor: not-allowed;
   }
 
+  /* Placeholders are format hints ("John Doe"), not labels — keep them visible. */
   .ns-field__input::placeholder {
-    color: transparent;
-    opacity: 0;
+    color: var(--ns-field-muted);
+    opacity: 1;
   }
 
   textarea.ns-field__input {
@@ -418,6 +416,16 @@
     color: var(--ns-field-muted);
   }
 
+  .ns-field__required {
+    color: var(--ns-field-error);
+  }
+
+  /* The asterisk sits flush against the label and reads a step larger. */
+  .ns-field__required--asterisk {
+    font-size: 1.25em;
+    line-height: 0;
+  }
+
   .ns-field__meta {
     line-height: var(--leading, 1.5625);
   }
@@ -457,8 +465,12 @@
   }
 }
 
+/*
+ * The control border carries focus (see :focus-within above), so the input
+ * itself never draws a ring. Text inputs always match :focus-visible — even
+ * on click — so an outline here would fire for mouse users too.
+ */
 .ns-field__input:focus,
 .ns-field__input:focus-visible {
-  outline: 2px solid var(--focus, color-mix(in srgb, var(--text-heading, #111) 70%, transparent));
-  outline-offset: 2px;
+  outline: none;
 }

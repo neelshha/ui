@@ -21,7 +21,7 @@ export function SiteThemeToggle({ className }: { className?: string }) {
 
   return (
     <Button
-      variant="solid"
+      variant="outline"
       icon
       className={className}
       onClick={() => setTheme(next)}

@@ -20,7 +20,7 @@ const rows = [
     type: '"stack" | "float" | "placeholder"',
     def: '"stack"',
     notes:
-      "TextField and TextArea. Stack and float both keep the label above the well — they look the same. Placeholder drops the visible label when you type.",
+      "TextField and TextArea. Stack and float both keep the label above the field — they look the same. Placeholder drops the visible label when you type.",
   },
   {
     name: "optionalLabel / requiredLabel",
@@ -45,6 +45,12 @@ const rows = [
     type: "boolean",
     def: "false",
     notes: "Renders a Required mark. Sets required and aria-required on the control.",
+  },
+  {
+    name: "placeholder",
+    type: "string",
+    notes:
+      "A format hint inside the empty field, like John Doe. Hidden while the label sits in the field (placeholder chrome).",
   },
   {
     name: "description",
@@ -76,7 +82,7 @@ export default function FieldPage() {
       <header className="docLead">
         <h1>Field</h1>
         <p>
-          A label above a recessed well. Native input. Help and error stay
+          A label above a silver field. Native input. Help and error stay
           associated. <code>TextField</code> and <code>TextArea</code>.
         </p>
       </header>
@@ -94,8 +100,8 @@ export default function FieldPage() {
         <h2>Usage</h2>
         <Code>{`import { Field, TextField, TextArea } from "@/components/ui/field";
 
-<TextField label="Email" type="email" name="email" />
-<TextArea label="Notes" name="notes" optional />`}</Code>
+<TextField label="Email" type="email" name="email" placeholder="you@example.com" />
+<TextArea label="Notes" name="notes" optional placeholder="e.g. Leave at the front desk." />`}</Code>
         <p>
           <code>Field</code> is public. Pass one control as the child. It
           receives <code>id</code>, <code>aria-describedby</code>, and invalid
@@ -157,7 +163,7 @@ export default function FieldPage() {
         description={
           <>
             Set <code>data-density=&quot;compact&quot;</code> on a region. The
-            well shrinks. The label stays above.
+            field shrinks. The label stays above.
           </>
         }
         code={`<div data-density="compact">

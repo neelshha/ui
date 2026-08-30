@@ -28,6 +28,7 @@ export function FieldDemo({
         required={required}
         disabled={disabled}
         readOnly={readOnly}
+        placeholder={readOnly ? undefined : "e.g. Leave at the front desk."}
         defaultValue={readOnly ? "Ships in two days." : undefined}
         {...(error ? { error } : {})}
       />
@@ -44,6 +45,7 @@ export function FieldDemo({
       required={required}
       disabled={disabled}
       readOnly={readOnly}
+      placeholder="John Doe"
       defaultValue={readOnly ? "Ada Lovelace" : undefined}
       {...(error ? { error } : {})}
     />
