@@ -19,25 +19,25 @@
 
   .ns-badge[data-tone="accent"] {
     color: var(--key-line, #221898);
-    border-color: color-mix(in srgb, var(--key-line, #221898) 35%, transparent);
-    background: color-mix(in srgb, var(--key, #a2c7ff) 18%, transparent);
+    border-color: var(--accent-line, color-mix(in srgb, var(--key-line, #221898) 35%, transparent));
+    background: var(--accent-surface, color-mix(in srgb, var(--key, #a2c7ff) 18%, transparent));
   }
 
   .ns-badge[data-tone="success"] {
     color: var(--success, #2f6b3a);
-    border-color: color-mix(in srgb, var(--success, #2f6b3a) 35%, transparent);
-    background: color-mix(in srgb, var(--success, #2f6b3a) 10%, transparent);
+    border-color: var(--success-line, color-mix(in srgb, var(--success, #2f6b3a) 35%, transparent));
+    background: var(--success-surface, color-mix(in srgb, var(--success, #2f6b3a) 10%, transparent));
   }
 
   .ns-badge[data-tone="warning"] {
     color: var(--warning, #8a5a12);
-    border-color: color-mix(in srgb, var(--warning, #8a5a12) 35%, transparent);
-    background: color-mix(in srgb, var(--warning, #8a5a12) 10%, transparent);
+    border-color: var(--warning-line, color-mix(in srgb, var(--warning, #8a5a12) 35%, transparent));
+    background: var(--warning-surface, color-mix(in srgb, var(--warning, #8a5a12) 10%, transparent));
   }
 
   .ns-badge[data-tone="danger"] {
     color: var(--error, #8f3232);
-    border-color: color-mix(in srgb, var(--error, #8f3232) 35%, transparent);
-    background: color-mix(in srgb, var(--error, #8f3232) 10%, transparent);
+    border-color: var(--error-line, color-mix(in srgb, var(--error, #8f3232) 35%, transparent));
+    background: var(--error-surface, color-mix(in srgb, var(--error, #8f3232) 10%, transparent));
   }
 }
