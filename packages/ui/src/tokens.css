@@ -35,7 +35,20 @@
     --info: #2c4a6e;
     --on-info: #fff;
     --line: color-mix(in srgb, var(--text-heading) 18%, transparent);
+    --line-strong: color-mix(in srgb, var(--text-heading) 32%, transparent);
     --focus: color-mix(in srgb, var(--text-heading) 70%, transparent);
+    --selection: color-mix(in srgb, var(--key) 42%, transparent);
+
+    --accent-surface: color-mix(in srgb, var(--key) 14%, var(--bg));
+    --accent-line: color-mix(in srgb, var(--key-line) 42%, transparent);
+    --success-surface: color-mix(in srgb, var(--success) 12%, var(--bg));
+    --success-line: color-mix(in srgb, var(--success) 42%, transparent);
+    --warning-surface: color-mix(in srgb, var(--warning) 12%, var(--bg));
+    --warning-line: color-mix(in srgb, var(--warning) 42%, transparent);
+    --error-surface: color-mix(in srgb, var(--error) 12%, var(--bg));
+    --error-line: color-mix(in srgb, var(--error) 42%, transparent);
+    --info-surface: color-mix(in srgb, var(--info) 12%, var(--bg));
+    --info-line: color-mix(in srgb, var(--info) 42%, transparent);
 
     --z-base: 0;
     --z-nav: 10;
@@ -207,25 +220,25 @@
         0 2px 0 oklch(0 0 0 / 16%);
       --on-key: #111;
       --key: #b4d2ff;
-      --face-line: #8a8a8a;
+      --face-line: #737373;
       --face: linear-gradient(
-        180deg,
-        #f7f7f7 0%,
-        #e4e4e4 42%,
-        #d2d2d2 100%
-      );
+            180deg,
+            #363636 0%,
+            #2a2a2a 42%,
+            #202020 100%
+          );
       --face-hover: linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #ececec 42%,
-        #d8d8d8 100%
-      );
+            180deg,
+            #424242 0%,
+            #333333 42%,
+            #282828 100%
+          );
       --face-press: linear-gradient(
-        180deg,
-        #e4e4e4 0%,
-        #d4d4d4 50%,
-        #c4c4c4 100%
-      );
+            180deg,
+            #2a2a2a 0%,
+            #222222 50%,
+            #1a1a1a 100%
+          );
       --key-face: linear-gradient(
         180deg,
         #f4f8ff 0%,
@@ -278,7 +291,7 @@
       0 2px 0 oklch(0 0 0 / 16%);
     --on-key: #111;
     --key: #b4d2ff;
-    --face-line: #8a8a8a;
+    --face-line: #737373;
     --face: linear-gradient(
       180deg,
       #f7f7f7 0%,
