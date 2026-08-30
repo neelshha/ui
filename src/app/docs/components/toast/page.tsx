@@ -18,7 +18,7 @@ const rows = [
   {
     name: "toast(message, options)",
     type: "fn",
-    notes: "Returns an id. tone is default | success | warning | danger | info. timeout defaults to 4000. Hover or focus pauses the timer.",
+    notes: "Returns an id. tone is default | success | warning | danger | info. timeout defaults to 4000. className styles an individual toast. Hover or focus pauses the timer.",
   },
   {
     name: "dismiss(id)",

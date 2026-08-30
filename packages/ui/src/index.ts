@@ -155,6 +155,10 @@ export { ThemeProvider, useTheme } from "./theme-provider";
 export { ThemeToggle } from "./theme-toggle";
 export type { ThemeToggleProps } from "./theme-toggle";
 export { ToastProvider, useToast } from "./toast";
-export type { ToastProviderProps, ToastTone } from "./toast";
+export type {
+  ToastOptions,
+  ToastProviderProps,
+  ToastTone,
+} from "./toast";
 export { Tooltip } from "./tooltip";
 export type { TooltipProps } from "./tooltip";

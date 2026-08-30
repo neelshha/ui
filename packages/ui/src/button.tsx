@@ -7,7 +7,14 @@ import { Spinner } from "./spinner";
 export { ButtonGroup } from "./button-group";
 export type { ButtonGroupProps } from "./button-group";
 
-export type ButtonVariant = "solid" | "outline" | "ghost" | "danger" | "link";
+export type ButtonVariant =
+  | "solid"
+  | "outline"
+  | "ghost"
+  | "danger"
+  | "success"
+  | "warning"
+  | "link";
 
 type Shared = {
   variant?: ButtonVariant;

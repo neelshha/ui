@@ -19,6 +19,14 @@ describe("Button", () => {
     expect(markup).not.toContain("<a");
   });
 
+  it("marks tone variants with data-variant", () => {
+    for (const variant of ["danger", "success", "warning"] as const) {
+      const markup = html({ variant });
+      expect(markup).toContain(`<button`);
+      expect(markup).toContain(`data-variant="${variant}"`);
+    }
+  });
+
   it("renders an a when href is set", () => {
     const markup = html({ href: "/docs" }, "Docs");
     expect(markup).toContain("<a");

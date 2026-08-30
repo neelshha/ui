@@ -15,10 +15,11 @@ export const metadata: Metadata = {
 const rows = [
   {
     name: "variant",
-    type: '"solid" | "outline" | "ghost" | "danger" | "link"',
+    type:
+      '"solid" | "outline" | "ghost" | "danger" | "success" | "warning" | "link"',
     def: '"solid"',
     notes:
-      "Solid is the sky key. Outline is silver. Ghost is text until hover. Link is text.",
+      "Solid is the sky key. Outline is silver. Ghost is text until hover. Danger uses error. Success and warning use their tone tokens. Link is text.",
   },
   {
     name: "icon",
@@ -93,12 +94,14 @@ export default function ButtonPage() {
 
       <Example
         title="Variants"
-        description="Solid is the sky key. Outline is silver. Ghost is text until you hover. Danger uses error. Link is type."
+        description="Solid is the sky key. Outline is silver. Ghost is text until you hover. Danger uses error. Success uses success. Warning uses warning. Link is type."
         wide
         code={`<Button>Save</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="danger">Delete</Button>
+<Button variant="success">Confirm</Button>
+<Button variant="warning">Review</Button>
 <Button variant="link">Link</Button>`}
       >
         <div className="demoRow">
@@ -106,6 +109,8 @@ export default function ButtonPage() {
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="danger">Delete</Button>
+          <Button variant="success">Confirm</Button>
+          <Button variant="warning">Review</Button>
           <Button variant="link">Link</Button>
         </div>
       </Example>

@@ -20,6 +20,7 @@ type ToastItem = {
   message: ReactNode;
   tone: ToastTone;
   timeout: number;
+  className?: string | undefined;
 };
 
 type Timer = {
@@ -28,11 +29,14 @@ type Timer = {
   started: number;
 };
 
+export type ToastOptions = {
+  tone?: ToastTone | undefined;
+  timeout?: number | undefined;
+  className?: string | undefined;
+};
+
 type ToastContextValue = {
-  toast: (
-    message: ReactNode,
-    options?: { tone?: ToastTone; timeout?: number } | undefined,
-  ) => string;
+  toast: (message: ReactNode, options?: ToastOptions | undefined) => string;
   dismiss: (id: string) => void;
 };
 
@@ -89,14 +93,15 @@ export function ToastProvider({ children }: ToastProviderProps) {
   );
 
   const toast = useCallback(
-    (
-      message: ReactNode,
-      options?: { tone?: ToastTone; timeout?: number } | undefined,
-    ) => {
+    (message: ReactNode, options?: ToastOptions | undefined) => {
       const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       const tone = options?.tone ?? "default";
       const timeout = options?.timeout ?? 4000;
-      setItems((current) => [...current, { id, message, tone, timeout }]);
+      const className = options?.className;
+      setItems((current) => [
+        ...current,
+        { id, message, tone, timeout, className },
+      ]);
       if (timeout > 0) arm(id, timeout);
       return id;
     },
@@ -121,7 +126,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
         {items.map((item) => (
           <div
             key={item.id}
-            className={cx("ns-toast")}
+            className={cx("ns-toast", item.className)}
             data-tone={item.tone}
             role={item.tone === "danger" ? "alert" : "status"}
             aria-atomic="true"

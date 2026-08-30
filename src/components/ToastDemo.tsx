@@ -13,13 +13,13 @@ function Inner() {
         Default
       </Button>
       <Button
-        variant="outline"
+        variant="success"
         onClick={() => toast("Saved.", { tone: "success" })}
       >
         Success
       </Button>
       <Button
-        variant="outline"
+        variant="warning"
         onClick={() => toast("Quota is low.", { tone: "warning" })}
       >
         Warning

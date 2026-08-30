@@ -53,31 +53,44 @@
     box-shadow: var(--flat);
   }
 
-  .ns-button[data-variant="danger"] {
-    --ns-key: var(--error, #8f3232);
+  .ns-button[data-variant="danger"],
+  .ns-button[data-variant="success"],
+  .ns-button[data-variant="warning"] {
     --ns-on-key: var(--on-key, #111);
-    --ns-key-line: color-mix(in srgb, var(--error, #8f3232) 72%, #111);
+    --ns-key-line: color-mix(in srgb, var(--ns-key) 72%, #111);
     --key-face: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--error, #8f3232) 18%, #fff) 0%,
-      color-mix(in srgb, var(--error, #8f3232) 38%, #fff) 18%,
-      color-mix(in srgb, var(--error, #8f3232) 58%, #fff) 50%,
-      color-mix(in srgb, var(--error, #8f3232) 62%, #fff) 80%,
-      color-mix(in srgb, var(--error, #8f3232) 55%, #fff) 100%
+      color-mix(in srgb, var(--ns-key) 18%, #fff) 0%,
+      color-mix(in srgb, var(--ns-key) 38%, #fff) 18%,
+      color-mix(in srgb, var(--ns-key) 58%, #fff) 50%,
+      color-mix(in srgb, var(--ns-key) 62%, #fff) 80%,
+      color-mix(in srgb, var(--ns-key) 55%, #fff) 100%
     );
     --key-face-hover: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--error, #8f3232) 12%, #fff) 0%,
-      color-mix(in srgb, var(--error, #8f3232) 30%, #fff) 18%,
-      color-mix(in srgb, var(--error, #8f3232) 50%, #fff) 50%,
-      color-mix(in srgb, var(--error, #8f3232) 54%, #fff) 100%
+      color-mix(in srgb, var(--ns-key) 12%, #fff) 0%,
+      color-mix(in srgb, var(--ns-key) 30%, #fff) 18%,
+      color-mix(in srgb, var(--ns-key) 50%, #fff) 50%,
+      color-mix(in srgb, var(--ns-key) 54%, #fff) 100%
     );
     --key-face-press: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--error, #8f3232) 38%, #fff) 0%,
-      color-mix(in srgb, var(--error, #8f3232) 62%, #fff) 50%,
-      color-mix(in srgb, var(--error, #8f3232) 72%, #fff) 100%
+      color-mix(in srgb, var(--ns-key) 38%, #fff) 0%,
+      color-mix(in srgb, var(--ns-key) 62%, #fff) 50%,
+      color-mix(in srgb, var(--ns-key) 72%, #fff) 100%
     );
+  }
+
+  .ns-button[data-variant="danger"] {
+    --ns-key: var(--error, #8f3232);
+  }
+
+  .ns-button[data-variant="success"] {
+    --ns-key: var(--success, #2f6b3a);
+  }
+
+  .ns-button[data-variant="warning"] {
+    --ns-key: var(--warning, #8a5a12);
   }
 
   .ns-button[data-variant="link"] {
@@ -131,7 +144,11 @@
   .ns-button[data-variant="solid"]:disabled,
   .ns-button[data-variant="solid"][aria-disabled="true"],
   .ns-button[data-variant="danger"]:disabled,
-  .ns-button[data-variant="danger"][aria-disabled="true"] {
+  .ns-button[data-variant="danger"][aria-disabled="true"],
+  .ns-button[data-variant="success"]:disabled,
+  .ns-button[data-variant="success"][aria-disabled="true"],
+  .ns-button[data-variant="warning"]:disabled,
+  .ns-button[data-variant="warning"][aria-disabled="true"] {
     background: var(--key-face);
   }
 
@@ -168,6 +185,12 @@
       ),
     .ns-button[data-variant="danger"]:hover:not(:disabled):not(
         [aria-disabled="true"]
+      ),
+    .ns-button[data-variant="success"]:hover:not(:disabled):not(
+        [aria-disabled="true"]
+      ),
+    .ns-button[data-variant="warning"]:hover:not(:disabled):not(
+        [aria-disabled="true"]
       ) {
       background: var(--key-face-hover);
     }
@@ -196,6 +219,12 @@
       [aria-disabled="true"]
     ),
   .ns-button[data-variant="danger"]:active:not(:disabled):not(
+      [aria-disabled="true"]
+    ),
+  .ns-button[data-variant="success"]:active:not(:disabled):not(
+      [aria-disabled="true"]
+    ),
+  .ns-button[data-variant="warning"]:active:not(:disabled):not(
       [aria-disabled="true"]
     ) {
     background: var(--key-face-press);
