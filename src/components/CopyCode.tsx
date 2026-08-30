@@ -12,7 +12,7 @@ export function CopyCode({ value }: { value: string }) {
     <Button
       type="button"
       icon
-      variant="outline"
+      variant="ghost"
       className="codeCopy"
       aria-label={copied ? "Copied" : "Copy"}
       onClick={async () => {

@@ -25,8 +25,10 @@ export function Example({
     <section className="example" {...(title ? { id: slug(title) } : {})}>
       {title ? <h2>{title}</h2> : null}
       {description ? <p>{description}</p> : null}
-      <Preview wide={wide ?? false}>{children}</Preview>
-      {code ? <Code>{code}</Code> : null}
+      <div className="exampleStage">
+        <Preview wide={wide ?? false}>{children}</Preview>
+        {code ? <Code>{code}</Code> : null}
+      </div>
     </section>
   );
 }

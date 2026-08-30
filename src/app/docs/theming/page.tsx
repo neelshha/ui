@@ -161,7 +161,7 @@ export default function ThemingPage() {
           The page is paper. Cards, default badges, and the navbar rail are
           hairlines on <code>--bg</code>. Solid keys use the sky candy face
           and <code>--float</code>. Outline keys use the silver face. Alerts
-          sit on a light tone wash with a start mark. Dialogs use{" "}
+          are paper; tone is ink and the hairline. Dialogs use{" "}
           <code>--float</code>. Fields use <code>--well</code>. Progress fill
           is <code>--key</code>. Inline <code>code</code> is a wash; a{" "}
           <code>pre</code> block is a hairline plate. Press uses the press face

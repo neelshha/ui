@@ -8,7 +8,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Alert",
-  description: "A status plate. Tone is a wash and a start mark.",
+  description: "A paper plate. Tone is ink and the hairline.",
 };
 
 const rows = [
@@ -16,7 +16,7 @@ const rows = [
     name: "tone",
     type: '"default" | "success" | "warning" | "danger" | "info"',
     def: '"default"',
-    notes: "Washes the plate and marks the start edge. Title picks up the tone.",
+    notes: "Colors the hairline and the title. The plate stays paper.",
   },
   {
     name: "role",
@@ -42,9 +42,8 @@ export default function AlertPage() {
       <header className="docLead">
         <h1>Alert</h1>
         <p>
-          A status plate. Soft wash, start mark, body stays readable. Children
-          go in. Compose a title and description when there is more than one
-          line.
+          A paper plate. Tone is ink and the hairline. Body stays readable.
+          Compose a title and description when there is more than one line.
         </p>
       </header>
 

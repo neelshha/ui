@@ -11,7 +11,7 @@ import { Example } from "@/components/Example";
 
 export const metadata: Metadata = {
   title: "Accordion",
-  description: "Exclusive details. No JS.",
+  description: "Separate silver keys. Exclusive details. No JS.",
 };
 
 const rows = [
@@ -28,7 +28,7 @@ const rows = [
   {
     name: "AccordionTrigger",
     type: "summary",
-    notes: "The clickable row. Native marker is hidden. A chevron turns when open.",
+    notes: "The silver key. Native marker is hidden. A chevron turns when open.",
   },
   {
     name: "AccordionPanel",
@@ -43,8 +43,9 @@ export default function AccordionPage() {
       <header className="docLead">
         <h1>Accordion</h1>
         <p>
-          Native <code>details</code>. A shared <code>name</code> makes the
-          group exclusive. No client file.
+          Native <code>details</code>. Each item is an outline key — silver
+          face, float, 2px press. A shared <code>name</code> makes the group
+          exclusive. No client file.
         </p>
       </header>
 

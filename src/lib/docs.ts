@@ -13,8 +13,8 @@ export const startNav = [
 ] as const;
 
 export const components = [
-  { slug: "accordion", title: "Accordion", description: "Exclusive details. No JS." },
-  { slug: "alert", title: "Alert", description: "A status plate. Tone is a wash and a start mark." },
+  { slug: "accordion", title: "Accordion", description: "Separate silver keys. Exclusive details. No JS." },
+  { slug: "alert", title: "Alert", description: "A paper plate. Tone is ink and the hairline." },
   { slug: "avatar", title: "Avatar", description: "A face. Initials if the image fails." },
   { slug: "badge", title: "Badge", description: "A small mark for status." },
   { slug: "breadcrumb", title: "Breadcrumb", description: "A native nav trail." },

@@ -8,7 +8,7 @@
     },
     {
       "path": "text.css",
-      "content": "@layer components {\n  .ns-text {\n    margin: 0;\n    font: inherit;\n    line-height: var(--leading, 1.5625);\n  }\n\n  .ns-text[data-tone=\"heading\"] {\n    color: var(--text-heading, #111);\n    font-size: var(--type-lg, 1.25rem);\n    font-weight: var(--weight-medium, 500);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-text[data-tone=\"body\"] {\n    color: var(--text-body, #444);\n    font-size: var(--type-md, 1rem);\n  }\n\n  .ns-text[data-tone=\"sub\"] {\n    color: var(--text-sub, #767676);\n    font-size: var(--type-sm, 0.8rem);\n  }\n}\n"
+      "content": "@layer components {\n  .ns-text {\n    margin: 0;\n    font: inherit;\n    line-height: var(--leading, 1.5625);\n  }\n\n  .ns-text[data-tone=\"heading\"] {\n    color: var(--text-heading, #111);\n    font-size: var(--type-lg, 1.25rem);\n    font-weight: var(--weight-medium, 500);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-text[data-tone=\"body\"] {\n    color: var(--text-body, #444);\n    font-size: var(--type-md, 1rem);\n  }\n\n  .ns-text[data-tone=\"sub\"] {\n    color: var(--text-sub, #5c5c5c);\n    font-size: var(--type-sm, 0.8rem);\n  }\n}\n"
     }
   ],
   "dependencies": {

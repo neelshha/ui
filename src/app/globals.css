@@ -97,11 +97,9 @@ code {
 pre {
   background: var(--bg-hover);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: var(--space-7) var(--space-8);
-  padding-inline-end: var(--space-12);
+  border-radius: var(--radius-list);
+  padding: 0.875rem 1rem;
   overflow-x: auto;
-  white-space: pre-wrap;
 }
 
 pre code {
@@ -218,6 +216,23 @@ pre code {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+}
+
+.exampleStage {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-list);
+  background: var(--bg);
+}
+
+.exampleStage .demo,
+.exampleStage .code {
+  border: 0;
+  border-radius: 0;
+}
+
+.exampleStage .code {
+  border-block-start: 1px solid var(--line);
 }
 
 .catalog {
@@ -337,13 +352,40 @@ pre code {
 
 .code {
   position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-list);
+  background: var(--bg-hover);
+}
+
+.code pre {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  background: none;
+  border: 0;
+  border-radius: 0;
 }
 
 .codeCopy {
+  --ns-control: 1.75rem;
   position: absolute;
-  inset-block-start: var(--space-3);
-  inset-inline-end: var(--space-3);
-  z-index: 1;
+  inset-block-start: 0.75rem;
+  inset-inline-end: 0.5rem;
+  z-index: 10;
+  width: 1.75rem;
+  min-height: 1.75rem;
+  border-radius: var(--radius);
+  background: var(--bg-hover);
+}
+
+@media (hover: hover) {
+  .codeCopy.ns-button[data-variant="ghost"]:hover:not(:disabled) {
+    background: var(--bg);
+  }
+}
+
+.codeCopy.ns-button[data-variant="ghost"]:active:not(:disabled) {
+  background: var(--bg);
 }
 
 .footer {
@@ -398,8 +440,9 @@ pre code {
 }
 
 .demo {
+  overflow: visible;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-list);
   background: var(--bg);
   background-clip: padding-box;
   box-shadow: none;
