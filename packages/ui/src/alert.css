@@ -35,6 +35,26 @@
     color: var(--text-body, #444);
   }
 
+  .ns-alert[data-tone="success"] {
+    border-color: var(--success-line, color-mix(in srgb, var(--success, #2f6b3a) 42%, transparent));
+    background: var(--success-surface, var(--face));
+  }
+
+  .ns-alert[data-tone="warning"] {
+    border-color: var(--warning-line, color-mix(in srgb, var(--warning, #8a5a12) 42%, transparent));
+    background: var(--warning-surface, var(--face));
+  }
+
+  .ns-alert[data-tone="danger"] {
+    border-color: var(--error-line, color-mix(in srgb, var(--error, #8f3232) 42%, transparent));
+    background: var(--error-surface, var(--face));
+  }
+
+  .ns-alert[data-tone="info"] {
+    border-color: var(--info-line, color-mix(in srgb, var(--info, #2c4a6e) 42%, transparent));
+    background: var(--info-surface, var(--face));
+  }
+
   .ns-alert[data-tone="success"] .ns-alert__title {
     color: var(--success, #2f6b3a);
   }
