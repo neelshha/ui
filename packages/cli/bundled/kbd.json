@@ -1,0 +1,20 @@
+{
+  "name": "kbd",
+  "title": "Kbd",
+  "files": [
+    {
+      "path": "kbd.tsx",
+      "content": "import \"./kbd.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type KbdProps = ComponentProps<\"kbd\">;\n\nexport function Kbd({ className, ...rest }: KbdProps) {\n  return <kbd className={cx(\"ns-kbd\", className)} {...rest} />;\n}\n"
+    },
+    {
+      "path": "kbd.css",
+      "content": "@layer components {\n  .ns-kbd {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    min-width: 1.5em;\n    padding: 0 var(--space-2, 0.31rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    background: var(--bg, #fff);\n    box-shadow: var(--raise);\n    color: var(--text-heading, #111);\n    font: inherit;\n    font-size: var(--type-sm, 0.8rem);\n    font-family: var(--font-mono, ui-monospace, monospace);\n    line-height: var(--leading-tight, 1.25);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

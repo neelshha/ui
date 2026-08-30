@@ -1,0 +1,20 @@
+{
+  "name": "accordion",
+  "title": "Accordion",
+  "files": [
+    {
+      "path": "accordion.tsx",
+      "content": "import \"./accordion.css\";\n\nimport {\n  Children,\n  cloneElement,\n  isValidElement,\n  type ComponentProps,\n  type ReactNode,\n} from \"react\";\nimport { cx } from \"./cx\";\n\nexport type AccordionProps = ComponentProps<\"div\"> & {\n  name?: string | undefined;\n};\n\nexport type AccordionItemProps = ComponentProps<\"details\">;\n\nexport type AccordionTriggerProps = ComponentProps<\"summary\">;\n\nexport type AccordionPanelProps = ComponentProps<\"div\">;\n\nexport function Accordion({ name, className, children, ...rest }: AccordionProps) {\n  return (\n    <div className={cx(\"ns-accordion\", className)} {...rest}>\n      {name\n        ? Children.map(children, (child) => {\n            if (!isValidElement<AccordionItemProps>(child)) return child;\n            return cloneElement(child, { name: child.props.name ?? name });\n          })\n        : children}\n    </div>\n  );\n}\n\nexport function AccordionItem({ className, ...rest }: AccordionItemProps) {\n  return <details className={cx(\"ns-accordion__item\", className)} {...rest} />;\n}\n\nexport function AccordionTrigger({ className, ...rest }: AccordionTriggerProps) {\n  return (\n    <summary className={cx(\"ns-accordion__trigger\", className)} {...rest} />\n  );\n}\n\nexport function AccordionPanel({\n  className,\n  children,\n  ...rest\n}: AccordionPanelProps) {\n  return (\n    <div className={cx(\"ns-accordion__panel\", className)} {...rest}>\n      {children as ReactNode}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "accordion.css",
+      "content": "@layer components {\n  .ns-accordion {\n    display: flex;\n    flex-direction: column;\n    min-width: 0;\n  }\n\n  .ns-accordion__item {\n    border-bottom: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n  }\n\n  .ns-accordion__trigger {\n    display: block;\n    padding: var(--space-4, 0.49rem) 0;\n    list-style: none;\n    cursor: pointer;\n    color: var(--text-heading, #111);\n    font-weight: var(--weight-medium, 500);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-accordion__trigger::-webkit-details-marker,\n  .ns-accordion__trigger::marker {\n    display: none;\n    content: \"\";\n  }\n\n  .ns-accordion__panel {\n    padding-block-end: var(--space-5, 0.61rem);\n    color: var(--text-body, #444);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

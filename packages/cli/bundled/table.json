@@ -1,0 +1,20 @@
+{
+  "name": "table",
+  "title": "Table",
+  "files": [
+    {
+      "path": "table.tsx",
+      "content": "import \"./table.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type TableProps = ComponentProps<\"table\">;\nexport type TableCaptionProps = ComponentProps<\"caption\">;\nexport type TableHeaderProps = ComponentProps<\"thead\">;\nexport type TableBodyProps = ComponentProps<\"tbody\">;\nexport type TableRowProps = ComponentProps<\"tr\">;\nexport type TableHeadProps = ComponentProps<\"th\">;\nexport type TableCellProps = ComponentProps<\"td\">;\n\nexport function Table({ className, ...rest }: TableProps) {\n  return (\n    <div className=\"ns-table-wrap\">\n      <table className={cx(\"ns-table\", className)} {...rest} />\n    </div>\n  );\n}\n\nexport function TableCaption({ className, ...rest }: TableCaptionProps) {\n  return <caption className={cx(\"ns-table__caption\", className)} {...rest} />;\n}\n\nexport function TableHeader({ className, ...rest }: TableHeaderProps) {\n  return <thead className={cx(\"ns-table__header\", className)} {...rest} />;\n}\n\nexport function TableBody({ className, ...rest }: TableBodyProps) {\n  return <tbody className={cx(\"ns-table__body\", className)} {...rest} />;\n}\n\nexport function TableRow({ className, ...rest }: TableRowProps) {\n  return <tr className={cx(\"ns-table__row\", className)} {...rest} />;\n}\n\nexport function TableHead({ className, ...rest }: TableHeadProps) {\n  return <th className={cx(\"ns-table__head\", className)} {...rest} />;\n}\n\nexport function TableCell({ className, ...rest }: TableCellProps) {\n  return <td className={cx(\"ns-table__cell\", className)} {...rest} />;\n}\n"
+    },
+    {
+      "path": "table.css",
+      "content": "@layer components {\n  .ns-table-wrap {\n    width: 100%;\n    overflow-x: auto;\n  }\n\n  .ns-table {\n    width: 100%;\n    border-collapse: collapse;\n    font: inherit;\n    color: var(--text-body, #444);\n    background: var(--bg, #fff);\n  }\n\n  .ns-table__caption {\n    caption-side: top;\n    text-align: start;\n    padding-block-end: var(--space-4, 0.49rem);\n    color: var(--text-sub, #767676);\n    font-size: var(--type-sm, 0.8rem);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-table__head,\n  .ns-table__cell {\n    padding: var(--space-3, 0.39rem) var(--space-4, 0.49rem);\n    text-align: start;\n    vertical-align: top;\n    border-bottom: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n  }\n\n  .ns-table__head {\n    color: var(--text-sub, #767676);\n    font-size: var(--type-sm, 0.8rem);\n    font-weight: var(--weight-medium, 500);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-table__cell {\n    color: var(--text-body, #444);\n  }\n\n  .ns-table__body .ns-table__row:last-child .ns-table__cell {\n    border-bottom: 0;\n  }\n\n  @media (hover: hover) {\n    .ns-table__body .ns-table__row:hover {\n      background: var(--bg-hover, #f3f2f1);\n    }\n  }\n\n  [data-density=\"compact\"] .ns-table__head,\n  [data-density=\"compact\"] .ns-table__cell {\n    padding: var(--space-2, 0.31rem) var(--space-3, 0.39rem);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

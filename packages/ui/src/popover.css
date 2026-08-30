@@ -1,0 +1,18 @@
+@layer components {
+  .ns-popover {
+    box-sizing: border-box;
+    min-width: 10rem;
+    margin: 0;
+    padding: var(--space-3, 0.39rem);
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border-radius: var(--radius, 0.4rem);
+    background: var(--bg-overlay, var(--bg, #fff));
+    color: var(--text-body, #444);
+    box-shadow: var(--raise);
+  }
+
+  .ns-popover:popover-open {
+    z-index: var(--z-overlay, 20);
+  }
+}

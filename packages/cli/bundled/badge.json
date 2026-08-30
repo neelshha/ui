@@ -1,0 +1,20 @@
+{
+  "name": "badge",
+  "title": "Badge",
+  "files": [
+    {
+      "path": "badge.tsx",
+      "content": "import \"./badge.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type BadgeTone = \"default\" | \"accent\" | \"success\" | \"warning\" | \"danger\";\n\nexport type BadgeProps = ComponentProps<\"span\"> & {\n  tone?: BadgeTone | undefined;\n};\n\nexport function Badge({ tone = \"default\", className, ...rest }: BadgeProps) {\n  return (\n    <span className={cx(\"ns-badge\", className)} data-tone={tone} {...rest} />\n  );\n}\n"
+    },
+    {
+      "path": "badge.css",
+      "content": "@layer components {\n  .ns-badge {\n    display: inline-flex;\n    align-items: center;\n    padding: var(--space-1, 0.25rem) var(--space-4, 0.49rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    font: inherit;\n    font-size: var(--type-sm, 0.8rem);\n    line-height: var(--leading-tight, 1.25);\n    color: var(--text-heading, #111);\n    background: var(--bg, #fff);\n    box-shadow: none;\n  }\n\n  .ns-badge[data-tone=\"accent\"] {\n    color: var(--on-ink, #fff);\n    border-color: color-mix(in srgb, var(--ink, #111) 28%, transparent);\n    background: var(--ink, #111);\n  }\n\n  .ns-badge[data-tone=\"success\"] {\n    color: var(--success, #2f6b3a);\n    border-color: color-mix(in srgb, var(--success, #2f6b3a) 42%, transparent);\n  }\n\n  .ns-badge[data-tone=\"warning\"] {\n    color: var(--warning, #8a5a12);\n    border-color: color-mix(in srgb, var(--warning, #8a5a12) 42%, transparent);\n  }\n\n  .ns-badge[data-tone=\"danger\"] {\n    color: var(--error, #8f3232);\n    border-color: color-mix(in srgb, var(--error, #8f3232) 42%, transparent);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

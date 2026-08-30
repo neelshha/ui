@@ -1,0 +1,20 @@
+{
+  "name": "progress",
+  "title": "Progress",
+  "files": [
+    {
+      "path": "progress.tsx",
+      "content": "import \"./progress.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type ProgressProps = ComponentProps<\"progress\">;\nexport type MeterProps = ComponentProps<\"meter\">;\n\nexport function Progress({ className, ...rest }: ProgressProps) {\n  return <progress className={cx(\"ns-progress\", className)} {...rest} />;\n}\n\nexport function Meter({ className, ...rest }: MeterProps) {\n  return <meter className={cx(\"ns-meter\", className)} {...rest} />;\n}\n"
+    },
+    {
+      "path": "progress.css",
+      "content": "@layer components {\n  .ns-progress,\n  .ns-meter {\n    appearance: none;\n    display: block;\n    box-sizing: border-box;\n    width: 100%;\n    height: 0.5em;\n    margin: 0;\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n    border-radius: 999px;\n    background: var(--bg, #fff);\n    box-shadow: var(--well);\n    overflow: hidden;\n  }\n\n  .ns-progress::-webkit-progress-bar,\n  .ns-meter::-webkit-meter-bar {\n    background: transparent;\n  }\n\n  .ns-progress::-webkit-progress-value {\n    background: var(--ink, #111);\n  }\n\n  .ns-progress::-moz-progress-bar {\n    background: var(--ink, #111);\n  }\n\n  .ns-meter::-webkit-meter-optimum-value,\n  .ns-meter::-webkit-meter-suboptimum-value,\n  .ns-meter::-webkit-meter-even-less-good-value {\n    background: var(--ink, #111);\n  }\n\n  .ns-meter::-moz-meter-bar {\n    background: var(--ink, #111);\n  }\n\n  .ns-progress:indeterminate::-webkit-progress-value {\n    background: color-mix(in srgb, var(--ink, #111) 40%, transparent);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

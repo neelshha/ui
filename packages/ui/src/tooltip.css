@@ -1,0 +1,33 @@
+@layer components {
+  .ns-tooltip {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .ns-tooltip__tip {
+    position: absolute;
+    inset-block-start: calc(100% + var(--space-2, 0.31rem));
+    inset-inline-start: 50%;
+    z-index: var(--z-overlay, 20);
+    width: max-content;
+    max-width: 14rem;
+    padding: var(--space-2, 0.31rem) var(--space-3, 0.39rem);
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border-radius: var(--radius, 0.4rem);
+    background: var(--bg-overlay, var(--bg, #fff));
+    color: var(--text-body, #444);
+    font-size: var(--type-sm, 0.8rem);
+    line-height: var(--leading-tight, 1.25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition: opacity var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1))
+      0.4s;
+  }
+
+  .ns-tooltip:hover .ns-tooltip__tip,
+  .ns-tooltip:focus-within .ns-tooltip__tip {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "dialog",
+  "title": "Dialog",
+  "files": [
+    {
+      "path": "dialog.tsx",
+      "content": "\"use client\";\n\nimport \"./dialog.css\";\n\nimport {\n  useEffect,\n  useRef,\n  type ComponentProps,\n  type ReactNode,\n  type Ref,\n} from \"react\";\nimport { Button, type ButtonVariant } from \"./button\";\nimport { cx } from \"./cx\";\n\nexport type DialogProps = Omit<ComponentProps<\"dialog\">, \"open\"> & {\n  open?: boolean | undefined;\n  onOpenChange?: ((open: boolean) => void) | undefined;\n};\n\nexport type DialogTitleProps = ComponentProps<\"h2\">;\n\nexport type DialogCloseProps = {\n  children?: ReactNode;\n  variant?: ButtonVariant | undefined;\n  disabled?: boolean | undefined;\n  className?: string | undefined;\n};\n\nfunction assignRef<T>(ref: Ref<T> | undefined, value: T | null) {\n  if (typeof ref === \"function\") {\n    ref(value);\n    return;\n  }\n  if (ref) ref.current = value;\n}\n\nexport function Dialog({\n  open,\n  onOpenChange,\n  className,\n  onClose,\n  ref: forwardedRef,\n  ...rest\n}: DialogProps) {\n  const ref = useRef<HTMLDialogElement>(null);\n\n  useEffect(() => {\n    const node = ref.current;\n    if (!node || open === undefined) return;\n    if (open && !node.open) node.showModal();\n    if (!open && node.open) node.close();\n  }, [open]);\n\n  return (\n    <dialog\n      {...rest}\n      ref={(node) => {\n        ref.current = node;\n        assignRef(forwardedRef, node);\n      }}\n      className={cx(\"ns-dialog\", className)}\n      onClose={(event) => {\n        onClose?.(event);\n        onOpenChange?.(false);\n      }}\n    />\n  );\n}\n\nexport function DialogTitle({ className, ...rest }: DialogTitleProps) {\n  return <h2 className={cx(\"ns-dialog__title\", className)} {...rest} />;\n}\n\nexport function DialogClose({\n  children = \"Close\",\n  variant = \"outline\",\n  disabled,\n  className,\n}: DialogCloseProps) {\n  return (\n    <form method=\"dialog\">\n      <Button\n        variant={variant}\n        type=\"submit\"\n        {...(disabled ? { disabled: true } : {})}\n        {...(className ? { className } : {})}\n      >\n        {children}\n      </Button>\n    </form>\n  );\n}\n\nexport function DialogActions({ children }: { children: ReactNode }) {\n  return <div className=\"ns-dialog__actions\">{children}</div>;\n}\n"
+    },
+    {
+      "path": "dialog.css",
+      "content": "@layer components {\n  .ns-dialog {\n    width: min(28rem, calc(100% - var(--space-10, 1.86rem)));\n    max-height: calc(100% - var(--space-10, 1.86rem));\n    margin: auto;\n    padding: var(--space-8, 1.19rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    background: var(\n      --bg-overlay,\n      var(--face, linear-gradient(180deg, #fff 0%, #f3f2f1 100%))\n    );\n    color: var(--text-body, #444);\n    box-shadow: var(--raise);\n  }\n\n  .ns-dialog::backdrop {\n    background: color-mix(in srgb, var(--bg-well, #e8e6e4) 72%, transparent);\n  }\n\n  .ns-dialog__title {\n    margin: 0 0 var(--space-4, 0.49rem);\n    color: var(--text-heading, #111);\n    font-size: var(--type-lg, 1.25rem);\n    font-weight: var(--weight-medium, 500);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-dialog__actions {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-end;\n    gap: var(--space-3, 0.39rem);\n    margin-top: var(--space-7, 0.95rem);\n  }\n\n  .ns-dialog__actions form {\n    display: contents;\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx",
+      "button"
+    ]
+  }
+}

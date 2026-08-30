@@ -1,0 +1,16 @@
+{
+  "name": "checkbox",
+  "title": "Checkbox",
+  "files": [
+    {
+      "path": "checkbox.tsx",
+      "content": "import { useId, type ComponentProps } from \"react\";\nimport { describedBy, Field, type FieldChrome } from \"./field\";\n\nexport type CheckboxProps = Omit<\n  ComponentProps<\"input\">,\n  \"type\" | \"className\" | \"size\"\n> &\n  Omit<FieldChrome, \"chrome\">;\n\nexport function Checkbox({\n  label,\n  optional,\n  required,\n  description,\n  error,\n  className,\n  id,\n  disabled,\n  \"aria-describedby\": ariaDescribedBy,\n  \"aria-invalid\": ariaInvalid,\n  ...rest\n}: CheckboxProps) {\n  const generatedId = useId();\n  const inputId = id ?? generatedId;\n  const descriptionId = `${inputId}-desc`;\n  const errorId = `${inputId}-error`;\n  const invalid = error != null || ariaInvalid === true || ariaInvalid === \"true\";\n\n  return (\n    <Field\n      label={label}\n      optional={optional}\n      required={required}\n      description={description}\n      error={error}\n      className={className}\n      disabled={disabled}\n      kind=\"choice\"\n      inputId={inputId}\n      descriptionId={descriptionId}\n      errorId={errorId}\n      invalid={invalid}\n    >\n      <input\n        {...rest}\n        id={inputId}\n        className=\"ns-choice\"\n        type=\"checkbox\"\n        disabled={disabled}\n        required={required}\n        aria-required={required || undefined}\n        aria-invalid={invalid || undefined}\n        aria-errormessage={error != null ? errorId : undefined}\n        aria-describedby={describedBy(\n          description != null && descriptionId,\n          error != null && errorId,\n          ariaDescribedBy,\n        )}\n      />\n    </Field>\n  );\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "field"
+    ]
+  }
+}

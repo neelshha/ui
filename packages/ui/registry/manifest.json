@@ -1,21 +1,291 @@
 {
   "items": [
     {
-      "name": "field",
-      "title": "Field",
-      "files": ["src/field.tsx", "src/field.css"],
-      "dependencies": {
-        "npm": [],
-        "registry": []
-      }
-    },
-    {
       "name": "tokens",
       "title": "Tokens",
       "files": ["src/tokens.css"],
       "dependencies": {
         "npm": [],
         "registry": []
+      }
+    },
+    {
+      "name": "cx",
+      "title": "cx",
+      "files": ["src/cx.ts"],
+      "dependencies": {
+        "npm": [],
+        "registry": []
+      }
+    },
+    {
+      "name": "theme",
+      "title": "Theme",
+      "files": ["src/theme.tsx", "src/theme-provider.tsx"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["tokens"]
+      }
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "files": ["src/button.tsx", "src/button-group.tsx", "src/button.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "spinner"]
+      }
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "files": ["src/label.tsx", "src/label.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "navbar",
+      "title": "Navbar",
+      "files": ["src/navbar.tsx", "src/navbar.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "button"]
+      }
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "files": ["src/card.tsx", "src/card.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "files": ["src/badge.tsx", "src/badge.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "files": ["src/separator.tsx", "src/separator.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "text",
+      "title": "Text",
+      "files": ["src/text.tsx", "src/text.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "files": ["src/field.tsx", "src/field.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "files": ["src/checkbox.tsx"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["field"]
+      }
+    },
+    {
+      "name": "radio",
+      "title": "Radio",
+      "files": ["src/radio.tsx"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["field"]
+      }
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "files": ["src/select.tsx"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["field"]
+      }
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "files": ["src/switch.tsx"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["field"]
+      }
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "files": ["src/alert.tsx", "src/alert.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "files": ["src/dialog.tsx", "src/dialog.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "button"]
+      }
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "files": ["src/table.tsx", "src/table.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "files": ["src/tabs.tsx", "src/tabs.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "button"]
+      }
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "files": ["src/spinner.tsx", "src/spinner.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "files": ["src/skeleton.tsx", "src/skeleton.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "files": ["src/accordion.tsx", "src/accordion.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "files": ["src/avatar.tsx", "src/avatar.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "files": ["src/progress.tsx", "src/progress.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "link",
+      "title": "Link",
+      "files": ["src/link.tsx", "src/link.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "kbd",
+      "title": "Kbd",
+      "files": ["src/kbd.tsx", "src/kbd.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "files": ["src/breadcrumb.tsx", "src/breadcrumb.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "files": ["src/popover.tsx", "src/popover.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "button"]
+      }
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "files": ["src/tooltip.tsx", "src/tooltip.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "menu",
+      "title": "Menu",
+      "files": ["src/menu.tsx", "src/menu.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "button", "popover"]
+      }
+    },
+    {
+      "name": "toast",
+      "title": "Toast",
+      "files": ["src/toast.tsx", "src/toast.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx"]
+      }
+    },
+    {
+      "name": "theme-toggle",
+      "title": "Theme toggle",
+      "files": ["src/theme-toggle.tsx"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["theme", "button"]
       }
     }
   ]

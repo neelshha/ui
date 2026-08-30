@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Framework } from "./types.js";
 
@@ -16,6 +16,13 @@ const VITE_CONFIGS = [
   "vite.config.cjs",
 ];
 
+const ALIAS_SOURCES = [
+  "tsconfig.json",
+  "tsconfig.app.json",
+  "jsconfig.json",
+  ...VITE_CONFIGS,
+];
+
 function hasAny(cwd: string, names: string[]) {
   return names.some((name) => existsSync(join(cwd, name)));
 }
@@ -31,7 +38,47 @@ export function defaultComponentPath(cwd: string): string {
   return "components/ui";
 }
 
-export function defaultUiAlias(path: string): string {
-  if (path.startsWith("src/")) return `@/${path.slice("src/".length)}`;
-  return `@/${path}`;
+export function inferAtAlias(sources: string[]): boolean {
+  return sources.some(
+    (text) => /["']@\/\*["']/.test(text) || /["']@["']\s*:/.test(text),
+  );
+}
+
+export function hasAtAlias(cwd: string): boolean {
+  const sources: string[] = [];
+  for (const name of ALIAS_SOURCES) {
+    const file = join(cwd, name);
+    if (!existsSync(file)) continue;
+    sources.push(readFileSync(file, "utf8"));
+  }
+  return inferAtAlias(sources);
+}
+
+export function uiImportPrefix(path: string, hasAlias: boolean): string {
+  const clean = path.replace(/^\.\//, "");
+  if (hasAlias) {
+    return clean.startsWith("src/") ? `@/${clean.slice(4)}` : `@/${clean}`;
+  }
+  return `./${clean}`;
+}
+
+export function tokensImportHint(
+  path: string,
+  hasAlias: boolean,
+): { line: string; note?: string } {
+  if (hasAlias) {
+    return { line: `@import "${uiImportPrefix(path, true)}/tokens.css";` };
+  }
+  const clean = path.replace(/^\.\//, "");
+  const fromSrc = clean.startsWith("src/")
+    ? `./${clean.slice(4)}/tokens.css`
+    : `./${clean}/tokens.css`;
+  return {
+    line: `@import "${fromSrc}";`,
+    note: "Relative to a CSS file in src/. Adjust if your entry CSS lives elsewhere.",
+  };
+}
+
+export function defaultUiAlias(path: string, hasAlias = false): string {
+  return uiImportPrefix(path, hasAlias);
 }

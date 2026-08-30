@@ -1,0 +1,24 @@
+@layer components {
+  .ns-text {
+    margin: 0;
+    font: inherit;
+    line-height: var(--leading, 1.5625);
+  }
+
+  .ns-text[data-tone="heading"] {
+    color: var(--text-heading, #111);
+    font-size: var(--type-lg, 1.25rem);
+    font-weight: var(--weight-medium, 500);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-text[data-tone="body"] {
+    color: var(--text-body, #444);
+    font-size: var(--type-md, 1rem);
+  }
+
+  .ns-text[data-tone="sub"] {
+    color: var(--text-sub, #767676);
+    font-size: var(--type-sm, 0.8rem);
+  }
+}

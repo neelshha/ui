@@ -1,0 +1,22 @@
+@layer components {
+  .ns-skeleton {
+    display: block;
+    min-height: 1em;
+    border-radius: var(--radius, 0.4rem);
+    background: var(--bg-well, #e8e6e4);
+    box-shadow: var(--well);
+    animation: ns-skeleton 1.2s ease-in-out infinite;
+  }
+
+  @keyframes ns-skeleton {
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns-skeleton {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "theme",
+  "title": "Theme",
+  "files": [
+    {
+      "path": "theme.tsx",
+      "content": "export const STORAGE_KEY = \"ns-theme\";\n\nexport type Theme = \"light\" | \"dark\" | \"system\";\n\nexport type ResolvedTheme = \"light\" | \"dark\";\n\nexport const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem(\"${STORAGE_KEY}\");var r=document.documentElement;var s=window.matchMedia(\"(prefers-color-scheme: dark)\").matches?\"dark\":\"light\";var v=t===\"dark\"||t===\"light\"||t===\"system\"?t:\"system\";var x=v===\"system\"?s:v;r.dataset.nsTheme=v;r.dataset.nsResolved=x;if(v===\"dark\"||v===\"light\"){r.classList.add(v);r.style.colorScheme=v}}catch(e){}})();`;\n\nexport function resolveTheme(theme: Theme): ResolvedTheme {\n  if (theme === \"light\" || theme === \"dark\") return theme;\n  return window.matchMedia(\"(prefers-color-scheme: dark)\").matches\n    ? \"dark\"\n    : \"light\";\n}\n\nexport function applyTheme(theme: Theme) {\n  const root = document.documentElement;\n  const resolved = resolveTheme(theme);\n  root.classList.remove(\"light\", \"dark\");\n  root.dataset.nsTheme = theme;\n  root.dataset.nsResolved = resolved;\n  if (theme === \"light\" || theme === \"dark\") {\n    root.classList.add(theme);\n    root.style.colorScheme = theme;\n    return;\n  }\n  root.style.removeProperty(\"color-scheme\");\n}\n\nexport function readTheme(fallback: Theme): Theme {\n  const stored = window.localStorage.getItem(STORAGE_KEY);\n  if (stored === \"light\" || stored === \"dark\" || stored === \"system\") {\n    return stored;\n  }\n  return fallback;\n}\n\nexport function ThemeScript() {\n  return (\n    <script id=\"ns-theme\" dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />\n  );\n}\n"
+    },
+    {
+      "path": "theme-provider.tsx",
+      "content": "\"use client\";\n\nimport {\n  createContext,\n  useContext,\n  useEffect,\n  useState,\n  type ReactNode,\n} from \"react\";\nimport {\n  STORAGE_KEY,\n  applyTheme,\n  readTheme,\n  resolveTheme,\n  type ResolvedTheme,\n  type Theme,\n} from \"./theme\";\n\nexport type { Theme } from \"./theme\";\n\ntype ThemeContextValue = {\n  theme: Theme;\n  resolved: ResolvedTheme;\n  setTheme: (theme: Theme) => void;\n};\n\nconst ThemeContext = createContext<ThemeContextValue | null>(null);\n\nexport function ThemeProvider({\n  children,\n  defaultTheme = \"system\",\n}: {\n  children: ReactNode;\n  defaultTheme?: Theme;\n}) {\n  const [theme, setThemeState] = useState<Theme>(defaultTheme);\n  const [resolved, setResolved] = useState<ResolvedTheme>(\"light\");\n\n  useEffect(() => {\n    const next = readTheme(defaultTheme);\n    setThemeState(next);\n    applyTheme(next);\n    setResolved(resolveTheme(next));\n\n    const media = window.matchMedia(\"(prefers-color-scheme: dark)\");\n    const onChange = () => {\n      setThemeState((current) => {\n        if (current === \"system\") {\n          applyTheme(\"system\");\n          setResolved(media.matches ? \"dark\" : \"light\");\n        }\n        return current;\n      });\n    };\n    media.addEventListener(\"change\", onChange);\n    return () => media.removeEventListener(\"change\", onChange);\n  }, [defaultTheme]);\n\n  const setTheme = (next: Theme) => {\n    window.localStorage.setItem(STORAGE_KEY, next);\n    setThemeState(next);\n    applyTheme(next);\n    setResolved(resolveTheme(next));\n  };\n\n  return (\n    <ThemeContext.Provider value={{ theme, resolved, setTheme }}>\n      {children}\n    </ThemeContext.Provider>\n  );\n}\n\nexport function useTheme(): ThemeContextValue {\n  const value = useContext(ThemeContext);\n  if (!value) {\n    throw new Error(\"useTheme must be used within ThemeProvider\");\n  }\n  return value;\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "tokens"
+    ]
+  }
+}

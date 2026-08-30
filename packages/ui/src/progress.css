@@ -1,0 +1,44 @@
+@layer components {
+  .ns-progress,
+  .ns-meter {
+    appearance: none;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 0.5em;
+    margin: 0;
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border-radius: 999px;
+    background: var(--bg, #fff);
+    box-shadow: var(--well);
+    overflow: hidden;
+  }
+
+  .ns-progress::-webkit-progress-bar,
+  .ns-meter::-webkit-meter-bar {
+    background: transparent;
+  }
+
+  .ns-progress::-webkit-progress-value {
+    background: var(--ink, #111);
+  }
+
+  .ns-progress::-moz-progress-bar {
+    background: var(--ink, #111);
+  }
+
+  .ns-meter::-webkit-meter-optimum-value,
+  .ns-meter::-webkit-meter-suboptimum-value,
+  .ns-meter::-webkit-meter-even-less-good-value {
+    background: var(--ink, #111);
+  }
+
+  .ns-meter::-moz-meter-bar {
+    background: var(--ink, #111);
+  }
+
+  .ns-progress:indeterminate::-webkit-progress-value {
+    background: color-mix(in srgb, var(--ink, #111) 40%, transparent);
+  }
+}

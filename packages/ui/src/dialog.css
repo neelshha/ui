@@ -1,0 +1,41 @@
+@layer components {
+  .ns-dialog {
+    width: min(28rem, calc(100% - var(--space-10, 1.86rem)));
+    max-height: calc(100% - var(--space-10, 1.86rem));
+    margin: auto;
+    padding: var(--space-8, 1.19rem);
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));
+    border-radius: var(--radius, 0.4rem);
+    background: var(
+      --bg-overlay,
+      var(--face, linear-gradient(180deg, #fff 0%, #f3f2f1 100%))
+    );
+    color: var(--text-body, #444);
+    box-shadow: var(--raise);
+  }
+
+  .ns-dialog::backdrop {
+    background: color-mix(in srgb, var(--bg-well, #e8e6e4) 72%, transparent);
+  }
+
+  .ns-dialog__title {
+    margin: 0 0 var(--space-4, 0.49rem);
+    color: var(--text-heading, #111);
+    font-size: var(--type-lg, 1.25rem);
+    font-weight: var(--weight-medium, 500);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-3, 0.39rem);
+    margin-top: var(--space-7, 0.95rem);
+  }
+
+  .ns-dialog__actions form {
+    display: contents;
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "popover",
+  "title": "Popover",
+  "files": [
+    {
+      "path": "popover.tsx",
+      "content": "import \"./popover.css\";\n\nimport type { ComponentProps, ReactNode } from \"react\";\nimport { Button, type ButtonVariant } from \"./button\";\nimport { cx } from \"./cx\";\n\nexport type PopoverProps = ComponentProps<\"div\">;\n\nexport type PopoverTriggerProps = {\n  popoverTarget: string;\n  children?: ReactNode;\n  className?: string | undefined;\n  variant?: ButtonVariant | undefined;\n};\n\nexport function Popover({ className, ...rest }: PopoverProps) {\n  return (\n    <div\n      popover=\"auto\"\n      className={cx(\"ns-popover\", className)}\n      {...rest}\n    />\n  );\n}\n\nexport function PopoverTrigger({\n  popoverTarget,\n  children,\n  className,\n  variant = \"outline\",\n}: PopoverTriggerProps) {\n  return (\n    <Button variant={variant} className={className} popoverTarget={popoverTarget}>\n      {children}\n    </Button>\n  );\n}\n"
+    },
+    {
+      "path": "popover.css",
+      "content": "@layer components {\n  .ns-popover {\n    box-sizing: border-box;\n    min-width: 10rem;\n    margin: 0;\n    padding: var(--space-3, 0.39rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    background: var(--bg-overlay, var(--bg, #fff));\n    color: var(--text-body, #444);\n    box-shadow: var(--raise);\n  }\n\n  .ns-popover:popover-open {\n    z-index: var(--z-overlay, 20);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx",
+      "button"
+    ]
+  }
+}

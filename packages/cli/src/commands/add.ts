@@ -1,10 +1,25 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { readConfig } from "../config.js";
 import { prepareFile } from "../prepare.js";
 import { loadItem } from "../registry.js";
+import type { RegistryItem } from "../types.js";
 
-export async function add(cwd: string, names: string[]) {
+export type AddFlags = {
+  dryRun?: boolean;
+  diff?: boolean;
+  overwriteFoundation?: boolean;
+  latest?: boolean;
+};
+
+const FOUNDATION_FILES = new Set([
+  "tokens.css",
+  "theme.tsx",
+  "theme-provider.tsx",
+  "cx.ts",
+]);
+
+export async function add(cwd: string, names: string[], flags: AddFlags = {}) {
   if (names.length === 0) {
     throw new Error("Name a component to add. Try: npx @neelshha/ui add field");
   }
@@ -15,28 +30,95 @@ export async function add(cwd: string, names: string[]) {
   }
 
   const destDir = join(cwd, config.path);
+  const items = await resolveItems(names, flags.latest);
 
-  for (const name of names) {
-    const item = await loadItem(name);
+  for (const item of items) {
     const cssFiles = item.files
       .filter((file) => file.path.endsWith(".css"))
       .map((file) => file.path);
 
     for (const file of item.files) {
       const dest = join(destDir, file.path);
-      mkdirSync(dirname(dest), { recursive: true });
       const siblingCss = file.path.endsWith(".tsx")
         ? cssFiles.filter((css) => css !== file.path)
         : [];
-      writeFileSync(dest, prepareFile(file.path, file.content, siblingCss));
+      const next = prepareFile(file.path, file.content, siblingCss);
+      const foundation = FOUNDATION_FILES.has(file.path);
+      const exists = existsSync(dest);
+
+      if (foundation && exists && !flags.overwriteFoundation) {
+        console.log(`Skipped ${config.path}/${file.path}`);
+        continue;
+      }
+
+      if (exists) {
+        const prev = readFileSync(dest, "utf8");
+        if (prev === next) {
+          console.log(`Unchanged ${config.path}/${file.path}`);
+          continue;
+        }
+        if (flags.diff) {
+          console.log(`diff ${config.path}/${file.path}`);
+          console.log(lineDiff(prev, next));
+        }
+        if (flags.dryRun) {
+          console.log(`Would update ${config.path}/${file.path}`);
+          continue;
+        }
+        mkdirSync(dirname(dest), { recursive: true });
+        writeFileSync(dest, next);
+        console.log(`Updated ${config.path}/${file.path}`);
+        continue;
+      }
+
+      if (flags.dryRun) {
+        console.log(`Would write ${config.path}/${file.path}`);
+        continue;
+      }
+
+      mkdirSync(dirname(dest), { recursive: true });
+      writeFileSync(dest, next);
       console.log(`Wrote ${config.path}/${file.path}`);
     }
 
-    const css = cssFiles[0];
-    if (css) {
-      console.log(
-        `Import styles once:\n  import "${config.aliases.ui}/${css}";`,
+  }
+
+  console.log(
+    `Component CSS is imported from the TSX. Import tokens.css once if you have not already.`,
+  );
+}
+
+function lineDiff(before: string, after: string): string {
+  const prev = before.split("\n");
+  const next = after.split("\n");
+  const max = Math.max(prev.length, next.length);
+  const lines: string[] = [];
+  for (let i = 0; i < max; i += 1) {
+    const left = prev[i];
+    const right = next[i];
+    if (left === right) continue;
+    if (left !== undefined) lines.push(`- ${left}`);
+    if (right !== undefined) lines.push(`+ ${right}`);
+  }
+  return lines.join("\n");
+}
+
+async function resolveItems(
+  names: string[],
+  latest?: boolean,
+  seen = new Set<string>(),
+): Promise<RegistryItem[]> {
+  const items: RegistryItem[] = [];
+  for (const name of names) {
+    if (seen.has(name)) continue;
+    seen.add(name);
+    const item = await loadItem(name, { ...(latest ? { latest } : {}) });
+    if (item.dependencies.registry.length > 0) {
+      items.push(
+        ...(await resolveItems(item.dependencies.registry, latest, seen)),
       );
     }
+    items.push(item);
   }
+  return items;
 }

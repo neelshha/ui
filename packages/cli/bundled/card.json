@@ -1,0 +1,20 @@
+{
+  "name": "card",
+  "title": "Card",
+  "files": [
+    {
+      "path": "card.tsx",
+      "content": "import \"./card.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type CardProps = ComponentProps<\"div\">;\n\nexport function Card({ className, ...rest }: CardProps) {\n  return <div className={cx(\"ns-card\", className)} {...rest} />;\n}\n"
+    },
+    {
+      "path": "card.css",
+      "content": "@layer components {\n  .ns-card {\n    display: flex;\n    flex-direction: column;\n    gap: var(--space-5, 0.61rem);\n    box-sizing: border-box;\n    padding: var(--space-8, 1.19rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    background: var(--bg, #fff);\n    color: var(--text-body, #444);\n    box-shadow: none;\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

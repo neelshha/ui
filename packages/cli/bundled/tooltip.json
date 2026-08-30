@@ -1,0 +1,20 @@
+{
+  "name": "tooltip",
+  "title": "Tooltip",
+  "files": [
+    {
+      "path": "tooltip.tsx",
+      "content": "import \"./tooltip.css\";\n\nimport type { ComponentProps, ReactNode } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type TooltipProps = Omit<ComponentProps<\"span\">, \"content\"> & {\n  content: ReactNode;\n};\n\nexport function Tooltip({ content, className, children, ...rest }: TooltipProps) {\n  return (\n    <span className={cx(\"ns-tooltip\", className)} {...rest}>\n      {children}\n      <span className=\"ns-tooltip__tip\" role=\"tooltip\">\n        {content}\n      </span>\n    </span>\n  );\n}\n"
+    },
+    {
+      "path": "tooltip.css",
+      "content": "@layer components {\n  .ns-tooltip {\n    position: relative;\n    display: inline-flex;\n  }\n\n  .ns-tooltip__tip {\n    position: absolute;\n    inset-block-start: calc(100% + var(--space-2, 0.31rem));\n    inset-inline-start: 50%;\n    z-index: var(--z-overlay, 20);\n    width: max-content;\n    max-width: 14rem;\n    padding: var(--space-2, 0.31rem) var(--space-3, 0.39rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    background: var(--bg-overlay, var(--bg, #fff));\n    color: var(--text-body, #444);\n    font-size: var(--type-sm, 0.8rem);\n    line-height: var(--leading-tight, 1.25);\n    opacity: 0;\n    pointer-events: none;\n    transform: translateX(-50%);\n    transition: opacity var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1))\n      0.4s;\n  }\n\n  .ns-tooltip:hover .ns-tooltip__tip,\n  .ns-tooltip:focus-within .ns-tooltip__tip {\n    opacity: 1;\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

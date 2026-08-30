@@ -1,0 +1,20 @@
+{
+  "name": "spinner",
+  "title": "Spinner",
+  "files": [
+    {
+      "path": "spinner.tsx",
+      "content": "import \"./spinner.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type SpinnerProps = ComponentProps<\"span\">;\n\nexport function Spinner({ className, ...rest }: SpinnerProps) {\n  return (\n    <span\n      className={cx(\"ns-spinner\", className)}\n      aria-hidden=\"true\"\n      {...rest}\n    />\n  );\n}\n"
+    },
+    {
+      "path": "spinner.css",
+      "content": "@layer components {\n  .ns-spinner {\n    box-sizing: border-box;\n    display: inline-block;\n    width: 1em;\n    height: 1em;\n    flex-shrink: 0;\n    border: 1.5px solid currentColor;\n    border-inline-end-color: transparent;\n    border-radius: 50%;\n    pointer-events: none;\n    animation: ns-spin 0.6s linear infinite;\n  }\n\n  @keyframes ns-spin {\n    to {\n      transform: rotate(1turn);\n    }\n  }\n\n  @media (prefers-reduced-motion: reduce) {\n    .ns-spinner {\n      animation: none;\n      border-inline-end-color: currentColor;\n      opacity: 0.6;\n    }\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

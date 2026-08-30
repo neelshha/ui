@@ -1,0 +1,17 @@
+{
+  "name": "theme-toggle",
+  "title": "Theme toggle",
+  "files": [
+    {
+      "path": "theme-toggle.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\nimport { Button } from \"./button\";\nimport { useTheme } from \"./theme-provider\";\n\nexport type ThemeToggleProps = {\n  className?: string;\n};\n\nexport function ThemeToggle({ className }: ThemeToggleProps) {\n  const { resolved, setTheme } = useTheme();\n  const [mounted, setMounted] = useState(false);\n\n  useEffect(() => {\n    setMounted(true);\n  }, []);\n\n  const next = resolved === \"dark\" ? \"light\" : \"dark\";\n  const label = mounted ? (resolved === \"dark\" ? \"Dark\" : \"Light\") : \"Theme\";\n  const hint = mounted\n    ? `Theme: ${label}. Click for ${next}.`\n    : \"Theme\";\n\n  return (\n    <Button\n      variant=\"solid\"\n      className={className}\n      onClick={() => setTheme(next)}\n      aria-label={hint}\n    >\n      {label}\n    </Button>\n  );\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "theme",
+      "button"
+    ]
+  }
+}

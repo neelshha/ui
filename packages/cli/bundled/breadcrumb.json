@@ -1,0 +1,20 @@
+{
+  "name": "breadcrumb",
+  "title": "Breadcrumb",
+  "files": [
+    {
+      "path": "breadcrumb.tsx",
+      "content": "import \"./breadcrumb.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type BreadcrumbProps = ComponentProps<\"nav\">;\nexport type BreadcrumbListProps = ComponentProps<\"ol\">;\nexport type BreadcrumbItemProps = ComponentProps<\"li\">;\nexport type BreadcrumbLinkProps = ComponentProps<\"a\">;\nexport type BreadcrumbPageProps = ComponentProps<\"span\">;\n\nexport function Breadcrumb({ className, ...rest }: BreadcrumbProps) {\n  return (\n    <nav\n      aria-label=\"Breadcrumb\"\n      className={cx(\"ns-breadcrumb\", className)}\n      {...rest}\n    />\n  );\n}\n\nexport function BreadcrumbList({ className, ...rest }: BreadcrumbListProps) {\n  return <ol className={cx(\"ns-breadcrumb__list\", className)} {...rest} />;\n}\n\nexport function BreadcrumbItem({ className, ...rest }: BreadcrumbItemProps) {\n  return <li className={cx(\"ns-breadcrumb__item\", className)} {...rest} />;\n}\n\nexport function BreadcrumbLink({ className, ...rest }: BreadcrumbLinkProps) {\n  return <a className={cx(\"ns-breadcrumb__link\", className)} {...rest} />;\n}\n\nexport function BreadcrumbPage({ className, ...rest }: BreadcrumbPageProps) {\n  return (\n    <span\n      aria-current=\"page\"\n      className={cx(\"ns-breadcrumb__page\", className)}\n      {...rest}\n    />\n  );\n}\n"
+    },
+    {
+      "path": "breadcrumb.css",
+      "content": "@layer components {\n  .ns-breadcrumb__list {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    gap: var(--space-2, 0.31rem);\n    margin: 0;\n    padding: 0;\n    list-style: none;\n    color: var(--text-sub, #767676);\n    font-size: var(--type-sm, 0.8rem);\n  }\n\n  .ns-breadcrumb__item {\n    display: inline-flex;\n    align-items: center;\n    gap: var(--space-2, 0.31rem);\n  }\n\n  .ns-breadcrumb__item:not(:last-child)::after {\n    content: \"/\";\n    color: var(--text-disabled, var(--text-sub, #767676));\n  }\n\n  .ns-breadcrumb__link {\n    color: inherit;\n    text-decoration: none;\n  }\n\n  @media (hover: hover) {\n    .ns-breadcrumb__link:hover {\n      color: var(--text-heading, #111);\n    }\n  }\n\n  .ns-breadcrumb__page {\n    color: var(--text-heading, #111);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+@layer components {
+  .ns-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .ns-table {
+    width: 100%;
+    border-collapse: collapse;
+    font: inherit;
+    color: var(--text-body, #444);
+    background: var(--bg, #fff);
+  }
+
+  .ns-table__caption {
+    caption-side: top;
+    text-align: start;
+    padding-block-end: var(--space-4, 0.49rem);
+    color: var(--text-sub, #767676);
+    font-size: var(--type-sm, 0.8rem);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-table__head,
+  .ns-table__cell {
+    padding: var(--space-3, 0.39rem) var(--space-4, 0.49rem);
+    text-align: start;
+    vertical-align: top;
+    border-bottom: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+  }
+
+  .ns-table__head {
+    color: var(--text-sub, #767676);
+    font-size: var(--type-sm, 0.8rem);
+    font-weight: var(--weight-medium, 500);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-table__cell {
+    color: var(--text-body, #444);
+  }
+
+  .ns-table__body .ns-table__row:last-child .ns-table__cell {
+    border-bottom: 0;
+  }
+
+  @media (hover: hover) {
+    .ns-table__body .ns-table__row:hover {
+      background: var(--bg-hover, #f3f2f1);
+    }
+  }
+
+  [data-density="compact"] .ns-table__head,
+  [data-density="compact"] .ns-table__cell {
+    padding: var(--space-2, 0.31rem) var(--space-3, 0.39rem);
+  }
+}

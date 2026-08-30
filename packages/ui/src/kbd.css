@@ -1,0 +1,19 @@
+@layer components {
+  .ns-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5em;
+    padding: 0 var(--space-2, 0.31rem);
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border-radius: var(--radius, 0.4rem);
+    background: var(--bg, #fff);
+    box-shadow: var(--raise);
+    color: var(--text-heading, #111);
+    font: inherit;
+    font-size: var(--type-sm, 0.8rem);
+    font-family: var(--font-mono, ui-monospace, monospace);
+    line-height: var(--leading-tight, 1.25);
+  }
+}

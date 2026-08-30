@@ -1,0 +1,20 @@
+{
+  "name": "separator",
+  "title": "Separator",
+  "files": [
+    {
+      "path": "separator.tsx",
+      "content": "import \"./separator.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\ntype SeparatorOrientation = \"horizontal\" | \"vertical\";\n\nexport type SeparatorProps = {\n  orientation?: SeparatorOrientation;\n  className?: string;\n} & Omit<ComponentProps<\"hr\">, \"className\">;\n\nexport function Separator({\n  orientation = \"horizontal\",\n  className,\n  ...rest\n}: SeparatorProps) {\n  if (orientation === \"vertical\") {\n    return (\n      <div\n        {...rest}\n        role=\"separator\"\n        aria-orientation=\"vertical\"\n        className={cx(\"ns-separator\", className)}\n        data-orientation=\"vertical\"\n      />\n    );\n  }\n\n  return (\n    <hr\n      className={cx(\"ns-separator\", className)}\n      data-orientation=\"horizontal\"\n      {...rest}\n    />\n  );\n}\n"
+    },
+    {
+      "path": "separator.css",
+      "content": "@layer components {\n  .ns-separator {\n    margin: 0;\n    border: 0;\n    padding: 0;\n  }\n\n  .ns-separator[data-orientation=\"horizontal\"] {\n    display: block;\n    width: 100%;\n    height: 2px;\n    background: linear-gradient(\n      180deg,\n      var(--shade, oklch(0 0 0 / 12%)),\n      var(--highlight, oklch(1 0 0 / 28%))\n    );\n  }\n\n  .ns-separator[data-orientation=\"vertical\"] {\n    display: inline-block;\n    width: 2px;\n    align-self: stretch;\n    min-height: 1.2em;\n    background: linear-gradient(\n      90deg,\n      var(--shade, oklch(0 0 0 / 12%)),\n      var(--highlight, oklch(1 0 0 / 28%))\n    );\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "text",
+  "title": "Text",
+  "files": [
+    {
+      "path": "text.tsx",
+      "content": "import \"./text.css\";\n\nimport type { ComponentProps, ElementType } from \"react\";\nimport { cx } from \"./cx\";\n\ntype TextTone = \"heading\" | \"body\" | \"sub\";\n\ntype TextTag = \"p\" | \"span\" | \"div\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"strong\";\n\nexport type TextProps = Omit<ComponentProps<\"p\">, \"as\"> & {\n  as?: TextTag;\n  tone?: TextTone;\n};\n\nexport function Text({\n  as: Tag = \"p\",\n  tone = \"body\",\n  className,\n  ...rest\n}: TextProps) {\n  const Element = Tag as ElementType;\n  return (\n    <Element className={cx(\"ns-text\", className)} data-tone={tone} {...rest} />\n  );\n}\n"
+    },
+    {
+      "path": "text.css",
+      "content": "@layer components {\n  .ns-text {\n    margin: 0;\n    font: inherit;\n    line-height: var(--leading, 1.5625);\n  }\n\n  .ns-text[data-tone=\"heading\"] {\n    color: var(--text-heading, #111);\n    font-size: var(--type-lg, 1.25rem);\n    font-weight: var(--weight-medium, 500);\n    line-height: var(--leading-tight, 1.25);\n  }\n\n  .ns-text[data-tone=\"body\"] {\n    color: var(--text-body, #444);\n    font-size: var(--type-md, 1rem);\n  }\n\n  .ns-text[data-tone=\"sub\"] {\n    color: var(--text-sub, #767676);\n    font-size: var(--type-sm, 0.8rem);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

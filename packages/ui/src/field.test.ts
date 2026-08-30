@@ -1,0 +1,141 @@
+import { createElement as h } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it, vi } from "vitest";
+import { Alert } from "./alert";
+import { Checkbox } from "./checkbox";
+import { Dialog, DialogTitle } from "./dialog";
+import { Radio, RadioGroup } from "./radio";
+import { Select } from "./select";
+import { Switch } from "./switch";
+import { Badge } from "./badge";
+import { TextField } from "./field";
+
+describe("Field", () => {
+  it("keeps description when error is set", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, {
+        label: "Name",
+        description: "Your full name.",
+        error: "Enter a name.",
+      }),
+    );
+    expect(markup).toContain("Your full name.");
+    expect(markup).toContain("Enter a name.");
+    expect(markup).toContain("aria-describedby");
+  });
+
+  it("marks required on the label and the input", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Email", required: true }),
+    );
+    expect(markup).toContain(" Required");
+    expect(markup).toContain("aria-required");
+    expect(markup).toContain("required");
+  });
+
+  it("keeps Optional when both optional and required are set", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Name", optional: true, required: true }),
+    );
+    expect(markup).toContain(" Optional");
+    expect(markup).not.toContain(" Required");
+  });
+
+  it("falls back from unsupported input types", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "When", type: "date" as never }),
+    );
+    expect(markup).toContain('type="text"');
+    expect(markup).not.toContain('type="date"');
+    expect(warn).toHaveBeenCalled();
+    warn.mockRestore();
+  });
+});
+
+describe("Badge", () => {
+  it("accepts intent tones", () => {
+    const markup = renderToStaticMarkup(
+      h(Badge, { tone: "success" }, "Live"),
+    );
+    expect(markup).toContain('data-tone="success"');
+    expect(markup).toContain("Live");
+  });
+});
+
+describe("Checkbox", () => {
+  it("renders a native checkbox in Field chrome", () => {
+    const markup = renderToStaticMarkup(
+      h(Checkbox, { label: "Remember me", name: "remember" }),
+    );
+    expect(markup).toContain('type="checkbox"');
+    expect(markup).toContain("ns-choice");
+    expect(markup).toContain('data-kind="choice"');
+    expect(markup).toContain("Remember me");
+  });
+});
+
+describe("Radio", () => {
+  it("clones name onto each radio", () => {
+    const markup = renderToStaticMarkup(
+      h(RadioGroup, {
+        label: "Notify",
+        name: "notify",
+        children: [
+          h(Radio, { key: "mail", label: "Mail" }),
+          h(Radio, { key: "none", label: "None" }),
+        ],
+      }),
+    );
+    expect(markup).toContain("<fieldset");
+    expect(markup).toContain("Notify");
+    expect(markup.split('name="notify"').length - 1).toBe(2);
+    expect(markup).toContain('type="radio"');
+  });
+});
+
+describe("Select", () => {
+  it("renders a native select with a raised label", () => {
+    const markup = renderToStaticMarkup(
+      h(Select, { label: "Role", name: "role" }, h("option", {}, "Editor")),
+    );
+    expect(markup).toContain("<select");
+    expect(markup).toContain('data-kind="select"');
+    expect(markup).toContain("Editor");
+  });
+});
+
+describe("Switch", () => {
+  it("renders a checkbox with switch role", () => {
+    const markup = renderToStaticMarkup(
+      h(Switch, { label: "Alerts", name: "alerts" }),
+    );
+    expect(markup).toContain('type="checkbox"');
+    expect(markup).toContain('role="switch"');
+    expect(markup).toContain('data-kind="switch"');
+  });
+});
+
+describe("Alert", () => {
+  it("defaults to status and accepts a tone", () => {
+    const markup = renderToStaticMarkup(
+      h(Alert, { tone: "success" }, "Saved."),
+    );
+    expect(markup).toContain('role="status"');
+    expect(markup).toContain('data-tone="success"');
+    expect(markup).toContain("Saved.");
+  });
+});
+
+describe("Dialog", () => {
+  it("renders a native dialog closed", () => {
+    const markup = renderToStaticMarkup(
+      h(Dialog, {}, h(DialogTitle, {}, "Delete?")),
+    );
+    expect(markup).toContain("<dialog");
+    expect(markup).toContain("ns-dialog");
+    expect(markup).toContain("<h2");
+    expect(markup).toContain("Delete?");
+    expect(markup).not.toContain("open");
+  });
+});

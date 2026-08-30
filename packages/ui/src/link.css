@@ -1,0 +1,16 @@
+@layer components {
+  .ns-link {
+    color: var(--link, var(--text-heading, #111));
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+
+  @media (hover: hover) {
+    .ns-link:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@layer components {
+  .ns-label {
+    color: var(--text-heading, #111);
+    font: inherit;
+    line-height: var(--leading, 1.5625);
+    cursor: default;
+    user-select: none;
+  }
+
+  .ns-label[for] {
+    cursor: pointer;
+  }
+}

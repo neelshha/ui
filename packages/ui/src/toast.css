@@ -1,0 +1,44 @@
+@layer components {
+  .ns-toast-region {
+    position: fixed;
+    inset-block-end: var(--space-8, 1.19rem);
+    inset-inline-end: var(--space-8, 1.19rem);
+    z-index: var(--z-toast, 30);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3, 0.39rem);
+    width: min(22rem, calc(100% - var(--space-10, 1.86rem)));
+    pointer-events: none;
+  }
+
+  .ns-toast {
+    padding: var(--space-4, 0.49rem) var(--space-5, 0.61rem);
+    border: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+    border-radius: var(--radius, 0.4rem);
+    background: var(--bg-overlay, var(--bg, #fff));
+    color: var(--text-body, #444);
+    box-shadow: none;
+    pointer-events: auto;
+  }
+
+  .ns-toast[data-tone="success"] {
+    border-color: color-mix(in srgb, var(--success, #2f6b3a) 42%, transparent);
+    color: var(--success, #2f6b3a);
+  }
+
+  .ns-toast[data-tone="warning"] {
+    border-color: color-mix(in srgb, var(--warning, #8a5a12) 42%, transparent);
+    color: var(--warning, #8a5a12);
+  }
+
+  .ns-toast[data-tone="danger"] {
+    border-color: color-mix(in srgb, var(--error, #8f3232) 42%, transparent);
+    color: var(--error, #8f3232);
+  }
+
+  .ns-toast[data-tone="info"] {
+    border-color: color-mix(in srgb, var(--info, #2c4a6e) 42%, transparent);
+    color: var(--info, #2c4a6e);
+  }
+}

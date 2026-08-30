@@ -1,0 +1,20 @@
+{
+  "name": "alert",
+  "title": "Alert",
+  "files": [
+    {
+      "path": "alert.tsx",
+      "content": "import \"./alert.css\";\n\nimport type { ComponentProps } from \"react\";\nimport { cx } from \"./cx\";\n\nexport type AlertTone = \"default\" | \"success\" | \"warning\" | \"danger\" | \"info\";\n\nexport type AlertProps = ComponentProps<\"div\"> & {\n  tone?: AlertTone;\n};\n\nexport function Alert({\n  tone = \"default\",\n  className,\n  role = \"status\",\n  ...rest\n}: AlertProps) {\n  return (\n    <div\n      className={cx(\"ns-alert\", className)}\n      data-tone={tone}\n      role={role}\n      {...rest}\n    />\n  );\n}\n"
+    },
+    {
+      "path": "alert.css",
+      "content": "@layer components {\n  .ns-alert {\n    display: flex;\n    flex-direction: column;\n    gap: var(--space-2, 0.31rem);\n    box-sizing: border-box;\n    padding: var(--space-5, 0.61rem) var(--space-6, 0.76rem);\n    border: 1px solid\n      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));\n    border-radius: var(--radius, 0.4rem);\n    background: var(--bg, #fff);\n    color: var(--text-body, #444);\n    box-shadow: none;\n  }\n\n  .ns-alert[data-tone=\"success\"] {\n    border-color: color-mix(in srgb, var(--success, #2f6b3a) 42%, transparent);\n    color: var(--success, #2f6b3a);\n  }\n\n  .ns-alert[data-tone=\"warning\"] {\n    border-color: color-mix(in srgb, var(--warning, #8a5a12) 42%, transparent);\n    color: var(--warning, #8a5a12);\n  }\n\n  .ns-alert[data-tone=\"danger\"] {\n    border-color: color-mix(in srgb, var(--error, #8f3232) 42%, transparent);\n    color: var(--error, #8f3232);\n  }\n\n  .ns-alert[data-tone=\"info\"] {\n    border-color: color-mix(in srgb, var(--info, #2c4a6e) 42%, transparent);\n    color: var(--info, #2c4a6e);\n  }\n}\n"
+    }
+  ],
+  "dependencies": {
+    "npm": [],
+    "registry": [
+      "cx"
+    ]
+  }
+}

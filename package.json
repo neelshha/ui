@@ -15,7 +15,8 @@
     "build": "next build",
     "start": "next start",
     "build:cli": "npm run build -w @neelshha/cli",
-    "ns": "node packages/cli/dist/index.js"
+    "ns": "node packages/cli/dist/index.js",
+    "test": "vitest run"
   },
   "dependencies": {
     "@neelshha/ui": "*",
@@ -27,6 +28,7 @@
     "@types/node": "^22.15.21",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

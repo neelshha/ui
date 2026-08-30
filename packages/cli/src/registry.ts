@@ -5,6 +5,10 @@ import type { RegistryIndex, RegistryItem } from "./types.js";
 
 export const DEFAULT_REGISTRY = "https://ui.neelshha.com/r";
 
+export type RegistryLoadOptions = {
+  latest?: boolean;
+};
+
 function bundledDir() {
   return join(dirname(fileURLToPath(import.meta.url)), "../bundled");
 }
@@ -29,18 +33,41 @@ export function registryBase() {
   return process.env.NS_REGISTRY ?? DEFAULT_REGISTRY;
 }
 
-export async function loadIndex(): Promise<RegistryIndex> {
-  const remote = await fetchJson<RegistryIndex>(`${registryBase()}/index.json`);
-  if (remote?.items) return remote;
-  const bundled = readBundled<RegistryIndex>("index");
-  if (!bundled) throw new Error("Could not load the registry index.");
-  return bundled;
+function useRemoteFirst(options?: RegistryLoadOptions) {
+  return Boolean(process.env.NS_REGISTRY) || Boolean(options?.latest);
 }
 
-export async function loadItem(name: string): Promise<RegistryItem> {
+export async function loadIndex(
+  options?: RegistryLoadOptions,
+): Promise<RegistryIndex> {
+  if (useRemoteFirst(options)) {
+    const remote = await fetchJson<RegistryIndex>(`${registryBase()}/index.json`);
+    if (remote?.items) return remote;
+  }
+
+  const bundled = readBundled<RegistryIndex>("index");
+  if (bundled?.items) return bundled;
+
+  const remote = await fetchJson<RegistryIndex>(`${registryBase()}/index.json`);
+  if (remote?.items) return remote;
+  throw new Error("Could not load the registry index.");
+}
+
+export async function loadItem(
+  name: string,
+  options?: RegistryLoadOptions,
+): Promise<RegistryItem> {
+  if (useRemoteFirst(options)) {
+    const remote = await fetchJson<RegistryItem>(
+      `${registryBase()}/${name}.json`,
+    );
+    if (remote?.name && remote.files) return remote;
+  }
+
+  const bundled = readBundled<RegistryItem>(name);
+  if (bundled?.name && bundled.files) return bundled;
+
   const remote = await fetchJson<RegistryItem>(`${registryBase()}/${name}.json`);
   if (remote?.name && remote.files) return remote;
-  const bundled = readBundled<RegistryItem>(name);
-  if (!bundled) throw new Error(`Unknown component "${name}". Run list.`);
-  return bundled;
+  throw new Error(`Unknown component "${name}". Run list.`);
 }

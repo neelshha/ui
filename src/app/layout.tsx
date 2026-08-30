@@ -1,33 +1,48 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Script from "next/script";
+import { ThemeProvider } from "@neelshha/ui";
+import { THEME_SCRIPT } from "@neelshha/ui/theme";
+import { DocsNav } from "@/components/DocsNav";
+import { DocsPager } from "@/components/DocsPager";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SITE } from "@/lib/docs";
 import "./globals.css";
 
-const site = "https://ui.neelshha.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(site),
+  metadataBase: new URL(SITE),
   title: {
-    default: "NS UI",
-    template: "%s — NS UI",
+    default: "neelshha/ui",
+    template: "%s — neelshha/ui",
   },
   description:
     "Interface components by Neel Shah. Copy them into a React or Next app.",
-  alternates: { canonical: site },
+  alternates: { canonical: SITE },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en-US">
+    <html lang="en-US" suppressHydrationWarning>
       <body>
-        <div className="page">
-          <nav className="nav">
-            <a href="/">NS UI</a>
-            <a href="/field">Field</a>
-          </nav>
-          {children}
-        </div>
+        <Script id="ns-theme" strategy="beforeInteractive">
+          {THEME_SCRIPT}
+        </Script>
+        <ThemeProvider>
+          <div className="site">
+            <SiteHeader />
+            <div className="shell frame">
+              <DocsNav />
+              <div className="main">
+                {children}
+                <DocsPager />
+              </div>
+            </div>
+            <SiteFooter />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

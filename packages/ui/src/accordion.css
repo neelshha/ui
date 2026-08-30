@@ -1,0 +1,33 @@
+@layer components {
+  .ns-accordion {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .ns-accordion__item {
+    border-bottom: 1px solid
+      var(--line, color-mix(in srgb, var(--text-heading, #111) 18%, transparent));
+  }
+
+  .ns-accordion__trigger {
+    display: block;
+    padding: var(--space-4, 0.49rem) 0;
+    list-style: none;
+    cursor: pointer;
+    color: var(--text-heading, #111);
+    font-weight: var(--weight-medium, 500);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-accordion__trigger::-webkit-details-marker,
+  .ns-accordion__trigger::marker {
+    display: none;
+    content: "";
+  }
+
+  .ns-accordion__panel {
+    padding-block-end: var(--space-5, 0.61rem);
+    color: var(--text-body, #444);
+  }
+}
