@@ -61,13 +61,23 @@ describe("Field", () => {
     expect(markup).not.toContain(" Optional");
   });
 
-  it("keeps a float label above the well", () => {
+  it("keeps a float label inside the well, driven by a sentinel placeholder", () => {
     const markup = renderToStaticMarkup(
-      h(TextField, { label: "Name", chrome: "stack" }),
+      h(TextField, { label: "Name", chrome: "float" }),
     );
-    expect(markup).toContain('data-label="stack"');
+    expect(markup).toContain('data-label="float"');
     expect(markup).toContain("<label");
-    expect(markup).not.toContain('placeholder=" "');
+    // The sentinel drives :placeholder-shown, so the fill state works
+    // without a user placeholder of its own.
+    expect(markup).toContain('placeholder=" "');
+  });
+
+  it("suppresses a user placeholder in the float chrome", () => {
+    const markup = renderToStaticMarkup(
+      h(TextField, { label: "Name", chrome: "float", placeholder: "John Doe" }),
+    );
+    expect(markup).toContain('placeholder=" "');
+    expect(markup).not.toContain("John Doe");
   });
 
   it("omits meta when there is no help or error", () => {

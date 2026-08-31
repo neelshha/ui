@@ -17,10 +17,10 @@ const rows = [
   },
   {
     name: "chrome",
-    type: '"stack" | "placeholder"',
+    type: '"stack" | "float" | "placeholder"',
     def: '"stack"',
     notes:
-      "TextField and TextArea. Stack keeps the label above the field. Placeholder drops the visible label when you type.",
+      "TextField and TextArea. Stack keeps the label above the field. Float starts in the well and lifts above on focus or fill. Placeholder drops the visible label when you type.",
   },
   {
     name: "optionalLabel / requiredLabel",
@@ -116,6 +116,14 @@ export default function FieldPage() {
         code={`<TextField label="Name" name="name" chrome="placeholder" />`}
       >
         <FieldDemo chrome="placeholder" />
+      </Example>
+
+      <Example
+        title="Float"
+        description="The label rests in the well and lifts above it on focus or once you type. A placeholder of your own is suppressed — the label is the in-field hint."
+        code={`<TextField label="Name" name="name" chrome="float" />`}
+      >
+        <FieldDemo chrome="float" />
       </Example>
 
       <Example

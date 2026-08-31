@@ -22,11 +22,14 @@ export default function ThemingPage() {
       <div className="docBlock">
         <h2>How the class works</h2>
         <p>
-          Light tokens live on <code>:root</code>. System dark applies when the
-          OS is dark and <code>&lt;html&gt;</code> is not <code>.light</code>.
-          Force a mode with <code>.dark</code> or <code>.light</code> on{" "}
-          <code>&lt;html&gt;</code>. Dark and light override type, surface,
-          key ink, shine, the candy faces, and the two light knobs.
+          Every palette token carries both faces with{" "}
+          <code>light-dark()</code> — the light and dark values sit side by
+          side in one <code>:root</code> block, and the element&apos;s{" "}
+          <code>color-scheme</code> picks the side. <code>:root</code> declares{" "}
+          <code>light dark</code>, so the page follows the OS until you force a
+          mode with <code>.dark</code> or <code>.light</code> on{" "}
+          <code>&lt;html&gt;</code>. There is no second copy of the dark palette
+          to keep in sync.
         </p>
       </div>
 
@@ -188,7 +191,11 @@ export default function ThemingPage() {
           <code>--float</code>. Outline keys — buttons, accordion, card,
           alert, dialog, menu, popover, toast, tooltip, badge, avatar — use
           the silver face, <code>--face-line</code>, and <code>--float</code>.
-          Fields use <code>--well</code>. Progress fill is <code>--key</code>.
+          Docs example stages wear the outline key&apos;s chrome —{" "}
+          <code>--face</code>, <code>--face-line</code>, and{" "}
+          <code>--float</code> — the same silver key the code block below is.
+          Fields use{" "}
+          <code>--well</code>. Progress fill is <code>--key</code>.
           Inline <code>code</code> is a wash; a <code>pre</code> block is a
           hairline plate. Press uses the press face and{" "}
           <code>--float-press</code>, then travels 2px. Ghost hover is a wash,

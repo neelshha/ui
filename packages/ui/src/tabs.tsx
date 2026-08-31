@@ -61,6 +61,10 @@ function firstTabValue(children: ReactNode): string | undefined {
   return found;
 }
 
+function isDisabled(tab: HTMLElement) {
+  return tab.getAttribute("aria-disabled") === "true";
+}
+
 export type TabsProps = ComponentProps<"div"> & {
   value?: string | undefined;
   defaultValue?: string | undefined;
@@ -119,22 +123,32 @@ export function TabList({
   const ref = useRef<HTMLDivElement>(null);
   const { setValue } = useTabs();
 
+  // Roving focus over every tab — disabled tabs stay focusable (APG) but
+  // never activate.
   function move(event: KeyboardEvent<HTMLDivElement>, delta: number) {
     const tabs = Array.from(
-      ref.current?.querySelectorAll<HTMLElement>(
-        '[role="tab"]:not([disabled])',
-      ) ?? [],
+      ref.current?.querySelectorAll<HTMLElement>('[role="tab"]') ?? [],
     );
     if (tabs.length === 0) return;
     const current = tabs.indexOf(event.target as HTMLElement);
     if (current < 0) return;
     const next = tabs[(current + delta + tabs.length) % tabs.length];
     if (!next) return;
-    const nextValue = next.dataset.value;
-    if (!nextValue) return;
     event.preventDefault();
-    setValue(nextValue);
     next.focus();
+    if (!isDisabled(next)) {
+      const nextValue = next.dataset.value;
+      if (nextValue) setValue(nextValue);
+    }
+  }
+
+  function jumpTo(tab: HTMLElement | null | undefined) {
+    if (!tab) return;
+    tab.focus();
+    if (!isDisabled(tab)) {
+      const nextValue = tab.dataset.value;
+      if (nextValue) setValue(nextValue);
+    }
   }
 
   return (
@@ -149,26 +163,14 @@ export function TabList({
         } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
           move(event, -1);
         } else if (event.key === "Home") {
-          const first = ref.current?.querySelector<HTMLElement>(
-            '[role="tab"]:not([disabled])',
+          event.preventDefault();
+          jumpTo(
+            ref.current?.querySelector<HTMLElement>('[role="tab"]'),
           );
-          const nextValue = first?.dataset.value;
-          if (first && nextValue) {
-            event.preventDefault();
-            setValue(nextValue);
-            first.focus();
-          }
         } else if (event.key === "End") {
-          const tabs = ref.current?.querySelectorAll<HTMLElement>(
-            '[role="tab"]:not([disabled])',
-          );
-          const last = tabs?.[tabs.length - 1];
-          const nextValue = last?.dataset.value;
-          if (last && nextValue) {
-            event.preventDefault();
-            setValue(nextValue);
-            last.focus();
-          }
+          const tabs = ref.current?.querySelectorAll<HTMLElement>('[role="tab"]');
+          event.preventDefault();
+          jumpTo(tabs?.[tabs.length - 1]);
         }
         onKeyDown?.(event);
       }}
@@ -190,10 +192,15 @@ export function Tab({ value, disabled, className, children }: TabProps) {
       aria-controls={`${uid}-panel-${token(value)}`}
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
-      {...(disabled ? { disabled: true } : {})}
+      /* APG: a disabled tab stays focusable and announces itself with
+         aria-disabled; activation is refused, not the attribute. */
+      {...(disabled ? { "aria-disabled": true as const } : {})}
       data-value={value}
       className={cx("ns-tabs__tab", className)}
-      onClick={() => setValue(value)}
+      onClick={() => {
+        if (disabled) return;
+        setValue(value);
+      }}
     >
       {children}
     </Button>

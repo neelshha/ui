@@ -100,9 +100,14 @@ export function Button({
 
   // Guards ride along whenever interaction is blocked, not just when a
   // handler exists — a disabled link must swallow clicks too (CSS blocks
-  // the mouse; this blocks keyboard and programmatic activation).
+  // the mouse; this blocks keyboard and programmatic activation). They only
+  // attach in the browser: function props inside server HTML are illegal
+  // RSC, and server-rendered blocked controls need no handlers anyway —
+  // native disabled blocks the button and CSS pointer-events blocks the
+  // pending one.
   const guards =
-    pending || disabled || onClick || onKeyDown
+    typeof window !== "undefined" &&
+    (pending || disabled || onClick || onKeyDown)
       ? {
           onClick: (
             event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,

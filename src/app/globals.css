@@ -300,28 +300,34 @@ pre code {
   gap: var(--space-5);
 }
 
+/* Inside an example, the showcase and the code block join into one silver
+   unit: flush stack, a single hairline seam, and radius only at the two
+   ends. A lone demo (no code below) keeps its full border and radius. */
 .exampleStage {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-list);
-  background: var(--bg);
+  display: flex;
+  flex-direction: column;
 }
 
-.exampleStage .demo,
-.exampleStage .ns-codeblock {
-  border: 0;
-  border-radius: 0;
-}
-
-.exampleStage .ns-codeblock {
-  box-shadow: none;
-  border-block-start: 1px solid var(--line);
-}
-
-.exampleStage .ns-codeblock__bar {
+.exampleStage .demo {
   border-block-end: 0;
-  background: var(--bg);
-  justify-content: flex-end;
+  border-start-start-radius: var(--radius-list);
+  border-start-end-radius: var(--radius-list);
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.exampleStage .demo:only-child {
+  border-block-end: 1px solid var(--face-line);
+  border-end-start-radius: var(--radius-list);
+  border-end-end-radius: var(--radius-list);
+}
+
+.exampleStage .ns-codeblock {
+  border-block-start: 1px solid var(--line);
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-start-radius: var(--radius-list);
+  border-end-end-radius: var(--radius-list);
 }
 
 .catalog {
@@ -630,13 +636,17 @@ pre code {
   gap: var(--space-8);
 }
 
+/* The showcase wears the outline key's chrome — the silver face,
+   --face-line, and the --float drop — so the stage reads as the same
+   silver key the code block below it is. Pieces on it delineate through
+   their own face-line borders and shadows. */
 .demo {
   overflow: visible;
-  border: 1px solid var(--line);
+  border: 1px solid var(--face-line);
   border-radius: var(--radius-list);
-  background: var(--bg);
+  background: var(--face);
   background-clip: padding-box;
-  box-shadow: none;
+  box-shadow: var(--float);
   padding: var(--space-11) var(--space-9);
   display: flex;
   align-items: center;

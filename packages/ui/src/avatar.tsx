@@ -30,6 +30,20 @@ export type AvatarImageProps = ComponentProps<"img">;
 
 export type AvatarFallbackProps = ComponentProps<"span">;
 
+export type ImageSettle = "loaded" | "failed" | "pending";
+
+/**
+ * Decide from the element itself whether a load already settled. An image
+ * that finished before hydration never fires onLoad/onError, so the state
+ * must be read off `complete`/`naturalWidth` on mount.
+ */
+export function settleImage(
+  img: Pick<HTMLImageElement, "complete" | "naturalWidth">,
+): ImageSettle {
+  if (!img.complete) return "pending";
+  return img.naturalWidth > 0 ? "loaded" : "failed";
+}
+
 export function Avatar({ size = "md", className, ...rest }: AvatarProps) {
   const [loaded, setLoaded] = useState(false);
 
@@ -60,9 +74,10 @@ export function AvatarImage({
   // from the element itself on mount.
   useEffect(() => {
     const img = ref.current;
-    if (!img || !img.complete) return;
-    if (img.naturalWidth > 0) setLoaded(true);
-    else setFailed(true);
+    if (!img) return;
+    const settled = settleImage(img);
+    if (settled === "loaded") setLoaded(true);
+    else if (settled === "failed") setFailed(true);
   }, []);
 
   if (failed) return null;

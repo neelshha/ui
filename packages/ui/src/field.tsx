@@ -40,7 +40,7 @@ export type FieldChrome = {
   description?: ReactNode | undefined;
   error?: ReactNode | undefined;
   className?: string | undefined;
-  chrome?: "stack" | "placeholder" | undefined;
+  chrome?: "stack" | "float" | "placeholder" | undefined;
 };
 
 export type FieldKind = "well" | "choice" | "select";
@@ -164,6 +164,7 @@ function textPlaceholder(
   placeholder: string | undefined,
 ) {
   if (chrome === "placeholder" && typeof label === "string") return label;
+  if (chrome === "float") return " ";
   return placeholder;
 }
 
@@ -198,6 +199,7 @@ export function Field({
     childProps["aria-invalid"] === "true";
   const requireControl = Boolean(required) && !optional;
   const placeholder = kind === "well" && chrome === "placeholder";
+  const float = kind !== "choice" && chrome === "float";
   const stack = kind !== "choice" && chrome === "stack";
   const labelMode = kind === "choice" ? undefined : chrome;
   const mark = (
@@ -248,7 +250,7 @@ export function Field({
           {mark}
         </label>
       ) : null}
-      {stack ? visibleLabel : null}
+      {stack || float ? visibleLabel : null}
       <div className="ns-field__control">
         {control}
         {kind === "choice" ? visibleLabel : null}

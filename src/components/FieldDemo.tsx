@@ -1,7 +1,7 @@
 import { TextArea, TextField } from "@neelshha/ui";
 
 type FieldDemoProps = {
-  chrome?: "stack" | "placeholder";
+  chrome?: "stack" | "float" | "placeholder";
   error?: string;
   optional?: boolean;
   required?: boolean;

@@ -412,6 +412,56 @@
     max-width: none;
   }
 
+  /*
+   * The float chrome: the label rests inside the well, aligned with the
+   * input text, and lifts to the slot above the well on focus or once the
+   * input is filled. A one-space sentinel placeholder drives the fill
+   * detection (:placeholder-shown), so the user's own placeholder is
+   * suppressed — the label is the in-field hint.
+   */
+  .ns-field[data-label="float"] {
+    position: relative;
+    /* Exactly one lifted label line: the slot it lands in. */
+    --ns-float-pad: calc(var(--type-sm, 0.8rem) * var(--leading-tight, 1.25));
+    padding-block-start: var(--ns-float-pad);
+  }
+
+  .ns-field[data-label="float"] .ns-field__label {
+    position: absolute;
+    /* The well control is positioned too; ride above its face. */
+    z-index: 1;
+    inset-block-start: 0;
+    inset-inline-start: var(--ns-field-inset-x, 0.76rem);
+    max-width: calc(100% - var(--ns-field-inset-x, 0.76rem) * 2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--ns-field-muted, #5c5c5c);
+    font-size: var(--type-md, 1rem);
+    line-height: var(--leading, 1.5625);
+    pointer-events: none;
+    transform: translateY(
+      calc(var(--ns-float-pad) + var(--ns-field-inset-y, 0.61rem))
+    );
+    transition:
+      transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+      font-size var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+      color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+  }
+
+  .ns-field[data-label="float"]:focus-within .ns-field__label,
+  .ns-field[data-label="float"]:has(.ns-field__input:not(:placeholder-shown))
+    .ns-field__label {
+    transform: none;
+    color: var(--ns-field-fg, #111);
+    font-size: var(--type-sm, 0.8rem);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-field[data-label="float"][data-invalid="true"] .ns-field__label {
+    color: var(--ns-field-error, #8f3232);
+  }
+
   .ns-field__optional,
   .ns-field__required {
     color: var(--ns-field-muted);
