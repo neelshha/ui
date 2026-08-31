@@ -478,15 +478,98 @@ pre code {
   margin-inline-start: auto;
 }
 
+/* The footer is one face-chromed bar like the navbar: the site face,
+   a face-line top seam, and quiet meta rows inside. The brand mark is a
+   small key chip; links are the quiet body ink and underline on hover. */
 .footer {
   margin-top: auto;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--face-line);
+  background: var(--face);
+  background-clip: padding-box;
+  box-shadow: var(--flat);
   color: var(--text-sub);
   font-size: var(--type-sm);
 }
 
 .footerInner {
-  padding-block: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-block: var(--space-8);
+}
+
+.footerTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5) var(--space-8);
+}
+
+.footerBrand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4) var(--space-5);
+  min-width: 0;
+}
+
+.footerMark {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--face-line);
+  border-radius: var(--radius);
+  background: var(--bg-well);
+  color: var(--text-heading);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+}
+
+.footerTagline {
+  color: var(--text-sub);
+}
+
+.footerNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5) var(--space-6);
+}
+
+.footerNav a {
+  color: var(--text-sub);
+  text-decoration: none;
+}
+
+.footerNav a:hover {
+  color: var(--text-heading);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.3em;
+}
+
+.footerNav a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.footerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.footerMeta a {
+  color: var(--text-sub);
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.footerMeta a:hover {
+  color: var(--text-heading);
+  text-decoration-color: currentColor;
 }
 
 .footerInner p {
