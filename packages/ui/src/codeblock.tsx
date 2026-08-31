@@ -3,6 +3,7 @@ import "./codeblock.css";
 import type { ComponentProps } from "react";
 import { cx } from "./cx";
 import { CodeCopy } from "./code-copy";
+import { highlight } from "./highlight";
 
 export type CodeBlockProps = Omit<ComponentProps<"figure">, "title"> & {
   /** Filename or label shown in the header bar. */
@@ -34,7 +35,19 @@ export function CodeBlock({
         <CodeCopy code={code} />
       </figcaption>
       <pre className="ns-codeblock__pre" tabIndex={0}>
-        <code>{code}</code>
+        {/* Server-rendered syntax ink: typed tokens as spans, plain runs as
+            bare text. The copy key still ships the raw `code` string. */}
+        <code>
+          {highlight(code, language).map((token, index) =>
+            token.type === "plain" ? (
+              token.text
+            ) : (
+              <span key={index} data-token={token.type}>
+                {token.text}
+              </span>
+            ),
+          )}
+        </code>
       </pre>
     </figure>
   );

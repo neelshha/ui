@@ -34,7 +34,9 @@ describe("CodeBlock", () => {
     expect(markup).toContain(">ts<");
     expect(markup).toContain("<pre");
     expect(markup).toContain("<code");
-    expect(markup).toContain("const hi");
+    // Syntax ink: keywords and strings render as typed token spans.
+    expect(markup).toContain('data-token="keyword"');
+    expect(markup).toContain('data-token="string"');
     expect(markup).toContain("Copy code");
   });
 

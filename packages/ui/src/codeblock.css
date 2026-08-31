@@ -84,6 +84,44 @@
     font: inherit;
   }
 
+  /* Syntax ink: VS Code's proven light/dark pairs, so every language reads
+     the same way in both themes. Plain text keeps the body ink. */
+  .ns-codeblock__pre code [data-token="keyword"] {
+    color: light-dark(#af00db, #c586c0);
+  }
+
+  .ns-codeblock__pre code [data-token="string"] {
+    color: light-dark(#a31515, #ce9178);
+  }
+
+  .ns-codeblock__pre code [data-token="comment"] {
+    color: light-dark(#6a737d, #6a9955);
+    font-style: italic;
+  }
+
+  .ns-codeblock__pre code [data-token="number"] {
+    color: light-dark(#098658, #b5cea8);
+  }
+
+  .ns-codeblock__pre code [data-token="function"],
+  .ns-codeblock__pre code [data-token="command"] {
+    color: light-dark(#795e26, #dcdcaa);
+  }
+
+  .ns-codeblock__pre code [data-token="tag"] {
+    color: light-dark(#800000, #569cd6);
+  }
+
+  .ns-codeblock__pre code [data-token="attr"],
+  .ns-codeblock__pre code [data-token="key"],
+  .ns-codeblock__pre code [data-token="flag"] {
+    color: light-dark(#e50000, #9cdcfe);
+  }
+
+  .ns-codeblock__pre code [data-token="type"] {
+    color: light-dark(#267f99, #4ec9b0);
+  }
+
   .ns-codeblock__pre:focus-visible {
     outline: 2px solid var(--focus, rgb(17 17 17 / 70%));
     outline-offset: -2px;
