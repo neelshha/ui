@@ -20,6 +20,7 @@ export const components = [
   { slug: "breadcrumb", title: "Breadcrumb", description: "A native nav trail." },
   { slug: "button", title: "Button", description: "A native button. Sky key. Press drops it 2px." },
   { slug: "card", title: "Card", description: "A silver key. Children go in." },
+  { slug: "code-block", title: "Code block", description: "A silver key for code. Header bar, copy in one tap." },
   { slug: "checkbox", title: "Checkbox", description: "A native checkbox in Field chrome." },
   { slug: "dialog", title: "Dialog", description: "A silver key modal. showModal, not a portal." },
   { slug: "field", title: "Field", description: "A text field with a label that stays." },
@@ -48,13 +49,17 @@ export function componentHref(slug: string) {
   return `/docs/components/${slug}`;
 }
 
+/** Shared heading-slug algorithm for anchor ids (Example titles, TOC). */
+export function slugify(text: string) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 export const componentNav = components.map((item) => ({
   href: componentHref(item.slug),
   label: item.title,
 }));
 
-export const pagerNav = [
-  ...startNav,
-  { href: "/components", label: "Components" },
-  ...componentNav,
-];
+// The pager only renders inside the docs layout, so the list chains docs
+// pages straight into the component pages — /components itself sits outside
+// the layout and would dead-end the trail.
+export const pagerNav = [...startNav, ...componentNav];

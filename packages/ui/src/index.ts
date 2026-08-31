@@ -45,6 +45,8 @@ export { ButtonGroup } from "./button-group";
 export type { ButtonGroupProps } from "./button-group";
 export { Card } from "./card";
 export type { CardProps } from "./card";
+export { CodeBlock } from "./codeblock";
+export type { CodeBlockProps } from "./codeblock";
 export { Checkbox } from "./checkbox";
 export type { CheckboxProps } from "./checkbox";
 export { cx } from "./cx";

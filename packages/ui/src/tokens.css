@@ -1,5 +1,3 @@
-@import "./fonts.css";
-
 @layer tokens, components;
 
 @layer tokens {
@@ -18,7 +16,8 @@
     --bg: #fff;
     --bg-hover: #f3f2f1;
     --bg-well: #e8e6e4;
-    --bg-overlay: var(--bg);
+    /* The scrim under drawers and dialogs — neutral ink, not the page. */
+    --bg-overlay: oklch(0 0 0 / 45%);
 
     --ink: #111;
     --on-ink: #fff;
@@ -72,6 +71,10 @@
 
     --control: calc(
       var(--type-md) * var(--leading-tight) + var(--space-4) * 2
+    );
+    /* Compact bar key — navbar toggles, the code-block copy key. */
+    --control-sm: calc(
+      var(--type-sm) * var(--leading-tight) + var(--space-2) * 2
     );
 
     --leading-tight: var(--ratio);
@@ -223,6 +226,8 @@
         0 2px 0 oklch(0 0 0 / 16%);
       --float: 0 8px 20px oklch(0 0 0 / 45%);
       --float-press: 0 2px 8px oklch(0 0 0 / 35%);
+      /* A touch deeper over the dark page. */
+      --bg-overlay: oklch(0 0 0 / 55%);
       --on-key: #f5f5f5;
       --key: #b4d2ff;
       --key-line: var(--key);
@@ -300,6 +305,8 @@
       0 2px 0 oklch(0 0 0 / 16%);
     --float: 0 8px 20px oklch(0 0 0 / 45%);
     --float-press: 0 2px 8px oklch(0 0 0 / 35%);
+    /* A touch deeper over the dark page. */
+    --bg-overlay: oklch(0 0 0 / 55%);
     --on-key: #f5f5f5;
     --key: #b4d2ff;
     --key-line: var(--key);

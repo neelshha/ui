@@ -18,7 +18,7 @@ export default function CliPage() {
 
       <div className="docBlock">
         <h2>init</h2>
-        <Code>{`npx @neelshha/ui init
+        <Code title="Terminal" language="bash">{`npx @neelshha/ui init
 npx @neelshha/ui init --path src/components/ui`}</Code>
         <p>
           Writes <code>ns.json</code>, tokens, <code>cx.ts</code>, and the theme
@@ -30,7 +30,7 @@ npx @neelshha/ui init --path src/components/ui`}</Code>
 
       <div className="docBlock">
         <h2>add</h2>
-        <Code>{`npx @neelshha/ui add field
+        <Code title="Terminal" language="bash">{`npx @neelshha/ui add field
 npx @neelshha/ui add button card
 npx @neelshha/ui add button --diff --dry-run`}</Code>
         <p>
@@ -48,13 +48,13 @@ npx @neelshha/ui add button --diff --dry-run`}</Code>
 
       <div className="docBlock">
         <h2>list</h2>
-        <Code>{`npx @neelshha/ui list`}</Code>
+        <Code title="Terminal" language="bash">{`npx @neelshha/ui list`}</Code>
         <p>Prints the registry. The live index is at /r/index.json.</p>
       </div>
 
       <div className="docBlock">
         <h2>From this repo</h2>
-        <Code>{`npm run build:cli
+        <Code title="Terminal" language="bash">{`npm run build:cli
 npm run ns -- init
 npm run ns -- add field`}</Code>
       </div>

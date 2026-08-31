@@ -42,23 +42,36 @@ export default function ThemingPage() {
           <code>ThemeToggle</code> flips light and dark. Until you touch it,
           the page follows the system. It lives here, not in the catalog.
         </p>
-        <Code>{`npx @neelshha/ui@latest add theme-toggle`}</Code>
+        <Code title="Terminal" language="bash">{`npx @neelshha/ui@latest add theme-toggle`}</Code>
       </div>
 
       <Example
         title="Theme toggle"
-        description="A solid key. Light and dark only — it does not restore system. The header uses the same action with an icon."
+        description="A solid key with a sun or moon glyph. Light and dark only — it does not restore system."
         code={`import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-<ThemeToggle />`}
+<ThemeToggle icon />`}
       >
-        <ThemeToggle />
+        <ThemeToggle icon />
+      </Example>
+
+      <Example
+        title="Alternate key"
+        description={
+          <>
+            The same action on an outline key — the quieter chrome this site
+            header uses. Pass <code>variant</code> to pick any Button chrome.
+          </>
+        }
+        code={`<ThemeToggle icon variant="outline" />`}
+      >
+        <ThemeToggle icon variant="outline" />
       </Example>
 
       <div className="docBlock">
         <h2>Tokens</h2>
         <p>One set. Override a primitive; the chrome follows.</p>
-        <Code>{`/* ink */
+        <Code title="tokens.css" language="css">{`/* ink */
 --text-heading
 --text-body
 --text-sub
@@ -73,7 +86,7 @@ export default function ThemingPage() {
 --bg
 --bg-hover
 --bg-well
---bg-overlay
+--bg-overlay     /* scrim under drawers and dialogs */
 
 /* key */
 --ink
@@ -125,6 +138,7 @@ export default function ThemingPage() {
 --type-mono      /* 0.875rem — DM Mono */
 --type-mono-sm
 --control        /* button / navbar height */
+--control-sm     /* compact bar key — navbar toggles, code-block copy */
 --space          /* 0.25rem */
 --space-1 … --space-14
 --leading-tight  /* --ratio */

@@ -2,8 +2,18 @@
 
 import "./popover.css";
 
-import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
-import { placeFromInvoker, popoverAnchorStyle, triggerAnchorStyle } from "./anchor";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentProps,
+  type ReactNode,
+} from "react";
+import {
+  popoverAnchorStyle,
+  triggerAnchorStyle,
+  watchPopoverPlacement,
+} from "./anchor";
 import { Button, type ButtonVariant } from "./button";
 import { cx } from "./cx";
 
@@ -18,9 +28,20 @@ export type PopoverTriggerProps = {
 };
 
 export function Popover({ className, id, style, ...rest }: PopoverProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // In fallback browsers the open popover follows its invoker on
+  // resize/scroll; native anchor positioning needs no help.
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    return watchPopoverPlacement(node);
+  }, []);
+
   return (
     <div
       {...rest}
+      ref={ref}
       id={id}
       popover="auto"
       className={cx("ns-popover", className)}
@@ -45,11 +66,9 @@ export function PopoverTrigger({
       const open =
         "newState" in event && (event as ToggleEvent).newState === "open";
       setExpanded(open);
-      if (open) placeFromInvoker(node);
     };
     node.addEventListener("toggle", onToggle);
     setExpanded(node.matches(":popover-open"));
-    if (node.matches(":popover-open")) placeFromInvoker(node);
     return () => node.removeEventListener("toggle", onToggle);
   }, [popoverTarget]);
 

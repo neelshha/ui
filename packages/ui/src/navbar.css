@@ -76,12 +76,9 @@
     color: var(--text-sub, #5c5c5c);
   }
 
-  /* Icon controls shrink to the navbar item rhythm so they sit flush in the bar. */
+  /* Icon controls shrink to the compact bar rhythm so they sit flush in the bar. */
   .ns-navbar .ns-button[data-icon] {
-    --ns-control: calc(
-      var(--type-sm, 0.8rem) * var(--leading-tight, 1.25) + var(--space-2, 0.31rem) *
-        2
-    );
+    --ns-control: var(--control-sm);
     font-size: var(--type-sm, 0.8rem);
   }
 

@@ -6,7 +6,7 @@ import { icon } from "@/components/icons";
 
 export default function HomePage() {
   return (
-    <div className="shell pageWrap">
+    <main id="content" className="shell pageWrap">
       <div className="page">
         <header className="hero">
           <h1>Interface components. Yours once you add them.</h1>
@@ -31,10 +31,10 @@ export default function HomePage() {
 
         <div className="docBlock">
           <h2>Install</h2>
-          <Code>{`npx @neelshha/ui@latest init
+          <Code title="Terminal" language="bash">{`npx @neelshha/ui@latest init
 npx @neelshha/ui@latest add field`}</Code>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

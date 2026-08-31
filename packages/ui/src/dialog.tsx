@@ -79,7 +79,22 @@ export function Dialog({
   const ref = useRef<HTMLDialogElement>(null);
   const openRef = useRef(open);
   openRef.current = open;
+  const warned = useRef(false);
   const uid = useId();
+
+  // A controlled dialog without onOpenChange re-opens on every close event
+  // (ESC, native close), so the user can never dismiss it.
+  if (
+    process.env.NODE_ENV !== "production" &&
+    open !== undefined &&
+    !onOpenChange &&
+    !warned.current
+  ) {
+    warned.current = true;
+    console.warn(
+      "Dialog: pass onOpenChange when you control `open`, or the dialog re-opens on ESC and can never be dismissed.",
+    );
+  }
   const titleId = `${uid}-title`;
   const descriptionId = `${uid}-desc`;
   const labelledBy =

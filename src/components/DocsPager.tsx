@@ -18,23 +18,27 @@ export function DocsPager() {
   return (
     <nav className="pager" aria-label="Page">
       {prev ? (
-        <Button href={prev.href} variant="outline" className="pagerLink">
-          <span className="pagerDir">
-            <ChevronLeft {...icon} />
-            Previous
-          </span>
+        <Button
+          href={prev.href}
+          variant="outline"
+          className="pagerLink"
+          aria-label={`Previous page: ${prev.label}`}
+        >
+          <ChevronLeft {...icon} />
           {prev.label}
         </Button>
       ) : (
         <span />
       )}
       {next ? (
-        <Button href={next.href} className="pagerLink pagerLinkNext">
-          <span className="pagerDir">
-            Next
-            <ChevronRight {...icon} />
-          </span>
+        <Button
+          href={next.href}
+          variant="outline"
+          className="pagerLink pagerLinkNext"
+          aria-label={`Next page: ${next.label}`}
+        >
           {next.label}
+          <ChevronRight {...icon} />
         </Button>
       ) : null}
     </nav>

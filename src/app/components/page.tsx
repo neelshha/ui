@@ -3,19 +3,19 @@ import { Catalog } from "@/components/Catalog";
 
 export const metadata: Metadata = {
   title: "Components",
-  description: "Twenty-nine primitives. Add the ones you need.",
+  description: "Thirty primitives. Add the ones you need.",
 };
 
 export default function ComponentsPage() {
   return (
-    <div className="shell pageWrap">
+    <main id="content" className="shell pageWrap">
       <article className="page">
         <header className="docLead">
           <h1>Components</h1>
-          <p>Twenty-nine primitives. Add the ones you need.</p>
+          <p>Thirty primitives. Add the ones you need.</p>
         </header>
         <Catalog />
       </article>
-    </div>
+    </main>
   );
 }

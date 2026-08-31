@@ -63,9 +63,9 @@ describe("Field", () => {
 
   it("keeps a float label above the well", () => {
     const markup = renderToStaticMarkup(
-      h(TextField, { label: "Name", chrome: "float" }),
+      h(TextField, { label: "Name", chrome: "stack" }),
     );
-    expect(markup).toContain('data-label="float"');
+    expect(markup).toContain('data-label="stack"');
     expect(markup).toContain("<label");
     expect(markup).not.toContain('placeholder=" "');
   });

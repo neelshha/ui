@@ -36,7 +36,7 @@ h1,
 h2,
 p,
 ul,
-pre,
+pre:not(.ns-codeblock__pre),
 table {
   margin: 0;
   padding: 0;
@@ -94,7 +94,7 @@ code {
   color: var(--text-heading);
 }
 
-pre {
+pre:not(.ns-codeblock__pre) {
   background: var(--bg-hover);
   border: 1px solid var(--line);
   border-radius: var(--radius-list);
@@ -178,6 +178,88 @@ pre code {
   --ns-sidebar-top: var(--header-height);
 }
 
+.docsNavSlot {
+  min-width: 0;
+  /* Runway for the sticky sidebar: the frame caps item heights with
+     align-items: start, so the rail slots must opt back into stretch —
+     a sticky element can only move inside a taller containing block. */
+  align-self: stretch;
+}
+
+.headerDocsNav {
+  display: none;
+}
+
+.headerDocsBackdrop {
+  position: fixed;
+  /* The scrim starts under the bar: dimming the page is the drawer's
+     job, and the navbar keeps its own face while the sidebar is open. */
+  inset: var(--header-height) 0 0;
+  z-index: calc(var(--z-nav, 10) - 1);
+  padding: 0;
+  border: 0;
+  background: var(--bg-overlay, rgb(0 0 0 / 45%));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    visibility 0s var(--duration, 200ms);
+}
+
+.headerDocsNav[data-open="true"] .headerDocsBackdrop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.headerDocsDrawer {
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  inset-inline-start: 0;
+  z-index: calc(var(--z-nav, 10) - 1);
+  width: min(var(--sidebar), 85vw);
+  border-inline-end: 1px solid var(--line);
+  background: var(--bg);
+  box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateX(-102%);
+  visibility: hidden;
+  transition:
+    transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    visibility 0s var(--duration, 200ms);
+}
+
+.headerDocsNav[data-open="true"] .headerDocsDrawer {
+  visibility: visible;
+  transform: none;
+  transition: transform var(--duration, 200ms)
+    var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.headerDocsDrawer .ns-sidebar {
+  position: static;
+  /* No fixed height: with one, the rail's bottom pad sits inside the box
+     while the content overflows past it, so the last item lands flush on
+     the drawer's bottom edge. Auto height lets the pad follow the list. */
+  max-height: none;
+  border-inline-end: 0;
+  border-block-end: 0;
+  /* Same rhythm as the desktop rail: the frame gutter in, the rail's
+     own end pad out. Without the start pad the items hug the screen edge. */
+  padding-block: var(--space-10, 1.86rem);
+  padding-inline: var(--space-10) var(--space-5, 0.61rem);
+}
+
+/* The library flattens the sidebar nav into a row on small screens for
+   inline headers; inside the drawer it should stack like a rail. */
+.headerDocsDrawer .ns-sidebar__nav {
+  flex-direction: column;
+  gap: var(--space-8, 1.19rem);
+}
+
 .skip {
   position: absolute;
   inset-inline-start: var(--space-4);
@@ -226,13 +308,20 @@ pre code {
 }
 
 .exampleStage .demo,
-.exampleStage .code {
+.exampleStage .ns-codeblock {
   border: 0;
   border-radius: 0;
 }
 
-.exampleStage .code {
+.exampleStage .ns-codeblock {
+  box-shadow: none;
   border-block-start: 1px solid var(--line);
+}
+
+.exampleStage .ns-codeblock__bar {
+  border-block-end: 0;
+  background: var(--bg);
+  justify-content: flex-end;
 }
 
 .catalog {
@@ -317,75 +406,22 @@ pre code {
 }
 
 .pager {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
   padding-top: var(--space-9);
   border-top: 1px solid var(--line);
 }
 
 .pager .ns-button {
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
   height: auto;
   min-height: var(--control);
   padding-block: var(--space-4);
 }
 
-.pagerLinkNext {
-  align-items: flex-end;
-  text-align: end;
-}
-
-.pagerDir {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  font-size: var(--type-sm);
-  opacity: 0.72;
-}
-
-.pagerLinkNext .pagerDir {
-  justify-content: flex-end;
-}
-
-.code {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-list);
-  background: var(--bg-hover);
-}
-
-.code pre {
-  margin: 0;
-  padding: 0.875rem 1rem;
-  background: none;
-  border: 0;
-  border-radius: 0;
-}
-
-.codeCopy {
-  --ns-control: 1.75rem;
-  position: absolute;
-  inset-block-start: 0.75rem;
-  inset-inline-end: 0.5rem;
-  z-index: 10;
-  width: 1.75rem;
-  min-height: 1.75rem;
-  border-radius: var(--radius);
-  background: var(--bg-hover);
-}
-
-@media (hover: hover) {
-  .codeCopy.ns-button[data-variant="ghost"]:hover:not(:disabled) {
-    background: var(--bg);
-  }
-}
-
-.codeCopy.ns-button[data-variant="ghost"]:active:not(:disabled) {
-  background: var(--bg);
+.pager .pagerLinkNext {
+  margin-inline-start: auto;
 }
 
 .footer {
@@ -404,13 +440,31 @@ pre code {
   margin-inline: auto;
 }
 
+/* From 52rem the frame carries a third column: sidebar, article, rail.
+   The article gives up width to the rail but keeps a readable measure
+   (~23.5rem at the breakpoint); below 52rem it needs the whole frame. */
+@media (min-width: 52rem) {
+  .frame {
+    grid-template-columns: var(--sidebar) minmax(0, 1fr) 9rem;
+  }
+
+  .frame > .tocSlot {
+    display: block;
+    grid-column: 3;
+    justify-self: start;
+    align-self: stretch;
+    min-width: 0;
+    width: 9rem;
+  }
+}
+
 @media (min-width: 65rem) {
   .frame {
     grid-template-columns: 1fr minmax(0, var(--content)) 1fr;
     column-gap: 0;
   }
 
-  .frame .ns-sidebar {
+  .frame > .docsNavSlot {
     grid-column: 1;
     justify-self: start;
     width: var(--sidebar);
@@ -420,6 +474,100 @@ pre code {
     grid-column: 2;
     width: min(100%, var(--content));
   }
+
+  /* The centered content leaves no frame gap on its right, so the rail
+     pays its own start pad — the same breathing room the mid range gets
+     from the frame's rail gap, and the wider card the big frame can spare. */
+  .frame > .tocSlot {
+    width: 10rem;
+    padding-inline-start: var(--rail);
+  }
+}
+
+/* The rail hides below 52rem, where the article needs the whole measure. */
+.tocSlot {
+  display: none;
+}
+
+/* The rail wears the library's raised face — the chrome Card and the code
+   block use — and its inner rhythm is the sidebar's: the same top pad before
+   the label, the same 4px label-to-list gap, the same row spacing. Its
+   sticky top matches the article's top padding so box and title start
+   level. */
+.toc {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-10));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  box-sizing: border-box;
+  padding: var(--space-10) var(--space-5);
+  border: 1px solid var(--face-line);
+  border-radius: var(--radius-list);
+  background: var(--face);
+  background-clip: padding-box;
+  box-shadow: var(--float);
+  max-height: calc(
+    100dvh - var(--header-height) - var(--space-10) - var(--space-6)
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.tocTitle {
+  margin: 0;
+  padding-inline: var(--space-3);
+  color: var(--text-heading);
+  font-size: var(--type-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+}
+
+.tocList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Rows speak the sidebar-item language: quiet, wash on hover, and the
+   flat treatment on the tracked section. */
+.tocList a {
+  display: block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius);
+  color: var(--text-sub);
+  font-size: var(--type-sm);
+  line-height: var(--leading-tight);
+  text-decoration: none;
+  transition:
+    color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    background var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.tocList a:hover {
+  color: var(--text-heading);
+  background: var(--bg-hover);
+}
+
+.tocList a[aria-current="location"] {
+  color: var(--text-heading);
+  background: var(--bg-hover);
+  box-shadow: var(--flat);
+}
+
+.tocList a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Anchored section headings land below the sticky header. */
+.doc h2 {
+  scroll-margin-top: calc(var(--header-height) + var(--space-5));
 }
 
 @media (max-width: 48rem) {
@@ -432,12 +580,18 @@ pre code {
     column-gap: 0;
   }
 
-  .header .ns-navbar {
-    padding-inline: var(--space-4);
+  .docsNavSlot {
+    display: none;
   }
 
-  .header .ns-navbar .ns-navbar__list {
-    gap: var(--space-2);
+  .headerDocsNav {
+    display: contents;
+  }
+
+  .header .ns-navbar {
+    /* Align the bar's contents with the page content gutter. */
+    padding-inline: var(--gutter);
+    gap: var(--space-4);
   }
 
   .header .ns-navbar .ns-navbar__brand {
@@ -449,29 +603,12 @@ pre code {
     justify-content: center;
   }
 
-  .pager {
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-  }
-
-  .pagerLinkNext {
-    order: 2;
-  }
-
-  .pager .ns-button {
-    width: 100%;
-  }
-
   .demo {
     padding: var(--space-8) var(--space-5);
   }
 
   .demoRow .ns-button {
     flex: 0 1 auto;
-  }
-
-  .code pre {
-    padding-right: 3rem;
   }
 
   .catalog {
@@ -489,6 +626,7 @@ pre code {
 .stack {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-8);
 }
 
@@ -506,8 +644,28 @@ pre code {
 }
 
 .demoInner {
+  display: flex;
+  flex-direction: column;
+  /* Shrink-to-content pieces (keys, choice rows, ribbons) center in the
+     stage; full-bleed pieces keep filling via the stretch list below. */
+  align-items: center;
   width: 100%;
   max-width: 22rem;
+}
+
+/* Elements that are meant to fill the stage keep stretching. */
+.demoInner > .stack,
+.demoInner > .ns-card,
+.demoInner > .ns-alert,
+.demoInner > .ns-accordion,
+.demoInner > .ns-tabs,
+.demoInner > .ns-table-wrap,
+.demoInner > .ns-navbar,
+.demoInner > .ns-sidebar,
+.demoInner > .ns-codeblock,
+.demoInner > .ns-progress,
+.demoInner > .ns-field:not([data-kind="choice"]):not([data-kind="group"]) {
+  align-self: stretch;
 }
 
 .demoWide .demoInner {
@@ -546,9 +704,4 @@ pre code {
   display: flex;
   align-items: center;
   gap: var(--space-7);
-}
-
-.api {
-  min-width: 36rem;
-  font-variant-numeric: tabular-nums;
 }

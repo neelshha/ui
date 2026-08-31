@@ -328,13 +328,16 @@
     border-radius: 999px;
   }
 
+  /* The thumb is a mini key: face chrome with a ring, raised on the tight
+     lift — never the 8px float, which smudges below an ~11px thumb. */
   .ns-choice[data-kind="switch"]::after {
     width: 0.72em;
     height: 0.72em;
-    border: 0;
+    border: 1px solid var(--face-line, #626262);
     border-radius: 999px;
     background: var(--face);
-    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
+    background-clip: padding-box;
+    box-shadow: var(--raise, 0 1px 2px rgb(0 0 0 / 25%));
     transform: translateX(-0.36em);
     opacity: 1;
     transition: transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
@@ -342,7 +345,6 @@
 
   .ns-choice[data-kind="switch"]:checked::after {
     background: var(--face);
-    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     transform: translateX(0.36em);
   }
 
@@ -405,8 +407,7 @@
     cursor: default;
   }
 
-  .ns-field[data-label="stack"] .ns-field__label,
-  .ns-field[data-label="float"] .ns-field__label {
+  .ns-field[data-label="stack"] .ns-field__label {
     position: static;
     max-width: none;
   }

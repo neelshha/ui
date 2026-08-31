@@ -11,7 +11,11 @@ import {
   type MouseEvent,
   type ReactNode,
 } from "react";
-import { placeFromInvoker, popoverAnchorStyle, triggerAnchorStyle } from "./anchor";
+import {
+  popoverAnchorStyle,
+  triggerAnchorStyle,
+  watchPopoverPlacement,
+} from "./anchor";
 import { Button, type ButtonVariant } from "./button";
 import { cx } from "./cx";
 
@@ -48,18 +52,13 @@ function hidePopover(node: HTMLElement | null) {
 export function Menu({ className, onKeyDown, id, style, ...rest }: MenuProps) {
   const ref = useRef<HTMLDivElement>(null);
 
+  // The placement watcher also handles the open state: it repositions on
+  // open, on resize, and on scroll in fallback browsers, and fires the
+  // onOpen hook once per open so the first item takes focus.
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    const onToggle = (event: Event) => {
-      if (!("newState" in event) || (event as ToggleEvent).newState !== "open") {
-        return;
-      }
-      placeFromInvoker(node);
-      menuItems(node)[0]?.focus();
-    };
-    node.addEventListener("toggle", onToggle);
-    return () => node.removeEventListener("toggle", onToggle);
+    return watchPopoverPlacement(node, () => menuItems(node)[0]?.focus());
   }, []);
 
   function move(event: KeyboardEvent<HTMLDivElement>, delta: number) {

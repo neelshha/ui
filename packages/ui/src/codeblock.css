@@ -1,0 +1,108 @@
+@layer components {
+  .ns-codeblock {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    /* <figure> UA margin (1em 40px) would inset the block. */
+    margin: 0;
+    min-width: 0;
+    border: 1px solid var(--face-line, #626262);
+    border-radius: var(
+      --radius-list,
+      calc(var(--radius, 0.4rem) + var(--inset-list, 0.31rem))
+    );
+    background: var(--face);
+    background-clip: padding-box;
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
+    overflow: hidden;
+  }
+
+  .ns-codeblock__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4, 0.49rem);
+    min-height: var(--control, 2rem);
+    padding: var(--space-2, 0.31rem) var(--space-4, 0.49rem);
+    border-block-end: 1px solid var(--line, rgb(0 0 0 / 12%));
+    background: var(--face-hover, rgb(255 255 255 / 40%));
+  }
+
+  .ns-codeblock__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2, 0.31rem);
+    min-width: 0;
+  }
+
+  .ns-codeblock__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-heading, #111);
+    font-size: var(--type-sm, 0.8rem);
+    font-weight: var(--weight-medium, 500);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-codeblock__lang {
+    flex-shrink: 0;
+    padding: 0 var(--space-2, 0.31rem);
+    border: 1px solid var(--face-line, #626262);
+    border-radius: var(--radius, 0.4rem);
+    background: var(--face);
+    background-clip: padding-box;
+    box-shadow: var(--float-press, 0 2px 6px rgb(0 0 0 / 10%));
+    color: var(--text-sub, #5c5c5c);
+    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
+    font-size: var(--type-mono-sm, 0.75rem);
+    line-height: var(--leading-tight, 1.25);
+  }
+
+  .ns-codeblock__pre {
+    margin: 0;
+    padding: var(--space-5, 0.61rem) var(--space-5, 0.61rem);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
+    font-size: var(--type-mono, 0.875rem);
+    line-height: var(--leading, 1.56);
+    color: var(--text-body, #444);
+  }
+
+  .ns-codeblock__pre code {
+    display: block;
+    min-width: max-content;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    color: inherit;
+    font: inherit;
+  }
+
+  .ns-codeblock__pre:focus-visible {
+    outline: 2px solid var(--focus, rgb(17 17 17 / 70%));
+    outline-offset: -2px;
+  }
+}
+
+/* The bar's copy key rides the compact bar rhythm — same size as the
+   navbar's icon toggles. */
+.ns-codeblock__bar .ns-button[data-icon] {
+  --ns-control: var(--control-sm);
+  font-size: var(--type-sm, 0.8rem);
+}
+
+/* The copy key is the library's outline icon Button; only the copied
+   success tint is bespoke here. */
+.ns-codeblock .ns-code-copy[aria-label="Copied"] {
+  color: var(--success, #2f6b3a);
+}
+
+[data-density="compact"] .ns-codeblock__bar {
+  min-height: calc(var(--control, 2rem) - var(--space-2, 0.31rem));
+}

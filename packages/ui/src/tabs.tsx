@@ -32,7 +32,18 @@ function useTabs() {
 }
 
 function token(value: string) {
-  return value.replace(/[^A-Za-z0-9_-]/g, "-");
+  const safe = value.replace(/[^A-Za-z0-9_-]/g, "-");
+  // "a b" and "a-b" sanitize to the same string; disambiguate with a hash
+  // of the raw value so two tabs can never share a DOM id.
+  return safe === value ? safe : `${safe}-${hash(value)}`;
+}
+
+function hash(value: string) {
+  let h = 5381;
+  for (let i = 0; i < value.length; i += 1) {
+    h = (h * 33) ^ value.charCodeAt(i);
+  }
+  return (h >>> 0).toString(36);
 }
 
 function firstTabValue(children: ReactNode): string | undefined {
@@ -78,8 +89,10 @@ export function Tabs({
   ...rest
 }: TabsProps) {
   const uid = useId();
+  // Lazy initializer: firstTabValue walks the children tree and must not
+  // run on every render.
   const [uncontrolled, setUncontrolled] = useState(
-    defaultValue ?? firstTabValue(children) ?? "",
+    () => defaultValue ?? firstTabValue(children) ?? "",
   );
   const value = controlled ?? uncontrolled;
 

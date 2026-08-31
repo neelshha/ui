@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { prepareFile } from "./prepare";
+import { prepareFile } from "./prepare.js";
 
 describe("prepareFile", () => {
   it("does not duplicate a CSS import already in source", () => {

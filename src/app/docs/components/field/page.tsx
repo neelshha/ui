@@ -17,10 +17,10 @@ const rows = [
   },
   {
     name: "chrome",
-    type: '"stack" | "float" | "placeholder"',
+    type: '"stack" | "placeholder"',
     def: '"stack"',
     notes:
-      "TextField and TextArea. Stack and float both keep the label above the field — they look the same. Placeholder drops the visible label when you type.",
+      "TextField and TextArea. Stack keeps the label above the field. Placeholder drops the visible label when you type.",
   },
   {
     name: "optionalLabel / requiredLabel",

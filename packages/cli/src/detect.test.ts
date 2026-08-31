@@ -3,7 +3,7 @@ import {
   inferAtAlias,
   tokensImportHint,
   uiImportPrefix,
-} from "./detect";
+} from "./detect.js";
 
 describe("alias detection", () => {
   it("sees a tsconfig @/* path", () => {
@@ -22,9 +22,9 @@ describe("alias detection", () => {
 
   it("prints @/ when the alias exists", () => {
     expect(uiImportPrefix("src/components/ui", true)).toBe("@/components/ui");
-    expect(tokensImportHint("src/components/ui", true).line).toBe(
-      '@import "@/components/ui/tokens.css";',
-    );
+    const hinted = tokensImportHint("src/components/ui", true);
+    expect(hinted.line).toBe('@import "@/components/ui/tokens.css";');
+    expect(hinted.fontsLine).toBe('@import "@/components/ui/fonts.css";');
   });
 
   it("prints a path relative to src when @/ is missing", () => {
@@ -33,6 +33,7 @@ describe("alias detection", () => {
     );
     const hint = tokensImportHint("src/components/ui", false);
     expect(hint.line).toBe('@import "./components/ui/tokens.css";');
+    expect(hint.fontsLine).toBe('@import "./components/ui/fonts.css";');
     expect(hint.note).toBeTruthy();
   });
 });

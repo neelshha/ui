@@ -50,6 +50,10 @@
       "types": "./src/card.tsx",
       "default": "./src/card.tsx"
     },
+    "./code-block": {
+      "types": "./src/codeblock.tsx",
+      "default": "./src/codeblock.tsx"
+    },
     "./checkbox": {
       "types": "./src/checkbox.tsx",
       "default": "./src/checkbox.tsx"
@@ -160,6 +164,7 @@
     "./breadcrumb.css": "./src/breadcrumb.css",
     "./button.css": "./src/button.css",
     "./card.css": "./src/card.css",
+    "./codeblock.css": "./src/codeblock.css",
     "./dialog.css": "./src/dialog.css",
     "./field.css": "./src/field.css",
     "./kbd.css": "./src/kbd.css",

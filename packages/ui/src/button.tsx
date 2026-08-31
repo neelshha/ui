@@ -98,8 +98,11 @@ export function Button({
     "aria-busy": pending || undefined,
   } as const;
 
+  // Guards ride along whenever interaction is blocked, not just when a
+  // handler exists — a disabled link must swallow clicks too (CSS blocks
+  // the mouse; this blocks keyboard and programmatic activation).
   const guards =
-    pending || onClick || onKeyDown
+    pending || disabled || onClick || onKeyDown
       ? {
           onClick: (
             event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,

@@ -5,6 +5,8 @@ import "./avatar.css";
 import {
   createContext,
   useContext,
+  useEffect,
+  useRef,
   useState,
   type ComponentProps,
 } from "react";
@@ -51,9 +53,22 @@ export function AvatarImage({
 }: AvatarImageProps) {
   const { setLoaded } = useContext(AvatarContext);
   const [failed, setFailed] = useState(false);
+  const ref = useRef<HTMLImageElement>(null);
+
+  // An image that finished loading before hydration never fires onLoad, so
+  // the fallback would sit over a loaded photo forever. Settle the state
+  // from the element itself on mount.
+  useEffect(() => {
+    const img = ref.current;
+    if (!img || !img.complete) return;
+    if (img.naturalWidth > 0) setLoaded(true);
+    else setFailed(true);
+  }, []);
+
   if (failed) return null;
   return (
     <img
+      ref={ref}
       className={cx("ns-avatar__image", className)}
       alt={alt}
       onLoad={(event) => {

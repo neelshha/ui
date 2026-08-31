@@ -34,10 +34,16 @@
 
   .ns-toast__dismiss {
     appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    width: 1.5em;
+    height: 1.5em;
     margin: 0;
     padding: 0;
     border: 0;
+    border-radius: var(--radius, 0.4rem);
     background: none;
     color: inherit;
     cursor: pointer;
@@ -49,6 +55,12 @@
   .ns-toast__dismiss:hover,
   .ns-toast__dismiss:focus-visible {
     opacity: 1;
+    background: var(--bg-hover, #f3f2f1);
+  }
+
+  .ns-toast__dismiss:focus-visible {
+    outline: 2px solid var(--focus, rgb(17 17 17 / 70%));
+    outline-offset: 2px;
   }
 
   /* Tone is the message ink, on the same silver chrome as every other tone. */

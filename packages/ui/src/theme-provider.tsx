@@ -57,7 +57,12 @@ export function ThemeProvider({
   }, [defaultTheme]);
 
   const setTheme = (next: Theme) => {
-    window.localStorage.setItem(STORAGE_KEY, next);
+    // Storage can throw in private modes; the toggle must still work.
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // Keep the in-memory theme even when the write is refused.
+    }
     setThemeState(next);
     applyTheme(next);
     setResolved(resolveTheme(next));

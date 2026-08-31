@@ -18,6 +18,7 @@ import {
   Button,
   Card,
   Checkbox,
+  CodeBlock,
   Kbd,
   Label,
   Link,
@@ -99,6 +100,13 @@ const thumbs = {
     </Breadcrumb>
   ),
   button: <Button>Save</Button>,
+  "code-block": (
+    <CodeBlock
+      title="page.tsx"
+      language="tsx"
+      code={`<Card>Notes</Card>`}
+    />
+  ),
   card: (
     <Card>
       <Text as="strong" tone="heading">
@@ -223,7 +231,9 @@ export function Catalog() {
           <NextLink href={componentHref(item.slug)} className="catalogHit">
             {item.title}
           </NextLink>
-          <div className="demo catalogPreview" aria-hidden="true">
+          {/* inert keeps the demo's live controls out of the tab order and
+              out of the accessibility tree, not just out of sight. */}
+          <div className="demo catalogPreview" aria-hidden="true" inert>
             <div className="demoInner">{thumbs[item.slug]}</div>
           </div>
           <div className="catalogMeta">

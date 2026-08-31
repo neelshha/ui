@@ -19,13 +19,13 @@ export default function InstallationPage() {
 
       <div className="docBlock">
         <h2>CLI</h2>
-        <Code>{`npx @neelshha/ui@latest init
+        <Code title="Terminal" language="bash">{`npx @neelshha/ui@latest init
 npx @neelshha/ui@latest add field`}</Code>
         <p>
           <code>init</code> writes <code>ns.json</code>, <code>tokens.css</code>,{" "}
-          <code>cx.ts</code>, <code>theme.tsx</code>, and{" "}
-          <code>theme-provider.tsx</code>. It looks for Next or Vite and picks{" "}
-          <code>src/components/ui</code> when <code>src</code> exists.
+          <code>fonts.css</code>, <code>cx.ts</code>, <code>theme.tsx</code>,{" "}
+          and <code>theme-provider.tsx</code>. It looks for Next or Vite and{" "}
+          picks <code>src/components/ui</code> when <code>src</code> exists.
         </p>
       </div>
 
@@ -35,12 +35,19 @@ npx @neelshha/ui@latest add field`}</Code>
           Once, in your global CSS. If the project has a <code>@/</code> alias
           (Next usually does), init prints that path:
         </p>
-        <Code>{`@import "@/components/ui/tokens.css";`}</Code>
+        <Code title="globals.css" language="css">{`@import "@/components/ui/tokens.css";
+@import "@/components/ui/fonts.css";`}</Code>
+        <p>
+          On Next you can skip the font import and self-host with{" "}
+          <code>next/font</code> — set the <code>--font-onest</code> and{" "}
+          <code>--font-dm-mono</code> variables the tokens read.
+        </p>
         <p>
           Vite often has no <code>@/</code>. Init will say so and print a path
           relative to a CSS file in <code>src/</code>:
         </p>
-        <Code>{`@import "./components/ui/tokens.css";`}</Code>
+        <Code title="globals.css" language="css">{`@import "./components/ui/tokens.css";
+@import "./components/ui/fonts.css";`}</Code>
         <p>
           Component CSS is imported from the TSX. You do not import{" "}
           <code>button.css</code> yourself.
@@ -56,7 +63,7 @@ npx @neelshha/ui@latest add field`}</Code>
           will refuse it. Wrap the tree in <code>ThemeProvider</code>. Add{" "}
           <code>suppressHydrationWarning</code> on <code>&lt;html&gt;</code>.
         </p>
-        <Code>{`import Script from "next/script";
+        <Code title="layout.tsx">{`import Script from "next/script";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { THEME_SCRIPT } from "@/components/ui/theme";
 

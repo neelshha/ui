@@ -12,8 +12,9 @@
     box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
   }
 
+  /* Same scrim ink as the mobile drawer — the documented --bg-overlay. */
   .ns-dialog::backdrop {
-    background: color-mix(in srgb, var(--bg-well, #e8e6e4) 72%, transparent);
+    background: var(--bg-overlay, rgb(0 0 0 / 45%));
   }
 
   .ns-dialog__title {

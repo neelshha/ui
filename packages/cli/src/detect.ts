@@ -65,16 +65,21 @@ export function uiImportPrefix(path: string, hasAlias: boolean): string {
 export function tokensImportHint(
   path: string,
   hasAlias: boolean,
-): { line: string; note?: string } {
+): { line: string; fontsLine: string; note?: string } {
   if (hasAlias) {
-    return { line: `@import "${uiImportPrefix(path, true)}/tokens.css";` };
+    const base = uiImportPrefix(path, true);
+    return {
+      line: `@import "${base}/tokens.css";`,
+      fontsLine: `@import "${base}/fonts.css";`,
+    };
   }
   const clean = path.replace(/^\.\//, "");
-  const fromSrc = clean.startsWith("src/")
-    ? `./${clean.slice(4)}/tokens.css`
-    : `./${clean}/tokens.css`;
+  const base = clean.startsWith("src/")
+    ? `./${clean.slice(4)}`
+    : `./${clean}`;
   return {
-    line: `@import "${fromSrc}";`,
+    line: `@import "${base}/tokens.css";`,
+    fontsLine: `@import "${base}/fonts.css";`,
     note: "Relative to a CSS file in src/. Adjust if your entry CSS lives elsewhere.",
   };
 }

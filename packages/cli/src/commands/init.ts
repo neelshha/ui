@@ -49,10 +49,11 @@ export async function init(
   console.log(`cx: ${path}/cx.ts`);
   console.log(`Theme: ${path}/theme.tsx`);
   if (alias) {
-    console.log(`Import tokens in your global CSS:\n  ${hint.line}`);
+    console.log(`Import tokens and fonts in your global CSS:\n  ${hint.line}\n  ${hint.fontsLine}`);
   } else {
     console.log(`No @/ alias found. Import tokens relative to your CSS file:`);
     console.log(`  ${hint.line}`);
+    console.log(`  ${hint.fontsLine}`);
     if (hint.note) console.log(hint.note);
   }
   console.log(

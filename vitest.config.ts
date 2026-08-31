@@ -6,6 +6,7 @@ export default defineConfig({
     include: [
       "packages/ui/src/**/*.test.ts",
       "packages/cli/src/**/*.test.ts",
+      "src/**/*.test.ts",
     ],
   },
 });

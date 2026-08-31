@@ -64,6 +64,15 @@
       }
     },
     {
+      "name": "code-block",
+      "title": "Code block",
+      "files": ["src/codeblock.tsx", "src/code-copy.tsx", "src/codeblock.css"],
+      "dependencies": {
+        "npm": [],
+        "registry": ["cx", "button"]
+      }
+    },
+    {
       "name": "card",
       "title": "Card",
       "files": ["src/card.tsx", "src/card.css"],

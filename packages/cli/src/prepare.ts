@@ -1,5 +1,5 @@
 const HOOKS =
-  /\buse(State|Effect|Memo|Callback|Ref|Context|Reducer|LayoutEffect|ImperativeHandle|SyncExternalStore)\b/;
+  /\buse(State|Effect|Memo|Callback|Ref|Context|Reducer|LayoutEffect|ImperativeHandle|SyncExternalStore|Transition|DeferredValue|ActionState|Optimistic|FormState|SearchParams|Pathname|Router)\b/;
 
 const USE_CLIENT = /^["']use client["']\s*;?/m;
 

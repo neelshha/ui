@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NavbarItem, NavbarList, NavbarMenu } from "@neelshha/ui";
+import { NavbarItem, NavbarList } from "@neelshha/ui";
 import { headerNav } from "@/lib/docs";
 
 function current(pathname: string, href: string) {
@@ -25,14 +25,12 @@ export function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <NavbarMenu>
-      <NavbarList>
-        {headerNav.map((item) => (
-          <NavbarItem key={item.href} current={current(pathname, item.href)}>
-            <Link href={item.href}>{item.label}</Link>
-          </NavbarItem>
-        ))}
-      </NavbarList>
-    </NavbarMenu>
+    <NavbarList>
+      {headerNav.map((item) => (
+        <NavbarItem key={item.href} current={current(pathname, item.href)}>
+          <Link href={item.href}>{item.label}</Link>
+        </NavbarItem>
+      ))}
+    </NavbarList>
   );
 }
