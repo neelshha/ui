@@ -61,6 +61,20 @@ import {
 import { icon } from "@/components/icons";
 import { componentHref, components } from "@/lib/docs";
 
+// Pieces whose previews need the room — wide chrome, rails, tables — get a
+// two-column tile in the bento; dense packing backfills the gaps around
+// them.
+const wideTiles = new Set([
+  "alert",
+  "code-block",
+  "dialog",
+  "field",
+  "navbar",
+  "sidebar",
+  "table",
+  "toast",
+]);
+
 const thumbs = {
   accordion: (
     <Accordion>
@@ -227,14 +241,19 @@ export function Catalog() {
   return (
     <ul className="catalog">
       {components.map((item) => (
-        <li key={item.slug}>
+        <li
+          key={item.slug}
+          className={`demo catalogTile${
+            wideTiles.has(item.slug) ? " catalogTileWide" : ""
+          }`}
+        >
           <NextLink href={componentHref(item.slug)} className="catalogHit">
             {item.title}
           </NextLink>
           {/* inert keeps the demo's live controls out of the tab order and
               out of the accessibility tree, not just out of sight. */}
-          <div className="demo catalogPreview" aria-hidden="true" inert>
-            <div className="demoInner">{thumbs[item.slug]}</div>
+          <div className="demoInner catalogPreview" aria-hidden="true" inert>
+            {thumbs[item.slug]}
           </div>
           <div className="catalogMeta">
             <strong>{item.title}</strong>

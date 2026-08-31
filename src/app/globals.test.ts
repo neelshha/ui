@@ -9,41 +9,46 @@ describe("Site CSS contract", () => {
     expect(css).toContain("@media (max-width: 48rem)");
   });
 
-  it("shows the On This Page rail from 52rem up, in the frame's third column", () => {
-    // Base: hidden. From 52rem the frame gains a 9rem rail column; the
-    // scoped selector must out-rank the base rule, so the media block has
-    // to come before it in source order.
+  it("shows the On This Page rail from 48rem up, in the frame's third column", () => {
+    // Base: hidden. From 48rem — the same band the docs sidebar appears —
+    // the frame gains a 9rem rail column; the scoped selector must out-rank
+    // the base rule, so the media block has to come before it in source order.
     expect(css).toContain(".tocSlot {\n  display: none;\n}");
-    expect(css).toContain("@media (min-width: 52rem)");
+    expect(css).toContain("@media (min-width: 48rem)");
     expect(css).toContain(
       ".frame {\n    grid-template-columns: var(--sidebar) minmax(0, 1fr) 9rem;\n  }",
     );
     expect(css).toContain(".frame > .tocSlot {\n    display: block;");
-    expect(css.indexOf("@media (min-width: 52rem)")).toBeLessThan(
+    expect(css.indexOf("@media (min-width: 48rem)")).toBeLessThan(
       css.indexOf(".tocSlot {\n  display: none;\n}"),
     );
-    // At 65rem the content centers and loses the frame gap, so the rail
-    // pays its own start pad and widens back to 10rem.
+    // At 65rem the content centers; the rail's slot then mirrors the
+    // sidebar's exactly — the same 12rem column pinned to the frame's
+    // right edge, hairline facing the article, spare width breathing on
+    // both sides.
     expect(css).toContain("@media (min-width: 65rem)");
     expect(css).toContain(
-      ".frame > .tocSlot {\n    width: 10rem;\n    padding-inline-start: var(--rail);\n  }",
+      ".frame > .tocSlot {\n    justify-self: end;\n    width: var(--sidebar);\n  }",
     );
   });
 
-  it("boxes the rail in the library's raised face and aligns it with the article top", () => {
+  it("makes the rail a bento tile — one face, edge-to-edge seam, level sticky top", () => {
+    // One chrome like the catalog tiles: face fill, face-line border,
+    // list radius, flat (no shadow at rest).
     expect(css).toContain(".toc {");
-    expect(css).toContain("border: 1px solid var(--face-line)");
-    expect(css).toContain("border-radius: var(--radius-list)");
-    expect(css).toContain("box-shadow: var(--float)");
+    expect(css).toContain("border: 1px solid var(--face-line);");
+    expect(css).toContain("border-radius: var(--radius-list);");
+    expect(css).toContain("background: var(--face);");
+    // The card's top edge rides the article's top pad — level with the
+    // page title's line; the space is above the card, not inside it.
+    expect(css).toContain("top: calc(var(--header-height) + var(--space-10));");
     expect(css).toContain(
-      "top: calc(var(--header-height) + var(--space-10));",
+      "max-height: calc(100dvh - var(--header-height) - var(--space-10));",
     );
-    // The rail's inner rhythm is the sidebar's: same rail pad before the
-    // label and the same 4px label-to-list gap.
-    expect(css).toContain("gap: var(--space-1);");
-    expect(css).toContain("padding: var(--space-10) var(--space-5);");
-    expect(css).toContain(".tocList a[aria-current=\"location\"] {");
-    expect(css).toContain("box-shadow: var(--flat);");
+    // The label and list are the tile's two bento sections, split by an
+    // edge-to-edge hairline seam.
+    expect(css).toContain("border-block-end: 1px solid var(--line);");
+    expect(css).toContain(".tocList {\n  display: flex;");
   });
 
   it("aligns the mobile navbar contents with the page content gutter", () => {
