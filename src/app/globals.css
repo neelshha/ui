@@ -176,12 +176,24 @@ pre code {
 
 .frame .ns-sidebar {
   --ns-sidebar-top: var(--header-height);
-  /* The docs rail anchors to the left edge: square left corners, no left
-     border, so the panel reads as starting from the left end. The
-     silver-key chrome stays on the top, right, and bottom edges. */
+  /* The docs rail anchors to the left edge: fully square (no radius on any
+     corner), no border except the inline-end hairline, and the shell's
+     gutter is absorbed by a negative margin so the panel sits flush
+     against the window edge. The gutter returns as the rail's start pad so
+     items don't hug the screen edge. */
+  margin-inline-start: calc(var(--gutter) * -1);
+  padding-inline-start: var(--gutter);
+  border-top: 0;
+  border-bottom: 0;
   border-left: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  border-radius: 0;
+}
+
+/* The rail's sticky top offset must clear the header, and the rail's own
+   end pad must match the frame gutter so the inline-end hairline lands
+   flush against the article. */
+.frame .docsNavSlot {
+  --ns-sidebar-top: var(--header-height);
 }
 
 .docsNavSlot {

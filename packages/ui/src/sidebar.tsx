@@ -33,7 +33,7 @@ export function SidebarGroup({ className, ...rest }: SidebarGroupProps) {
 
 export type SidebarLabelProps = Omit<
   ComponentProps<"a">,
-  "href" | "children" | "className"
+  "href" | "children" | "className" | "aria-current" | "ref"
 > & {
   children?: ReactNode;
   className?: string | undefined;
@@ -77,9 +77,7 @@ export function SidebarLabel({
   }
 
   return (
-    <p className={classNames} {...rest}>
-      {children}
-    </p>
+    <p className={classNames}>{children}</p>
   );
 }
 
@@ -91,7 +89,7 @@ export function SidebarList({ className, ...rest }: SidebarListProps) {
 
 export type SidebarItemProps = Omit<
   ComponentProps<"a">,
-  "href" | "children" | "className"
+  "href" | "children" | "className" | "aria-current" | "ref"
 > & {
   children?: ReactNode;
   className?: string | undefined;
