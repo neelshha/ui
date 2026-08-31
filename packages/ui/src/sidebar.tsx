@@ -31,7 +31,10 @@ export function SidebarGroup({ className, ...rest }: SidebarGroupProps) {
   return <div className={cx("ns-sidebar__group", className)} {...rest} />;
 }
 
-export type SidebarLabelProps = {
+export type SidebarLabelProps = Omit<
+  ComponentProps<"a">,
+  "href" | "children" | "className"
+> & {
   children?: ReactNode;
   className?: string | undefined;
   href?: string | undefined;
@@ -43,6 +46,7 @@ export function SidebarLabel({
   current,
   className,
   children,
+  ...rest
 }: SidebarLabelProps) {
   const classNames = cx("ns-sidebar__label", className);
   if (href) {
@@ -51,6 +55,7 @@ export function SidebarLabel({
         <a
           href={href}
           className="ns-sidebar__label-link"
+          {...rest}
           {...(current ? { "aria-current": "page" as const } : {})}
         >
           {children}
@@ -64,13 +69,18 @@ export function SidebarLabel({
       <p className={classNames}>
         {cloneElement(children, {
           className: cx("ns-sidebar__label-link", children.props.className),
+          ...rest,
           ...(current ? { "aria-current": "page" as const } : {}),
         })}
       </p>
     );
   }
 
-  return <p className={classNames}>{children}</p>;
+  return (
+    <p className={classNames} {...rest}>
+      {children}
+    </p>
+  );
 }
 
 export type SidebarListProps = ComponentProps<"ul">;
@@ -79,7 +89,10 @@ export function SidebarList({ className, ...rest }: SidebarListProps) {
   return <ul className={cx("ns-sidebar__list", className)} {...rest} />;
 }
 
-export type SidebarItemProps = {
+export type SidebarItemProps = Omit<
+  ComponentProps<"a">,
+  "href" | "children" | "className"
+> & {
   children?: ReactNode;
   className?: string | undefined;
   href?: string | undefined;
@@ -91,6 +104,7 @@ export function SidebarItem({
   current,
   className,
   children,
+  ...rest
 }: SidebarItemProps) {
   const classNames = cx("ns-sidebar__item", className);
   const currentMark = current ? { "aria-current": "page" as const } : {};
@@ -98,7 +112,7 @@ export function SidebarItem({
   if (href) {
     return (
       <li>
-        <a href={href} className={classNames} {...currentMark}>
+        <a href={href} className={classNames} {...rest} {...currentMark}>
           {children}
         </a>
       </li>
@@ -110,6 +124,7 @@ export function SidebarItem({
       <li>
         {cloneElement(children, {
           className: cx(classNames, children.props.className),
+          ...rest,
           ...currentMark,
         })}
       </li>
@@ -118,7 +133,7 @@ export function SidebarItem({
 
   return (
     <li>
-      <span className={classNames} {...currentMark}>
+      <span className={classNames} {...rest} {...currentMark}>
         {children}
       </span>
     </li>
