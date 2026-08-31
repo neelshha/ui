@@ -7,10 +7,11 @@
     min-height: 0;
     padding-block: var(--space-10, 1.86rem);
     padding-inline-end: var(--space-5, 0.61rem);
-    border-inline-end: 1px solid
-      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));
-    background: var(--bg, #fff);
-    box-shadow: none;
+    border: 1px solid var(--face-line, #626262);
+    border-radius: var(--radius-list, 0.5rem);
+    background: var(--face);
+    background-clip: padding-box;
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     color: var(--text-body, #444);
     position: sticky;
     top: var(--ns-sidebar-top, 0px);
@@ -97,20 +98,27 @@
     transition:
       color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
       background var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+      border-color var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
       box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
       transform var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
   }
 
+  /* Rows speak the outline key's language, in the face family so the
+     tone holds at every stop of the rail's gradient: hover lifts lighter
+     (--face-hover), the current row presses darker (--face-press). The
+     old --bg-hover wash reads only near the gradient's top — further down
+     the face darkens past it and the row flips lighter than its
+     surroundings. */
   .ns-sidebar__item:active {
     transform: translateY(2px);
-    background: var(--bg-hover, #f3f2f1);
+    background: var(--face-press);
     box-shadow: var(--flat);
   }
 
   .ns-sidebar__item[aria-current="page"] {
     color: var(--text-heading, #111);
     border-color: transparent;
-    background: var(--bg-hover, #f3f2f1);
+    background: var(--face-press);
     box-shadow: var(--flat);
   }
 
@@ -123,13 +131,13 @@
   @media (hover: hover) {
     .ns-sidebar__item:hover {
       color: var(--text-heading, #111);
-      background: var(--bg-hover, #f3f2f1);
+      background: var(--face-hover);
     }
 
     .ns-sidebar__item[aria-current="page"]:hover {
       color: var(--text-heading, #111);
       border-color: transparent;
-      background: var(--bg-hover, #f3f2f1);
+      background: var(--face-press);
       box-shadow: var(--flat);
     }
   }
@@ -141,9 +149,6 @@
       overflow: visible;
       padding-inline-end: 0;
       padding-block-end: var(--space-6, 0.76rem);
-      border-inline-end: 0;
-      border-block-end: 1px solid
-        var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));
     }
 
     .ns-sidebar__nav {

@@ -14,10 +14,13 @@
     );
     padding: var(--space-2, 0.31rem) var(--space-5, 0.61rem);
     border: 0;
-    border-bottom: 1px solid
-      var(--line, color-mix(in srgb, var(--text-heading, #111) 12%, transparent));
-    background: var(--bg, #fff);
-    box-shadow: none;
+    /* Full-bleed bar: square corners, one edge — the face-line seam under
+       the bar carries the edge the way the sidebar's inline-end hairline
+       did, and the face + float lift the bar over the page it sticks to. */
+    border-block-end: 1px solid var(--face-line, #626262);
+    background: var(--face);
+    background-clip: padding-box;
+    box-shadow: var(--float, 0 8px 20px rgb(0 0 0 / 12%));
     color: var(--text-body, #444);
   }
 
@@ -82,10 +85,23 @@
     font-size: var(--type-sm, 0.8rem);
   }
 
+  /* Rows speak the outline key's language, in the face family so the tone
+     holds on the bar's face gradient: hover lifts lighter (--face-hover),
+     the current row presses darker (--face-press). The ghost button's
+     --bg-hover wash under-reads on the face, the same flip the sidebar
+     rows had. Specificity ties with button.css's ghost rules, and
+     navbar.css is imported after button.css, so these win. */
   .ns-button.ns-navbar__item[aria-current="page"] {
     color: var(--text-heading, #111);
     border-color: transparent;
-    background: var(--bg-hover, #f3f2f1);
+    background: var(--face-press);
+    box-shadow: var(--flat);
+  }
+
+  .ns-button.ns-navbar__item:active:not(:disabled):not([aria-disabled="true"]),
+  .ns-button.ns-navbar__toggle:active:not(:disabled):not([aria-disabled="true"]) {
+    color: var(--text-heading, #111);
+    background: var(--face-press);
     box-shadow: var(--flat);
   }
 
@@ -95,8 +111,11 @@
   }
 
   @media (hover: hover) {
+    .ns-button.ns-navbar__item:hover:not(:disabled):not([aria-disabled="true"]),
+    .ns-button.ns-navbar__toggle:hover:not(:disabled):not([aria-disabled="true"]),
     .ns-navbar__item:hover:not(:disabled):not([aria-disabled="true"]) {
       color: var(--text-heading, #111);
+      background: var(--face-hover);
     }
 
     .ns-button.ns-navbar__item[aria-current="page"]:hover:not(:disabled):not(
@@ -104,7 +123,7 @@
       ) {
       color: var(--text-heading, #111);
       border-color: transparent;
-      background: var(--bg-hover, #f3f2f1);
+      background: var(--face-press);
       box-shadow: var(--flat);
     }
   }

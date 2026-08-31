@@ -176,6 +176,12 @@ pre code {
 
 .frame .ns-sidebar {
   --ns-sidebar-top: var(--header-height);
+  /* The docs rail anchors to the left edge: square left corners, no left
+     border, so the panel reads as starting from the left end. The
+     silver-key chrome stays on the top, right, and bottom edges. */
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .docsNavSlot {
@@ -245,8 +251,13 @@ pre code {
      while the content overflows past it, so the last item lands flush on
      the drawer's bottom edge. Auto height lets the pad follow the list. */
   max-height: none;
-  border-inline-end: 0;
-  border-block-end: 0;
+  /* Full-bleed in the drawer: the drawer's own hairline and scrim carry
+     the edge, so the rail drops the card chrome — border, radius, and
+     float all off, or the rounded corners notch white gaps into the
+     panel's corners. */
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   /* Same rhythm as the desktop rail: the frame gutter in, the rail's
      own end pad out. Without the start pad the items hug the screen edge. */
   padding-block: var(--space-10, 1.86rem);
@@ -396,6 +407,8 @@ pre code {
   overflow: visible;
   padding: 0;
   border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .catalogPreview .ns-navbar {
