@@ -6,9 +6,10 @@ import { NavbarItem, NavbarList } from "@neelshha/ui";
 import { headerNav } from "@/lib/docs";
 
 function current(pathname: string, href: string) {
-  if (href === "/components") {
+  if (href === "/docs/components") {
     return (
-      pathname === "/components" || pathname.startsWith("/docs/components")
+      pathname === "/docs/components" ||
+      pathname.startsWith("/docs/components/")
     );
   }
   if (href === "/docs") {

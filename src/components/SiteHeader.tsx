@@ -12,7 +12,7 @@ export function SiteHeader() {
         </NavbarBrand>
         <SiteNav />
         <NavbarSpacer />
-        <ThemeToggle icon variant="outline" />
+        <ThemeToggle icon variant="ghost" />
         <MobileDocsNav />
       </Navbar>
     </header>

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import { DM_Mono, Onest } from "next/font/google";
-import { ThemeProvider } from "@neelshha/ui";
-import { THEME_SCRIPT } from "@neelshha/ui/theme";
+import { ThemeProvider, ThemeScript } from "@neelshha/ui";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SITE } from "@/lib/docs";
@@ -44,9 +42,11 @@ export default function RootLayout({
       className={`${onest.variable} ${dmMono.variable}`}
     >
       <body>
-        <Script id="ns-theme" strategy="beforeInteractive">
-          {THEME_SCRIPT}
-        </Script>
+        {/* A plain inline script, first in the body: it runs before paint so
+            the theme never flashes, and React never has to re-render a script
+            tag on the client (next/script's beforeInteractive logs a console
+            error for exactly that in the App Router). */}
+        <ThemeScript />
         <a href="#content" className="skip ns-button" data-variant="outline">
           Skip to content
         </a>

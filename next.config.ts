@@ -13,7 +13,12 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@neelshha/ui"],
   async redirects() {
     return [
-      { source: "/docs/components", destination: "/components", permanent: true },
+      // The components catalog lives in the docs tree, next to the component
+      // pages. Old standalone links land in the sidebar layout. This one
+      // stays temporary (307): permanent redirects are cached by browsers,
+      // and this URL already flipped direction once — a pinned 308 here
+      // would loop old visitors through a full page reload on every click.
+      { source: "/components", destination: "/docs/components", permanent: false },
       ...componentRedirects,
     ];
   },

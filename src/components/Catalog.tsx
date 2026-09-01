@@ -1,6 +1,5 @@
 import NextLink from "next/link";
-import { CircleCheck } from "lucide-react";
-import {
+import { CircleCheck } from "lucide-react";import {
   Accordion,
   AccordionItem,
   AccordionPanel,
@@ -21,7 +20,6 @@ import {
   CodeBlock,
   Kbd,
   Label,
-  Link,
   Menu,
   MenuItem,
   MenuTrigger,
@@ -60,21 +58,6 @@ import {
 } from "@neelshha/ui";
 import { icon } from "@/components/icons";
 import { componentHref, components } from "@/lib/docs";
-
-// Pieces whose previews need the room — wide chrome, rails, tables — get a
-// two-column tile in the bento; dense packing backfills the gaps around
-// them.
-const wideTiles = new Set([
-  "alert",
-  "code-block",
-  "dialog",
-  "field",
-  "navbar",
-  "sidebar",
-  "table",
-  "toast",
-]);
-
 const thumbs = {
   accordion: (
     <Accordion>
@@ -139,7 +122,10 @@ const thumbs = {
   field: <TextField label="Name" name="catalog-name" placeholder="John Doe" />,
   kbd: <Kbd>⌘K</Kbd>,
   label: <Label>Email</Label>,
-  link: <Link href="/docs">Docs</Link>,
+  // A span wearing the link chrome, not <Link> — the whole tile is already
+  // one anchor, and an <a> inside an <a> is invalid HTML that breaks
+  // hydration. The preview is inert and aria-hidden, so nothing is lost.
+  link: <span className="ns-link">Docs</span>,
   menu: (
     <>
       <MenuTrigger menu="catalog-actions">Actions</MenuTrigger>
@@ -241,24 +227,19 @@ export function Catalog() {
   return (
     <ul className="catalog">
       {components.map((item) => (
-        <li
-          key={item.slug}
-          className={`demo catalogTile${
-            wideTiles.has(item.slug) ? " catalogTileWide" : ""
-          }`}
-        >
+        <li key={item.slug} className="catalogTile">
           <NextLink href={componentHref(item.slug)} className="catalogHit">
-            {item.title}
+            {/* inert keeps the demo's live controls out of the tab order and
+                out of the accessibility tree, not just out of sight. */}
+            <div
+              className="demo demoInner catalogPreview"
+              aria-hidden="true"
+              inert
+            >
+              {thumbs[item.slug]}
+            </div>
+            <span className="catalogName">{item.title}</span>
           </NextLink>
-          {/* inert keeps the demo's live controls out of the tab order and
-              out of the accessibility tree, not just out of sight. */}
-          <div className="demoInner catalogPreview" aria-hidden="true" inert>
-            {thumbs[item.slug]}
-          </div>
-          <div className="catalogMeta">
-            <strong>{item.title}</strong>
-            <span>{item.description}</span>
-          </div>
         </li>
       ))}
     </ul>

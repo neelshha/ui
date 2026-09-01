@@ -67,49 +67,48 @@
 
     --bp-md: 48rem;
 
-    --ratio: 1.25;
-
+    /* Type — shadcn's type scale (the Tailwind text-* steps), kept as the
+       same --type-* names. Line heights ride along as the Tailwind pairs:
+       the sm pair (1.25/0.875) drives tight UI leading, base is 1.5. */
+    --type-xs: 0.75rem;
+    --type-sm: 0.875rem;
     --type-md: 1rem;
-    --type-sm: calc(var(--type-md) / var(--ratio));
-    --type-xs: calc(var(--type-sm) / var(--ratio));
-    --type-lg: calc(var(--type-md) * var(--ratio));
-    --type-xl: calc(var(--type-lg) * var(--ratio));
-    --type-2xl: calc(var(--type-xl) * var(--ratio));
+    --type-lg: 1.125rem;
+    --type-xl: 1.25rem;
+    --type-2xl: 1.5rem;
     --type-mono: 0.875rem;
-    --type-mono-sm: calc(var(--type-mono) / var(--ratio));
+    --type-mono-sm: 0.75rem;
 
-    --control: calc(
-      var(--type-md) * var(--leading-tight) + var(--space-4) * 2
-    );
-    /* Compact bar key — navbar toggles, the code-block copy key. */
-    --control-sm: calc(
-      var(--type-sm) * var(--leading-tight) + var(--space-2) * 2
-    );
+    /* Controls match shadcn's key heights: h-9 standard, h-8 compact. */
+    --control: 2.25rem;
+    --control-sm: 2rem;
 
-    --leading-tight: var(--ratio);
-    --leading: calc(var(--ratio) * var(--ratio));
+    --leading-tight: calc(1.25 / 0.875);
+    --leading: 1.5;
 
     --weight-regular: 400;
     --weight-medium: 500;
 
+    /* Space — shadcn's linear scale: every step is N × 0.25rem, matching
+       Tailwind's spacing utilities one-to-one. */
     --space: 0.25rem;
-    --space-1: var(--space);
-    --space-2: calc(var(--space-1) * var(--ratio));
-    --space-3: calc(var(--space-2) * var(--ratio));
-    --space-4: calc(var(--space-3) * var(--ratio));
-    --space-5: calc(var(--space-4) * var(--ratio));
-    --space-6: calc(var(--space-5) * var(--ratio));
-    --space-7: calc(var(--space-6) * var(--ratio));
-    --space-8: calc(var(--space-7) * var(--ratio));
-    --space-9: calc(var(--space-8) * var(--ratio));
-    --space-10: calc(var(--space-9) * var(--ratio));
-    --space-11: calc(var(--space-10) * var(--ratio));
-    --space-12: calc(var(--space-11) * var(--ratio));
-    --space-13: calc(var(--space-12) * var(--ratio));
-    --space-14: calc(var(--space-13) * var(--ratio));
+    --space-1: calc(var(--space) * 1);
+    --space-2: calc(var(--space) * 2);
+    --space-3: calc(var(--space) * 3);
+    --space-4: calc(var(--space) * 4);
+    --space-5: calc(var(--space) * 5);
+    --space-6: calc(var(--space) * 6);
+    --space-7: calc(var(--space) * 7);
+    --space-8: calc(var(--space) * 8);
+    --space-9: calc(var(--space) * 9);
+    --space-10: calc(var(--space) * 10);
+    --space-11: calc(var(--space) * 11);
+    --space-12: calc(var(--space) * 12);
+    --space-13: calc(var(--space) * 13);
+    --space-14: calc(var(--space) * 14);
 
-    --radius: var(--space-3);
-    --inset-list: var(--space-2);
+    --radius: 0.625rem;
+    --inset-list: var(--space-1);
     --radius-list: calc(var(--radius) + var(--inset-list));
 
     --highlight: light-dark(oklch(1 0 0 / 62%), oklch(1 0 0 / 36%));
@@ -213,9 +212,7 @@
   }
 
   [data-density="compact"] {
-    --control: calc(
-      var(--type-sm) * var(--leading-tight) + var(--space-3) * 2
-    );
+    --control: var(--control-sm);
   }
 
   /* Forced modes. The values never change — only the color-scheme does, so

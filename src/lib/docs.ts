@@ -2,11 +2,12 @@ export const SITE = "https://ui.neelshha.com";
 
 export const headerNav = [
   { href: "/docs", label: "Docs" },
-  { href: "/components", label: "Components" },
+  { href: "/docs/components", label: "Components" },
 ] as const;
 
 export const startNav = [
   { href: "/docs", label: "Introduction" },
+  { href: "/docs/components", label: "Components" },
   { href: "/docs/installation", label: "Installation" },
   { href: "/docs/theming", label: "Theming" },
   { href: "/docs/cli", label: "CLI" },
@@ -59,7 +60,7 @@ export const componentNav = components.map((item) => ({
   label: item.title,
 }));
 
-// The pager only renders inside the docs layout, so the list chains docs
-// pages straight into the component pages — /components itself sits outside
-// the layout and would dead-end the trail.
+// The pager only renders inside the docs layout. The components catalog
+// now lives at /docs/components inside the layout, so the trail chains the
+// docs pages through the catalog and into the component pages.
 export const pagerNav = [...startNav, ...componentNav];

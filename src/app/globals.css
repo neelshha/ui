@@ -345,70 +345,51 @@ pre code {
   box-shadow: none;
 }
 
-/* The catalog is a bento: tiles pack tight, and each tile is one chrome —
-   the outline-key face the docs examples wear — with the preview above and
-   the name + description below a hairline seam, like the code block's bar.
-   Tiles sit flat until hover, which lifts a key's shadow over the
-   neighbours. A handful of pieces that need the room span two columns. */
+/* The catalog follows the shadcn components-page anatomy: a uniform grid
+   where every tile is one link — the live preview centered in a fixed-height
+   box wearing the outline-key chrome, the name sitting under the box, and
+   the whole card clickable. Hover washes the preview's face. */
 .catalog {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  grid-auto-flow: dense;
-  gap: var(--space-3);
+  gap: var(--space-5) var(--space-3);
 }
 
 .catalog .catalogTile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
   padding: 0;
+  border: 0;
+  background: none;
   box-shadow: none;
-  transition:
-    background var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
-    box-shadow var(--duration, 200ms) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
-}
-
-.catalog .catalogTile:hover {
-  z-index: 1;
-  background: var(--face-hover);
-  box-shadow: var(--float);
-}
-
-@media (min-width: 48rem) {
-  .catalogTileWide {
-    grid-column: span 2;
-  }
 }
 
 .catalogHit {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space: nowrap;
-  color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  color: inherit;
   text-decoration: none;
 }
 
-.catalog a.catalogHit:hover {
-  color: transparent;
-}
-
-.catalogPreview {
-  flex: 1 1 auto;
-  min-height: 8.5rem;
-  padding: var(--space-8);
+.demo.catalogPreview {
+  flex: 0 0 auto;
+  height: 10rem;
+  overflow: hidden;
+  padding: var(--space-6);
   pointer-events: none;
   /* Center the thumb in the stage like the docs demo does. */
-  display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
-.catalogPreview .demoInner,
+.catalogHit:hover .catalogPreview {
+  background: var(--face-hover);
+}
+
+.catalogName {
+  color: var(--text-heading);
+  font-weight: var(--weight-medium);
+}
+
 .catalogPreview .ns-card {
   max-width: 16rem;
 }
@@ -442,19 +423,6 @@ pre code {
 }
 
 .catalogDialog strong {
-  color: var(--text-heading);
-  font-weight: var(--weight-medium);
-}
-
-.catalogMeta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-4) var(--space-5);
-  border-top: 1px solid var(--line);
-}
-
-.catalog strong {
   color: var(--text-heading);
   font-weight: var(--weight-medium);
 }

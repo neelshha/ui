@@ -8,14 +8,12 @@ export const metadata: Metadata = {
 
 export default function ComponentsPage() {
   return (
-    <main id="content" className="shell pageWrap">
-      <article className="page">
-        <header className="docLead">
-          <h1>Components</h1>
-          <p>Thirty primitives. Add the ones you need.</p>
-        </header>
-        <Catalog />
-      </article>
-    </main>
+    <article className="doc">
+      <header className="docLead">
+        <h1>Components</h1>
+        <p>Thirty primitives. Add the ones you need.</p>
+      </header>
+      <Catalog />
+    </article>
   );
 }

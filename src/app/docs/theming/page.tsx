@@ -130,26 +130,25 @@ export default function ThemingPage() {
 --z-toast        /* 30 */
 --bp-md          /* 48rem — media queries cannot use var() */
 
-/* scale — every step is × --ratio */
---ratio          /* 1.25 */
---type-xs
---type-sm
+/* scale — shadcn's type and space steps */
+--type-xs        /* 0.75rem */
+--type-sm        /* 0.875rem — control text */
 --type-md        /* 1rem — Onest */
---type-lg
---type-xl
---type-2xl       /* page titles */
+--type-lg        /* 1.125rem */
+--type-xl        /* 1.25rem */
+--type-2xl       /* 1.5rem — page titles */
 --type-mono      /* 0.875rem — DM Mono */
---type-mono-sm
---control        /* button / navbar height */
---control-sm     /* compact bar key — navbar toggles, code-block copy */
+--type-mono-sm   /* 0.75rem */
+--control        /* 2.25rem — button / navbar height */
+--control-sm     /* 2rem — compact bar key */
 --space          /* 0.25rem */
---space-1 … --space-14
---leading-tight  /* --ratio */
---leading        /* --ratio² */
+--space-1 … --space-14  /* N × 0.25rem, linear */
+--leading-tight  /* 1.25 / 0.875 */
+--leading        /* 1.5 */
 --weight-regular
 --weight-medium
---radius         /* --space-3 */
---inset-list     /* --space-2, pad around a list row */
+--radius         /* 0.625rem */
+--inset-list     /* --space-1, pad around a list row */
 --radius-list    /* --radius + --inset-list */
 
 /* light */
@@ -177,8 +176,10 @@ export default function ThemingPage() {
 --ease
 --duration       /* 0ms when prefers-reduced-motion */`}</Code>
         <p>
-          Type and space share <code>--ratio</code>. Change that one number and
-          the ladder stays even. <code>--well</code> is the recessed field.
+          Type and space use shadcn&apos;s steps — the Tailwind text sizes and
+          the linear <code>N × 0.25rem</code> space ladder — under the same
+          <code>--type-*</code> and <code>--space-*</code> names. Fonts stay
+          yours. <code>--well</code> is the recessed field.
           <code>--face</code> is the silver candy. <code>--focus</code> is the
           ink ring. Unlayered rules win over the token layer.
         </p>

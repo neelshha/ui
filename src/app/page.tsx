@@ -20,7 +20,7 @@ export default function HomePage() {
               Get started
               <ArrowRight {...icon} />
             </Button>
-            <Button href="/components" variant="outline">
+            <Button href="/docs/components" variant="outline">
               <LayoutGrid {...icon} />
               View components
             </Button>
