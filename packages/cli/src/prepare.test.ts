@@ -13,4 +13,23 @@ describe("prepareFile", () => {
     ]);
     expect(next.startsWith(`import "./field.css";`)).toBe(true);
   });
+
+  it("does not treat a hook mentioned in a comment as client code", () => {
+    const source = `// The parent owns the useState here.\nexport function Label() {}\n`;
+    expect(prepareFile("label.tsx", source, [])).toBe(source);
+  });
+
+  it("does not treat a hook named in a block comment as client code", () => {
+    const source = `/*\n * Wraps useEffect-driven popovers.\n */\nexport function Popover() {}\n`;
+    expect(prepareFile("popover.tsx", source, [])).toBe(source);
+  });
+
+  it("still injects 'use client' for a real hook call", () => {
+    const next = prepareFile(
+      "toast.tsx",
+      `import { useState } from "react";\n\nexport function Toast() {\n  const [open, setOpen] = useState(false);\n}\n`,
+      [],
+    );
+    expect(next.startsWith(`"use client";`)).toBe(true);
+  });
 });

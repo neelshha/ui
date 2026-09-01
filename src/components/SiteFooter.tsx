@@ -2,7 +2,12 @@ import { Link } from "@neelshha/ui";
 import { headerNav } from "@/lib/docs";
 
 const REPO = "https://github.com/neelshha/ui";
-const YEAR = new Date().getFullYear();
+
+// Statically prerendered pages would freeze a build-time year; render the
+// current year on the client after hydration instead.
+function FooterYear() {
+  return <span suppressHydrationWarning>{new Date().getFullYear()}</span>;
+}
 
 export function SiteFooter() {
   return (
@@ -27,7 +32,9 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="footerMeta">
-          <span>© {YEAR} Neel Shah</span>
+          <span>
+            © <FooterYear /> Neel Shah
+          </span>
           <span>
             <Link href={REPO} target="_blank">
               Copy the source

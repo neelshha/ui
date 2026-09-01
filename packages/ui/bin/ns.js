@@ -11,7 +11,7 @@ try {
 } catch {
   const child = spawn(
     "npx",
-    ["--yes", "@neelshha/cli@0.1.0", ...args],
+    ["--yes", "@neelshha/cli@latest", ...args],
     { stdio: "inherit", shell: process.platform === "win32" },
   );
   child.on("exit", (code) => {

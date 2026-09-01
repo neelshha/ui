@@ -81,7 +81,9 @@ function scanner(
   }
   flush();
   return tokens;
-}function scanTsx(code: string): Token[] {
+}
+
+function scanTsx(code: string): Token[] {
   let inTag = false; // just saw `<Name` — next identifier is the tag
   let inClose = false; // just saw `</`
 

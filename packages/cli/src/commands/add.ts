@@ -83,6 +83,18 @@ export async function add(cwd: string, names: string[], flags: AddFlags = {}) {
 
   }
 
+  // The registry schema carries npm dependencies, but the CLI does not run
+  // the package manager — surface them so the user isn't left with a broken
+  // import after the files are written.
+  const npmDeps = [
+    ...new Set(items.flatMap((item) => item.dependencies.npm)),
+  ];
+  if (npmDeps.length > 0) {
+    console.log(
+      `\nThis component needs npm packages the CLI does not install:\n  npm install ${npmDeps.join(" ")}`,
+    );
+  }
+
   console.log(
     `Component CSS is imported from the TSX. Import tokens.css once if you have not already.`,
   );

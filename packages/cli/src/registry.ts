@@ -5,6 +5,9 @@ import type { RegistryIndex, RegistryItem } from "./types.js";
 
 export const DEFAULT_REGISTRY = "https://ui.neelshha.com/r";
 
+/** Network calls must never hang the CLI indefinitely. */
+const FETCH_TIMEOUT_MS = 10_000;
+
 export type RegistryLoadOptions = {
   latest?: boolean;
 };
@@ -21,10 +24,14 @@ function readBundled<T>(name: string): T | null {
 
 async function fetchJson<T>(url: string): Promise<T | null> {
   try {
-    const response = await fetch(url, { headers: { accept: "application/json" } });
+    const response = await fetch(url, {
+      headers: { accept: "application/json" },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
     if (!response.ok) return null;
     return (await response.json()) as T;
   } catch {
+    // Timeout, network failure, or invalid JSON — fall back to bundled.
     return null;
   }
 }

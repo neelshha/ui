@@ -11,7 +11,14 @@ export function configPath(cwd: string) {
 export function readConfig(cwd: string): NsConfig | null {
   const file = configPath(cwd);
   if (!existsSync(file)) return null;
-  const parsed = JSON.parse(readFileSync(file, "utf8")) as Partial<NsConfig>;
+  let parsed: Partial<NsConfig>;
+  try {
+    parsed = JSON.parse(readFileSync(file, "utf8")) as Partial<NsConfig>;
+  } catch {
+    throw new Error(
+      `${CONFIG_NAME} is not valid JSON. Fix or delete it, then run init.`,
+    );
+  }
   if (!parsed.path || !parsed.aliases?.ui) {
     throw new Error(`${CONFIG_NAME} is missing path or aliases.ui. Run init.`);
   }
