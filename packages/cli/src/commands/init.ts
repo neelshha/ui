@@ -8,7 +8,7 @@ import {
   hasAtAlias,
   tokensImportHint,
 } from "../detect.js";
-import { loadItem } from "../registry.js";
+import { loadItem, registryBase } from "../registry.js";
 import { prepareFile } from "../prepare.js";
 import type { NsConfig } from "../types.js";
 
@@ -24,6 +24,7 @@ export async function init(
   const config: NsConfig = {
     path,
     aliases: { ui: defaultUiAlias(path, alias) },
+    registry: registryBase(),
   };
 
   writeConfig(cwd, config);

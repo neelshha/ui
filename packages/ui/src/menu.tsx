@@ -36,6 +36,20 @@ export type MenuItemProps = {
   onClick?: ((event: MouseEvent<HTMLButtonElement>) => void) | undefined;
 };
 
+/** Index of the item to focus after an arrow move, given the enabled items
+    and the currently focused index (-1 when focus is not on an item — e.g.
+    right after the menu opened). Wraps at both ends. Disabled items never
+    reach this function: the caller filters them out of `count`. */
+export function menuFocusTarget(
+  count: number,
+  currentIndex: number,
+  delta: 1 | -1,
+): number {
+  if (count === 0) return -1;
+  if (currentIndex < 0) return 0;
+  return (currentIndex + delta + count) % count;
+}
+
 function menuItems(root: HTMLElement | null) {
   return Array.from(
     root?.querySelectorAll<HTMLElement>('[role="menuitem"]:not([disabled])') ??
@@ -61,12 +75,10 @@ export function Menu({ className, onKeyDown, id, style, ...rest }: MenuProps) {
     return watchPopoverPlacement(node, () => menuItems(node)[0]?.focus());
   }, []);
 
-  function move(event: KeyboardEvent<HTMLDivElement>, delta: number) {
+  function move(event: KeyboardEvent<HTMLDivElement>, delta: 1 | -1) {
     const list = menuItems(ref.current);
-    if (list.length === 0) return;
     const current = list.indexOf(event.target as HTMLElement);
-    const index = current < 0 ? 0 : (current + delta + list.length) % list.length;
-    const next = list[index];
+    const next = list[menuFocusTarget(list.length, current, delta)];
     if (!next) return;
     event.preventDefault();
     next.focus();

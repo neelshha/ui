@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { readConfig } from "../config.js";
 import { prepareFile } from "../prepare.js";
-import { loadItem } from "../registry.js";
+import { loadItem, type RegistryLoadOptions } from "../registry.js";
 import type { RegistryItem } from "../types.js";
 
 export type AddFlags = {
@@ -30,7 +30,11 @@ export async function add(cwd: string, names: string[], flags: AddFlags = {}) {
   }
 
   const destDir = join(cwd, config.path);
-  const items = await resolveItems(names, flags.latest);
+  const loadOptions = {
+    ...(flags.latest ? { latest: true } : {}),
+    ...(config.registry ? { base: config.registry } : {}),
+  };
+  const items = await resolveItems(names, loadOptions);
 
   for (const item of items) {
     const cssFiles = item.files
@@ -95,9 +99,17 @@ export async function add(cwd: string, names: string[], flags: AddFlags = {}) {
     );
   }
 
-  console.log(
-    `Component CSS is imported from the TSX. Import tokens.css once if you have not already.`,
-  );
+  // Setup notes come from each registry item's docs field, so an item only
+  // prints what it actually needs (CSS items mention tokens.css; pure-TSX
+  // items print nothing).
+  const notes = [
+    ...new Set(
+      items.flatMap((item) => (item.docs ? [item.docs] : [])),
+    ),
+  ];
+  for (const note of notes) {
+    console.log(`\n${note}`);
+  }
 }
 
 function lineDiff(before: string, after: string): string {
@@ -117,18 +129,16 @@ function lineDiff(before: string, after: string): string {
 
 async function resolveItems(
   names: string[],
-  latest?: boolean,
+  options: RegistryLoadOptions = {},
   seen = new Set<string>(),
 ): Promise<RegistryItem[]> {
   const items: RegistryItem[] = [];
   for (const name of names) {
     if (seen.has(name)) continue;
     seen.add(name);
-    const item = await loadItem(name, { ...(latest ? { latest } : {}) });
+    const item = await loadItem(name, options);
     if (item.dependencies.registry.length > 0) {
-      items.push(
-        ...(await resolveItems(item.dependencies.registry, latest, seen)),
-      );
+      items.push(...(await resolveItems(item.dependencies.registry, options, seen)));
     }
     items.push(item);
   }

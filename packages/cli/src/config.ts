@@ -25,6 +25,7 @@ export function readConfig(cwd: string): NsConfig | null {
   return {
     path: parsed.path,
     aliases: { ui: parsed.aliases.ui },
+    ...(typeof parsed.registry === "string" ? { registry: parsed.registry } : {}),
   };
 }
 
